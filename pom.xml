@@ -2843,6 +2843,22 @@
             </plugins>
         </build>
     </profile>
+    <profile>
+      <id>hwx-release</id>
+      <activation>
+        <property>
+            <name>hwx-release</name>
+        </property>
+      </activation>
+	  <properties>
+		<reponame></reponame>
+	    <repoid></repoid>
+		<repourl></repourl>
+    <snapshotrepoid>hwx-snapshots</snapshotrepoid>
+    <snapshotreponame>hwx-snapshots</snapshotreponame>
+    <snapshotrepourl>http://nexus-private.hortonworks.com/nexus/content/repositories/apache-snapshots/</snapshotrepourl>
+	  </properties>
+    </profile>
   </profiles>
   <!-- See http://jira.codehaus.org/browse/MSITE-443 why the settings need to be here and not in pluginManagement. -->
   <reporting>
@@ -3131,12 +3147,27 @@
                -->
       <url>file:///tmp</url>
     </site>
+    <repository>
+      <id>${repoid}</id>
+      <name>${reponame}</name>
+      <url>${repourl}</url>
+    </repository>
+    <snapshotRepository>
+      <id>${snapshotrepoid}</id>
+      <name>${snapshotreponame}</name>
+      <url>${snapshotrepourl}</url>
+    </snapshotRepository>
   </distributionManagement>
   <repositories>
     <repository>
         <id>project.local</id>
         <name>project</name>
         <url>file:${project.basedir}/src/main/site/resources/repo</url>
+    </repository>
+    <repository>
+      <id>public</id>
+      <name>hwx</name>
+      <url>http://nexus-private.hortonworks.com/nexus/content/groups/public/</url>
     </repository>
 </repositories>
 </project>
