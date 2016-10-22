@@ -21,14 +21,14 @@ package org.apache.hadoop.hbase.regionserver;
 import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.google.common.annotations.VisibleForTesting;
-
-import com.google.common.base.Objects;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.hbase.classification.InterfaceAudience;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.hbase.util.ClassSize;
+
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Objects;
 
 
 /**
@@ -123,6 +123,41 @@ public class MultiVersionConcurrencyControl {
     synchronized (writeQueue) {
       long nextWriteNumber = writePoint.incrementAndGet();
       WriteEntry e = new WriteEntry(nextWriteNumber);
+      writeQueue.add(e);
+      return e;
+    }
+  }
+
+  /**
+   * Start a write transaction. Create a new {@link WriteEntry} with a new write number and add it
+   * to our queue of ongoing writes. Return this WriteEntry instance.
+   * To complete the write transaction and wait for it to be visible, call
+   * {@link #completeAndWait(WriteEntry)}. If the write failed, call
+   * {@link #complete(WriteEntry)} so we can clean up AFTER removing ALL trace of the failed write
+   * transaction.
+   * @see #complete(WriteEntry)
+   * @see #completeAndWait(WriteEntry)
+   */
+  public WriteEntry begin(long writeNumber) {
+    synchronized (writeQueue) {
+      while(true) {
+        long w = writePoint.get();
+        // we always expect that this is called with the writeNumber sequentially and in the same
+        // order from the primary
+        if (writeNumber != w + 1) {
+          assert false;
+          LOG.warn("Trying to increment write number with a hole. Current writePoint:" + w + ", " +
+              "requested write point:" + writeNumber);
+        }
+        if (w > writeNumber) {
+          throw new IllegalStateException("Trying to increment write number to a smaller value." +
+              "Current writePoint:" + w + ", requested write point:" + writeNumber);
+        }
+        if (writePoint.compareAndSet(w, writeNumber)) {
+          break;
+        }
+      }
+      WriteEntry e = new WriteEntry(writeNumber);
       writeQueue.add(e);
       return e;
     }
