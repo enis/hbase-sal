@@ -17,6 +17,7 @@
  */
 package org.apache.hadoop.hbase.regionserver;
 
+import static org.apache.hadoop.hbase.CellUtil.cloneFamily;
 import static org.apache.hadoop.hbase.HConstants.REPLICATION_SCOPE_LOCAL;
 
 import java.io.EOFException;
@@ -188,7 +189,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.io.Closeables;
-
 
 @SuppressWarnings("deprecation")
 @InterfaceAudience.Private
@@ -3046,6 +3046,493 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
     }
   }
 
+  /** Structure to hold the context for an ongoing batch write */
+  public class WriteContext<T> {
+    private final BatchOperation<T> batchOp;
+    private MultiVersionConcurrencyControl mvcc;
+    private WALKey walKey;
+    private WALEdit walEdit;
+    private boolean inMemstore = true;
+
+    /** Keeps track of the locks we hold so we can release them in finally clause */
+    private List<RowLock> acquiredRowLocks;
+    private boolean locked = false;
+
+    // reference family maps directly so coprocessors can mutate them if desired
+    private Map<byte[], List<Cell>>[] familyMaps;
+
+    private long currentNonceGroup = HConstants.NO_NONCE;
+    private long currentNonce = HConstants.NO_NONCE;
+
+    private int lastIndexExclusive;
+
+    private WriteEntry writeEntry = null;
+    private boolean success = false;
+    private Exception exception;
+
+    private long addedSize = 0;
+
+    private long now;
+
+    // metrics related
+    private int noOfPuts = 0;
+    private int noOfDeletes = 0;
+
+    private WriteContext(BatchOperation<T> batchOp) {
+      this.batchOp = batchOp;
+      this.familyMaps = new Map[batchOp.operations.length];
+      this.acquiredRowLocks = Lists.newArrayListWithCapacity(batchOp.operations.length);
+      this.lastIndexExclusive = batchOp.nextIndexToProcess;
+    }
+
+    private void addAcquiredRowLock(RowLock rowLock) {
+      this.acquiredRowLocks.add(rowLock);
+    }
+
+    public WALKey getWalKey() {
+      return walKey;
+    }
+
+    public WALEdit getWalEdit() {
+      return walEdit;
+    }
+  }
+
+  public <T> WriteContext startBatchMutate(Mutation[] mutations, long nonceGroup, long nonce)
+      throws IOException {
+    return startBatchMutate(new MutationBatch(mutations, nonceGroup, nonce));
+  }
+
+  private <T> WriteContext startBatchMutate(BatchOperation<T> batchOp) throws IOException {
+    WriteContext<T> trx = new WriteContext<T>(batchOp);
+
+    // Variable to note if all Put items are for the same CF -- metrics related
+    boolean putsCfSetConsistent = true;
+    // Variable to note if all Delete items are for the same CF -- metrics related
+    boolean deletesCfSetConsistent = true;
+    // The set of columnFamilies first seen for Put.
+    Set<byte[]> putsCfSet = null;
+    // The set of columnFamilies first seen for Delete.
+    Set<byte[]> deletesCfSet = null;
+
+    // We try to set up a batch in the range [firstIndex,lastIndexExclusive)
+    int firstIndex = batchOp.nextIndexToProcess;
+
+    int cellCount = 0;
+
+    try {
+      // STEP 1. Try to acquire as many locks as we can, and ensure we acquire at least one.
+      int numReadyToWrite = 0;
+      trx.now = EnvironmentEdgeManager.currentTime();
+      while (trx.lastIndexExclusive < batchOp.operations.length) {
+        if (checkBatchOp(batchOp, trx.lastIndexExclusive, trx.familyMaps, trx.now)) {
+          trx.lastIndexExclusive++;
+          continue;
+        }
+        Mutation mutation = batchOp.getMutation(trx.lastIndexExclusive);
+        // If we haven't got any rows in our batch, we should block to get the next one.
+        RowLock rowLock = null;
+        try {
+          rowLock = getRowLockInternal(mutation.getRow(), true);
+        } catch (IOException ioe) {
+          LOG.warn("Failed getting lock, row=" + Bytes.toStringBinary(mutation.getRow()), ioe);
+        }
+        if (rowLock == null) {
+          // We failed to grab another lock
+          break; // Stop acquiring more rows for this batch
+        } else {
+          trx.addAcquiredRowLock(rowLock);
+        }
+
+        trx.lastIndexExclusive++;
+        numReadyToWrite++;
+        if (mutation instanceof Put) {
+          // If Column Families stay consistent through out all of the
+          // individual puts then metrics can be reported as a multiput across
+          // column families in the first put.
+          if (putsCfSet == null) {
+            putsCfSet = mutation.getFamilyCellMap().keySet();
+          } else {
+            putsCfSetConsistent = putsCfSetConsistent
+                && mutation.getFamilyCellMap().keySet().equals(putsCfSet);
+          }
+        } else {
+          if (deletesCfSet == null) {
+            deletesCfSet = mutation.getFamilyCellMap().keySet();
+          } else {
+            deletesCfSetConsistent = deletesCfSetConsistent
+                && mutation.getFamilyCellMap().keySet().equals(deletesCfSet);
+          }
+        }
+      }
+
+      // We've now grabbed as many mutations off the list as we can
+
+      // STEP 2. Update any LATEST_TIMESTAMP timestamps
+      // We should record the timestamp only after we have acquired the rowLock,
+      // otherwise, newer puts/deletes are not guaranteed to have a newer timestamp
+      trx.now = EnvironmentEdgeManager.currentTime();
+      byte[] byteNow = Bytes.toBytes(trx.now);
+
+      // Nothing to put/delete -- an exception in the above such as NoSuchColumnFamily?
+      if (numReadyToWrite <= 0) {
+        return trx;
+      }
+
+      for (int i = firstIndex; i < trx.lastIndexExclusive; i++) {
+        // skip invalid
+        if (batchOp.retCodeDetails[i].getOperationStatusCode()
+            != OperationStatusCode.NOT_RUN) {
+          // lastIndexExclusive was incremented above.
+          continue;
+        }
+
+        Mutation mutation = batchOp.getMutation(i);
+        if (mutation instanceof Put) {
+          updateCellTimestamps(trx.familyMaps[i].values(), byteNow);
+          trx.noOfPuts++;
+        } else {
+          prepareDeleteTimestamps(mutation, trx.familyMaps[i], byteNow);
+          trx.noOfDeletes++;
+        }
+        rewriteCellTags(trx.familyMaps[i], mutation);
+        WALEdit fromCP = batchOp.walEditsFromCoprocessors[i];
+        if (fromCP != null) {
+          cellCount += fromCP.size();
+        }
+        for (List<Cell> cells : trx.familyMaps[i].values()) {
+          cellCount += cells.size();
+        }
+      }
+      trx.walEdit = new WALEdit(cellCount, false);
+      lock(this.updatesLock.readLock(), numReadyToWrite);
+      trx.locked = true;
+
+      // calling the pre CP hook for batch mutation
+      if (coprocessorHost != null) {
+        MiniBatchOperationInProgress<Mutation> miniBatchOp =
+            new MiniBatchOperationInProgress<Mutation>(batchOp.getMutationsForCoprocs(),
+                batchOp.retCodeDetails, batchOp.walEditsFromCoprocessors, firstIndex,
+                trx.lastIndexExclusive);
+        if (coprocessorHost.preBatchMutate(miniBatchOp)) {
+          return trx;
+        } else {
+          for (int i = firstIndex; i < trx.lastIndexExclusive; i++) {
+            if (batchOp.retCodeDetails[i].getOperationStatusCode() != OperationStatusCode.NOT_RUN) {
+              // lastIndexExclusive was incremented above.
+              continue;
+            }
+            // we pass (i - firstIndex) below since the call expects a relative index
+            Mutation[] cpMutations = miniBatchOp.getOperationsFromCoprocessors(i - firstIndex);
+            if (cpMutations == null) {
+              continue;
+            }
+            // Else Coprocessor added more Mutations corresponding to the Mutation at this index.
+            for (int j = 0; j < cpMutations.length; j++) {
+              Mutation cpMutation = cpMutations[j];
+              Map<byte[], List<Cell>> cpFamilyMap = cpMutation.getFamilyCellMap();
+              checkAndPrepareMutation(cpMutation, false, cpFamilyMap, trx.now);
+
+              // Acquire row locks. If not, the whole batch will fail.
+              trx.acquiredRowLocks.add(getRowLockInternal(cpMutation.getRow(), true));
+
+              if (cpMutation.getDurability() == Durability.SKIP_WAL) {
+                recordMutationWithoutWal(cpFamilyMap);
+              }
+
+              // Returned mutations from coprocessor correspond to the Mutation at index i. We can
+              // directly add the cells from those mutations to the familyMaps of this mutation.
+              mergeFamilyMaps(trx.familyMaps[i], cpFamilyMap); // will get added to the memstore later
+            }
+          }
+        }
+      }
+
+      // STEP 3. Build WAL edit
+      Durability durability = Durability.USE_DEFAULT;
+      for (int i = firstIndex; i < trx.lastIndexExclusive; i++) {
+        // Skip puts that were determined to be invalid during preprocessing
+        if (batchOp.retCodeDetails[i].getOperationStatusCode() != OperationStatusCode.NOT_RUN) {
+          continue;
+        }
+
+        Mutation m = batchOp.getMutation(i);
+        Durability tmpDur = getEffectiveDurability(m.getDurability());
+        if (tmpDur.ordinal() > durability.ordinal()) {
+          durability = tmpDur;
+        }
+        if (tmpDur == Durability.SKIP_WAL) {
+          recordMutationWithoutWal(m.getFamilyCellMap());
+          continue;
+        }
+
+        long nonceGroup = batchOp.getNonceGroup(i);
+        long nonce = batchOp.getNonce(i);
+        // In replay, the batch may contain multiple nonces. If so, write WALEdit for each.
+        // Given how nonces are originally written, these should be contiguous.
+        // They don't have to be, it will still work, just write more WALEdits than needed.
+        if (nonceGroup != trx.currentNonceGroup || nonce != trx.currentNonce) {
+          // TODO: there is no replay here, but should we handle this?
+          trx.currentNonceGroup = nonceGroup;
+          trx.currentNonce = nonce;
+        }
+
+        // Add WAL edits by CP
+        WALEdit fromCP = batchOp.walEditsFromCoprocessors[i];
+        if (fromCP != null) {
+          for (Cell cell : fromCP.getCells()) {
+            trx.walEdit.add(cell);
+          }
+        }
+        addFamilyMapToWALEdit(trx.familyMaps[i], trx.walEdit);
+      }
+
+      // STEP 4. Append the final edit to WAL and sync.
+      Mutation mutation = batchOp.getMutation(firstIndex);
+
+      if (!trx.walEdit.isEmpty()) {
+        trx.walKey = new WALKey(this.getRegionInfo().getEncodedNameAsBytes(),
+            this.htableDescriptor.getTableName(), WALKey.NO_SEQUENCE_ID, trx.now,
+            mutation.getClusterIds(), trx.currentNonceGroup, trx.currentNonce, mvcc,
+            this.getReplicationScope());
+      }
+    } finally {
+      // TODO
+      return trx;
+    }
+  }
+
+  /**
+   * Here is where a WAL edit gets its sequenceid.
+   * SIDE-EFFECT is our stamping the sequenceid into every Cell AND setting the sequenceid into the
+   * MVCC WriteEntry!!!!
+   */
+  public WriteContext preAppend(WriteContext trx) {
+    if (trx.walKey.getSequenceId() != WALKey.NO_SEQUENCE_ID) {
+      return trx;
+    }
+    long regionSequenceId = WALKey.NO_SEQUENCE_ID;
+    MultiVersionConcurrencyControl mvcc = trx.walKey.getMvcc();
+    MultiVersionConcurrencyControl.WriteEntry we = null;
+
+    if (mvcc != null) {
+      we = mvcc.begin();
+      regionSequenceId = we.getWriteNumber();
+    }
+
+    if (!trx.walEdit.isReplay() && trx.inMemstore) {
+      for (Cell c: trx.walEdit.getCells()) {
+        try {
+          CellUtil.setSequenceId(c, regionSequenceId);
+        } catch (IOException e) {
+          throw new RuntimeException(e); // should not happen
+        }
+      }
+    }
+    trx.walKey.setWriteEntry(we);
+    return trx;
+  }
+
+  private static class WALReplayBatch extends BatchOperation<WALKey> {
+
+    private WALKey walKey;
+    private WALEdit walEdit;
+
+    WALReplayBatch(WALKey walKey, WALEdit walEdit) {
+      super(new WALKey[]{walKey});
+      this.walKey = walKey;
+      this.walEdit = walEdit;
+    }
+
+    @Override
+    public Mutation getMutation(int index) {
+      return null; // no mutation object at this point
+    }
+
+    @Override
+    public long getNonceGroup(int index) {
+      return walKey.getNonceGroup();
+    }
+
+    @Override
+    public long getNonce(int index) {
+      return walKey.getNonce();
+    }
+
+    @Override
+    public Mutation[] getMutationsForCoprocs() {
+      return new Mutation[0];
+    }
+
+    @Override
+    public boolean isInReplay() {
+      return true;
+    }
+
+    @Override
+    public long getReplaySequenceId() {
+      return walKey.getSequenceId();
+    }
+  }
+
+  public WriteContext<WALKey> startReplay(WALKey walKey, WALEdit walEdit) {
+    WALReplayBatch replayBatch = new WALReplayBatch(walKey, walEdit);
+
+    WriteContext<WALKey> trx = new WriteContext<>(replayBatch);
+    trx.walKey = walKey;
+    trx.walEdit = walEdit;
+
+    trx.familyMaps[0] = new TreeMap<byte[], List<Cell>>(Bytes.BYTES_COMPARATOR);
+    for (Cell cell : walEdit.getCells()) {
+      byte[] family = CellUtil.cloneFamily(cell);
+      List<Cell> l = trx.familyMaps[0].get(family);
+      if (l == null) {
+        l = new ArrayList<>();
+        trx.familyMaps[0].put(family, l);
+      }
+      l.add(cell);
+    }
+    return trx;
+  }
+
+
+  public <T> WriteContext<T> applyCommittedSerial(WriteContext<T> trx) {
+    if (trx.writeEntry == null) {
+      // This means a replica is processing the WALEdit originated at another replica
+      trx.writeEntry = mvcc.begin(trx.walKey.getSequenceId());
+
+      // TODO: acquire locks if this is replay
+
+    } else {
+      try {
+        trx.writeEntry = trx.walKey.getWriteEntry();
+      } catch (InterruptedIOException e) {
+        // TODO should not happen with 2.0
+        throw new RuntimeException(e);
+      }
+    }
+    return trx;
+  }
+
+  public <T> WriteContext<T> applyCommitted(WriteContext<T> trx) throws IOException {
+    BatchOperation<T> batchOp = trx.batchOp;
+    int firstIndex = batchOp.nextIndexToProcess;
+    int lastIndexExclusive = trx.lastIndexExclusive;
+    MemstoreSize memstoreSize = new MemstoreSize();
+
+    try {
+      // STEP 5. Write back to memstore
+      for (int i = firstIndex; i < lastIndexExclusive; i++) {
+        if (batchOp.retCodeDetails[i].getOperationStatusCode() != OperationStatusCode.NOT_RUN) {
+          continue;
+        }
+        // We need to update the sequence id for following reasons.
+        // 1) If the op is in replay mode, FSWALEntry#stampRegionSequenceId won't stamp sequence id.
+        // 2) If no WAL, FSWALEntry won't be used
+        // we use durability of the original mutation for the mutation passed by CP.
+//        boolean updateSeqId = replay || batchOp.getMutation(i).getDurability() == Durability.SKIP_WAL;
+//        if (updateSeqId) {
+//          this.updateSequenceId(trx.familyMaps[i].values(),
+//              replay? batchOp.getReplaySequenceId(): writeEntry.getWriteNumber());
+//        }
+        applyFamilyMapToMemstore(trx.familyMaps[i], memstoreSize);
+      }
+
+      // STEP 6. Complete mvcc.
+
+      if (trx.writeEntry != null) {
+        mvcc.completeAndWait(trx.writeEntry);
+        trx.writeEntry = null;
+      }
+
+      // STEP 7. Release row locks, etc.
+      if (trx.locked) {
+        this.updatesLock.readLock().unlock();
+        trx.locked = false;
+      }
+      releaseRowLocks(trx.acquiredRowLocks);
+
+      // calling the post CP hook for batch mutation
+      if (coprocessorHost != null) {
+        MiniBatchOperationInProgress<Mutation> miniBatchOp =
+            new MiniBatchOperationInProgress<Mutation>(batchOp.getMutationsForCoprocs(),
+                batchOp.retCodeDetails, batchOp.walEditsFromCoprocessors, firstIndex, lastIndexExclusive);
+        coprocessorHost.postBatchMutate(miniBatchOp);
+      }
+
+      for (int i = firstIndex; i < lastIndexExclusive; i ++) {
+        if (batchOp.retCodeDetails[i] == OperationStatus.NOT_RUN) {
+          batchOp.retCodeDetails[i] = OperationStatus.SUCCESS;
+        }
+      }
+
+      // STEP 8. Run coprocessor post hooks. This should be done after the wal is
+      // synced so that the coprocessor contract is adhered to.
+      if (coprocessorHost != null) {
+        for (int i = firstIndex; i < lastIndexExclusive; i++) {
+          // only for successful puts
+          if (batchOp.retCodeDetails[i].getOperationStatusCode()
+              != OperationStatusCode.SUCCESS) {
+            continue;
+          }
+          Mutation m = batchOp.getMutation(i);
+          if (m instanceof Put) {
+            coprocessorHost.postPut((Put) m, trx.walEdit, m.getDurability());
+          } else {
+            coprocessorHost.postDelete((Delete) m, trx.walEdit, m.getDurability());
+          }
+        }
+      }
+
+      trx.success = true;
+      return trx;
+    } finally {
+      // Call complete rather than completeAndWait because we probably had error if walKey != null
+      if (trx.writeEntry != null) mvcc.complete(trx.writeEntry);
+      this.addAndGetMemstoreSize(memstoreSize);
+      if (trx.locked) {
+        this.updatesLock.readLock().unlock();
+      }
+      releaseRowLocks(trx.acquiredRowLocks);
+
+      // See if the column families were consistent through the whole thing.
+      // if they were then keep them. If they were not then pass a null.
+      // null will be treated as unknown.
+      // Total time taken might be involving Puts and Deletes.
+      // Split the time for puts and deletes based on the total number of Puts and Deletes.
+
+      if (trx.noOfPuts > 0) {
+        // There were some Puts in the batch.
+        if (this.metricsRegion != null) {
+          this.metricsRegion.updatePut();
+        }
+      }
+      if (trx.noOfDeletes > 0) {
+        // There were some Deletes in the batch.
+        if (this.metricsRegion != null) {
+          this.metricsRegion.updateDelete();
+        }
+      }
+      if (!trx.success) {
+        for (int i = firstIndex; i < lastIndexExclusive; i++) {
+          if (batchOp.retCodeDetails[i].getOperationStatusCode() == OperationStatusCode.NOT_RUN) {
+            batchOp.retCodeDetails[i] = OperationStatus.FAILURE;
+          }
+        }
+      }
+      if (coprocessorHost != null && !batchOp.isInReplay()) {
+        // call the coprocessor hook to do any finalization steps
+        // after the put is done
+        MiniBatchOperationInProgress<Mutation> miniBatchOp =
+            new MiniBatchOperationInProgress<Mutation>(batchOp.getMutationsForCoprocs(),
+                batchOp.retCodeDetails, batchOp.walEditsFromCoprocessors, firstIndex, lastIndexExclusive);
+        coprocessorHost.postBatchMutateIndispensably(miniBatchOp, trx.success);
+      }
+
+      batchOp.nextIndexToProcess = lastIndexExclusive;
+    }
+  }
+
   /**
    * Called to do a piece of the batch that came in to {@link #batchMutate(Mutation[], long, long)}
    * In here we also handle replay of edits on region recover.
@@ -3054,7 +3541,6 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
   @edu.umd.cs.findbugs.annotations.SuppressWarnings(value="UL_UNRELEASED_LOCK",
       justification="Findbugs seems to be confused on this.")
   @SuppressWarnings("unchecked")
-  // TODO: This needs a rewrite. Doesn't have to be this long. St.Ack 20160120
   private void doMiniBatchMutate(BatchOperation<?> batchOp) throws IOException {
     boolean replay = batchOp.isInReplay();
     // Variable to note if all Put items are for the same CF -- metrics related
@@ -3082,6 +3568,8 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
     /** Keep track of the locks we hold so we can release them in finally clause */
     List<RowLock> acquiredRowLocks = Lists.newArrayListWithCapacity(batchOp.operations.length);
     MemstoreSize memstoreSize = new MemstoreSize();
+    long addedSize = 0;
+
     try {
       // STEP 1. Try to acquire as many locks as we can, and ensure we acquire at least one.
       int numReadyToWrite = 0;
@@ -3178,8 +3666,8 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
       // calling the pre CP hook for batch mutation
       if (!replay && coprocessorHost != null) {
         MiniBatchOperationInProgress<Mutation> miniBatchOp =
-          new MiniBatchOperationInProgress<Mutation>(batchOp.getMutationsForCoprocs(),
-          batchOp.retCodeDetails, batchOp.walEditsFromCoprocessors, firstIndex, lastIndexExclusive);
+            new MiniBatchOperationInProgress<Mutation>(batchOp.getMutationsForCoprocs(),
+                batchOp.retCodeDetails, batchOp.walEditsFromCoprocessors, firstIndex, lastIndexExclusive);
         if (coprocessorHost.preBatchMutate(miniBatchOp)) {
           return;
         } else {
@@ -3897,7 +4385,7 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
   throws IOException {
     // Any change in how we update Store/MemStore needs to also be done in other applyToMemstore!!!!
     if (store == null) {
-      checkFamily(CellUtil.cloneFamily(cell));
+      checkFamily(cloneFamily(cell));
       // Unreachable because checkFamily will throw exception
     }
     ((HStore) store).add(cell, memstoreSize);
