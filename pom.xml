@@ -84,6 +84,7 @@
     <module>hbase-shaded</module>
     <module>hbase-spark</module>
     <module>hbase-archetypes</module>
+    <module>hbase-raft</module>
   </modules>
   <!--Add apache snapshots in case we want to use unreleased versions of plugins:
       e.g. surefire 2.18-SNAPSHOT-->
@@ -1242,6 +1243,7 @@
     <kerby.version>1.0.0-RC2</kerby.version>
     <commons-crypto.version>1.0.0</commons-crypto.version>
     <curator.version>2.11.0</curator.version>
+    <raft.version>1.0-SNAPSHOT</raft.version>
     <!-- Plugin Dependencies -->
     <maven.assembly.version>2.4</maven.assembly.version>
     <maven.antrun.version>1.8</maven.antrun.version>
@@ -1852,6 +1854,43 @@
           </exclusion>
         </exclusions>
       </dependency>
+
+     <dependency>
+      <artifactId>raft-common</artifactId>
+      <groupId>com.hortonworks.raft</groupId>
+      <version>${raft.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>raft-common</artifactId>
+      <groupId>com.hortonworks.raft</groupId>
+      <version>${raft.version}</version>
+      <scope>test</scope>
+      <type>test-jar</type>
+    </dependency>
+    <dependency>
+      <artifactId>raft-client</artifactId>
+      <groupId>com.hortonworks.raft</groupId>
+      <version>${raft.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>raft-client</artifactId>
+      <groupId>com.hortonworks.raft</groupId>
+      <version>${raft.version}</version>
+      <scope>test</scope>
+      <type>test-jar</type>
+    </dependency>
+    <dependency>
+      <artifactId>raft-server</artifactId>
+      <groupId>com.hortonworks.raft</groupId>
+      <version>${raft.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>raft-server</artifactId>
+      <groupId>com.hortonworks.raft</groupId>
+      <version>${raft.version}</version>
+      <scope>test</scope>
+      <type>test-jar</type>
+    </dependency>
     </dependencies>
   </dependencyManagement>
   <!-- Dependencies needed by subprojects -->
