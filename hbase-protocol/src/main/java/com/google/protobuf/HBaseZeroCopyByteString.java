@@ -27,11 +27,10 @@ package com.google.protobuf;  // This is a lie.
  *
  * @since 0.96.1
  */
-public final class HBaseZeroCopyByteString extends LiteralByteString {
+public final class HBaseZeroCopyByteString {
   // Gotten from AsyncHBase code base with permission.
   /** Private constructor so this class cannot be instantiated. */
   private HBaseZeroCopyByteString() {
-    super(null);
     throw new UnsupportedOperationException("Should never be here.");
   }
 
@@ -41,7 +40,7 @@ public final class HBaseZeroCopyByteString extends LiteralByteString {
    * @return wrapped array
    */
   public static ByteString wrap(final byte[] array) {
-    return new LiteralByteString(array);
+    return ByteString.wrap(array);
   }
 
   /**
@@ -52,23 +51,6 @@ public final class HBaseZeroCopyByteString extends LiteralByteString {
    * @return wrapped array
    */
   public static ByteString wrap(final byte[] array, int offset, int length) {
-    return new BoundedByteString(array, offset, length);
-  }
-
-  // TODO:
-  // ZeroCopyLiteralByteString.wrap(this.buf, 0, this.count);
-
-  /**
-   * Extracts the byte array from the given {@link ByteString} without copy.
-   * @param buf A buffer from which to extract the array.  This buffer must be
-   * actually an instance of a {@code LiteralByteString}.
-   * @return byte[] representation
-   */
-  public static byte[] zeroCopyGetBytes(final ByteString buf) {
-    if (buf instanceof LiteralByteString) {
-      return ((LiteralByteString) buf).bytes;
-    }
-    throw new UnsupportedOperationException("Need a LiteralByteString, got a "
-                                            + buf.getClass().getName());
+    return ByteString.wrap(array, offset, length);
   }
 }
