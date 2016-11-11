@@ -145,9 +145,9 @@ public class MultiVersionConcurrencyControl {
         // we always expect that this is called with the writeNumber sequentially and in the same
         // order from the primary
         if (writeNumber != w + 1) {
-          assert false;
           LOG.warn("Trying to increment write number with a hole. Current writePoint:" + w + ", " +
               "requested write point:" + writeNumber);
+          assert false;
         }
         if (w > writeNumber) {
           throw new IllegalStateException("Trying to increment write number to a smaller value." +

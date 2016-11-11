@@ -66,7 +66,7 @@ import java.util.concurrent.atomic.LongAdder;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.concurrent.locks.StampedLock;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -193,7 +193,7 @@ import com.google.common.io.Closeables;
 @SuppressWarnings("deprecation")
 @InterfaceAudience.Private
 public class HRegion implements HeapSize, PropagatingConfigurationObserver, Region {
-  private static final Log LOG = LogFactory.getLog(HRegion.class);
+  public static final Log LOG = LogFactory.getLog(HRegion.class);
 
   public static final String LOAD_CFS_ON_DEMAND_CONFIG_KEY =
     "hbase.hregion.scan.loadColumnFamiliesOnDemand";
@@ -566,10 +566,10 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
   private long blockingMemStoreSize;
   final long threadWakeFrequency;
   // Used to guard closes
-  final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+  final ReadWriteLock lock = new StampedLock().asReadWriteLock(); // TODO
 
   // Stop updates lock
-  private final ReentrantReadWriteLock updatesLock = new ReentrantReadWriteLock();
+  private final ReadWriteLock updatesLock = new StampedLock().asReadWriteLock(); // TODO
   private boolean splitRequest;
   private byte[] explicitSplitPoint = null;
 
@@ -3321,16 +3321,22 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
     }
 
     if (!trx.walEdit.isReplay() && trx.inMemstore) {
-      for (Cell c: trx.walEdit.getCells()) {
+      setCellSequenceIds(trx.walEdit, regionSequenceId);
+    }
+    trx.writeEntry = we;
+    trx.walKey.setWriteEntry(we);
+    return trx;
+  }
+
+  private void setCellSequenceIds(WALEdit walEdit, long sequenceId) {
+      for (Cell c: walEdit.getCells()) {
         try {
-          CellUtil.setSequenceId(c, regionSequenceId);
+          CellUtil.setSequenceId(c, sequenceId);
         } catch (IOException e) {
           throw new RuntimeException(e); // should not happen
         }
       }
-    }
-    trx.walKey.setWriteEntry(we);
-    return trx;
+
   }
 
   private static class WALReplayBatch extends BatchOperation<WALKey> {
@@ -3379,6 +3385,7 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
     WALReplayBatch replayBatch = new WALReplayBatch(walKey, walEdit);
 
     WriteContext<WALKey> trx = new WriteContext<>(replayBatch);
+    trx.lastIndexExclusive = replayBatch.operations.length;
     trx.walKey = walKey;
     trx.walEdit = walEdit;
 
@@ -3392,24 +3399,24 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
       }
       l.add(cell);
     }
+
+    // KVCodec does not serialize sequence ids, we have to stamp them again in replay.
+    setCellSequenceIds(walEdit, walKey.getSequenceId());
     return trx;
   }
 
-
   public <T> WriteContext<T> applyCommittedSerial(WriteContext<T> trx) {
     if (trx.writeEntry == null) {
+      if (LOG.isTraceEnabled()) {
+        LOG.trace("Applying transaction with walKey:" +  trx.walKey);
+      }
       // This means a replica is processing the WALEdit originated at another replica
       trx.writeEntry = mvcc.begin(trx.walKey.getSequenceId());
 
       // TODO: acquire locks if this is replay
 
     } else {
-      try {
-        trx.writeEntry = trx.walKey.getWriteEntry();
-      } catch (InterruptedIOException e) {
-        // TODO should not happen with 2.0
-        throw new RuntimeException(e);
-      }
+      // nothing to to here in case of default replica
     }
     return trx;
   }
@@ -3430,11 +3437,14 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
         // 1) If the op is in replay mode, FSWALEntry#stampRegionSequenceId won't stamp sequence id.
         // 2) If no WAL, FSWALEntry won't be used
         // we use durability of the original mutation for the mutation passed by CP.
-//        boolean updateSeqId = replay || batchOp.getMutation(i).getDurability() == Durability.SKIP_WAL;
+//        boolean updateSeqId = replay || batchOp.getMutation(i).getDurability() == Durability.SKIP_WAL; TODO
 //        if (updateSeqId) {
 //          this.updateSequenceId(trx.familyMaps[i].values(),
 //              replay? batchOp.getReplaySequenceId(): writeEntry.getWriteNumber());
 //        }
+        if (LOG.isTraceEnabled()) {
+          LOG.trace("Applying familyMaps to memstore:" +  trx.familyMaps[i]);
+        }
         applyFamilyMapToMemstore(trx.familyMaps[i], memstoreSize);
       }
 
@@ -5466,7 +5476,7 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
         mvcc.advanceTo(bulkLoadEvent.getBulkloadSeqNum());
       }
     } finally {
-      closeBulkRegionOperation();
+      closeBulkRegionOperation(multipleFamilies);
     }
   }
 
@@ -5844,7 +5854,7 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
   @VisibleForTesting
   class RowLockContext {
     private final HashedBytes row;
-    final ReadWriteLock readWriteLock = new ReentrantReadWriteLock(true);
+    final ReadWriteLock readWriteLock = new StampedLock().asReadWriteLock(); // TODO
     final AtomicBoolean usable = new AtomicBoolean(true);
     final AtomicInteger count = new AtomicInteger(0);
     final Object lock = new Object();
@@ -5973,7 +5983,8 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
     Map<String, Long> storeFilesSizes = new HashMap<String, Long>();
     Preconditions.checkNotNull(familyPaths);
     // we need writeLock for multi-family bulk load
-    startBulkRegionOperation(hasMultipleColumnFamilies(familyPaths));
+    boolean writeLockNeeded = hasMultipleColumnFamilies(familyPaths);
+    startBulkRegionOperation(writeLockNeeded);
     boolean isSuccessful = false;
     try {
       this.writeRequestsCount.increment();
@@ -6114,7 +6125,7 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
         }
       }
 
-      closeBulkRegionOperation();
+      closeBulkRegionOperation(writeLockNeeded);
     }
     return isSuccessful;
   }
@@ -8442,8 +8453,8 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
    * Closes the lock. This needs to be called in the finally block corresponding
    * to the try block of #startRegionOperation
    */
-  private void closeBulkRegionOperation(){
-    if (lock.writeLock().isHeldByCurrentThread()) lock.writeLock().unlock();
+  private void closeBulkRegionOperation(boolean writeLockNeeded){
+    if (writeLockNeeded) lock.writeLock().unlock();
     else lock.readLock().unlock();
   }
 

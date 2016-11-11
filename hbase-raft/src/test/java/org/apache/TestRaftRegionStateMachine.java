@@ -56,6 +56,7 @@ public class TestRaftRegionStateMachine {
   static {
     GenericTestUtils.setLogLevel(RaftServer.LOG, Level.DEBUG);
     GenericTestUtils.setLogLevel(RaftClient.LOG, Level.DEBUG);
+    GenericTestUtils.setLogLevel(HRegion.LOG, Level.TRACE);
   }
 
   private final MiniRaftClusterWithSimulatedRpc cluster;
@@ -75,14 +76,14 @@ public class TestRaftRegionStateMachine {
 
   static final Logger LOG = LoggerFactory.getLogger(RaftBasicTests.class);
 
-  public static final int NUM_SERVERS = 5;
+  public static final int NUM_SERVERS = 3;
 
   private final RaftProperties properties = new RaftProperties();
 
   {
     properties.setBoolean(RaftServerConfigKeys.RAFT_SERVER_USE_MEMORY_LOG_KEY, false);
     // TODO: use guice or something?
-    properties.setStrings(RaftServerConfigKeys.RAFT_SERVER_STATEMACHINE_CLASS_KEY,
+    properties.setStrings(MiniRaftCluster.STATEMACHINE_CLASS_KEY,
       RegionStateMachine.class.getName());
   }
 
@@ -108,8 +109,8 @@ public class TestRaftRegionStateMachine {
   public void testBasicAppendEntries() throws Exception {
     final MiniRaftCluster cluster = getCluster();
     RaftServer leader = waitForLeader(cluster);
-    final String killed = cluster.getFollowers().get(3).getId();
-    cluster.killServer(killed);
+//    final String killed = cluster.getFollowers().get(3).getId();
+//    cluster.killServer(killed); TODO
     LOG.info(cluster.printServers());
 
     final RaftClient client = cluster.createClient("client", null);
@@ -121,7 +122,7 @@ public class TestRaftRegionStateMachine {
         new Put(b).addImmutable(HBaseUtils.FAMILY, b, b)));
     }
 
-    Thread.sleep(cluster.getMaxTimeout() + 100);
+    Thread.sleep(cluster.getMaxTimeout() + 2000);
     LOG.info(cluster.printAllLogs());
 
     cluster.getServers().stream().filter(RaftServer::isAlive)

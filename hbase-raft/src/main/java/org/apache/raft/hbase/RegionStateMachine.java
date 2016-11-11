@@ -74,6 +74,7 @@ import org.apache.raft.statemachine.BaseStateMachine;
 import org.apache.raft.statemachine.TrxContext;
 
 import com.google.common.collect.Lists;
+import com.google.protobuf.ByteString;
 
 public class RegionStateMachine extends BaseStateMachine {
 
@@ -139,17 +140,19 @@ public class RegionStateMachine extends BaseStateMachine {
       startNonAtomicRegionMutation(batchContext, region, regionAction);
     }
 
-    WriteContext writeContext = batchContext.getWriteContext();
-    SMLogEntryProto.Builder builder = SMLogEntryProto.newBuilder();
-    builder.setData(encoder.write(writeContext.getWalKey(), writeContext.getWalEdit()));
-    return new TrxContext(this, request, builder.build(), batchContext);
+    return new TrxContext(this, request).setStateMachineContext(batchContext);
   }
 
   @Override
-  public TrxContext preAppendTransaction(TrxContext trx) {
+  public TrxContext preAppendTransaction(TrxContext trx) throws IOException {
     BatchContext batchContext = (BatchContext) trx.getStateMachineContext().get();
     // stamp sequence id
     region.preAppend(batchContext.getWriteContext());
+
+    WriteContext writeContext = batchContext.getWriteContext();
+    SMLogEntryProto.Builder builder = SMLogEntryProto.newBuilder();
+    builder.setData(encoder.write(writeContext.getWalKey(), writeContext.getWalEdit()));
+    trx.setSmLogEntryProto(builder.build());
     return super.preAppendTransaction(trx);
   }
 
@@ -189,7 +192,8 @@ public class RegionStateMachine extends BaseStateMachine {
     WriteContext writeContext = batchContext.getWriteContext();
 
     region.applyCommitted(writeContext);
-    return null;
+
+    return CompletableFuture.completedFuture(() -> ByteString.copyFrom("success".getBytes()));
   }
 
   public HRegion getRegion() {
