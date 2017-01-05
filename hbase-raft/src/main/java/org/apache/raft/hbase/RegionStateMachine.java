@@ -43,6 +43,7 @@ import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.ipc.RpcCallContext;
 import org.apache.hadoop.hbase.shaded.protobuf.ProtobufUtil;
+import org.apache.hadoop.hbase.shaded.protobuf.ResponseConverter;
 import org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos;
 import org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos.MultiRequest;
 import org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos.MultiResponse;
@@ -56,7 +57,6 @@ import org.apache.hadoop.hbase.regionserver.HRegion.WriteContext;
 import org.apache.hadoop.hbase.regionserver.OperationStatus;
 import org.apache.hadoop.hbase.regionserver.RegionScanner;
 import org.apache.hadoop.hbase.regionserver.wal.WALEdit;
-import org.apache.hadoop.hbase.shaded.protobuf.ResponseConverter;
 import org.apache.hadoop.hbase.util.EnvironmentEdgeManager;
 import org.apache.hadoop.hbase.wal.WALKey;
 import org.apache.hadoop.hbase.wal.WALSplitter;
@@ -65,16 +65,15 @@ import org.apache.raft.conf.RaftProperties;
 import org.apache.raft.hbase.wal.PBWALDataCodec;
 import org.apache.raft.hbase.wal.RaftWAL;
 import org.apache.raft.hbase.wal.WALDataCodec;
-import org.apache.raft.proto.RaftProtos.SMLogEntryProto;
 import org.apache.raft.protocol.Message;
 import org.apache.raft.protocol.RaftClientRequest;
-import org.apache.raft.server.RaftConfiguration;
 import org.apache.raft.server.storage.RaftStorage;
+import org.apache.raft.shaded.com.google.protobuf.ByteString;
+import org.apache.raft.shaded.proto.RaftProtos.SMLogEntryProto;
 import org.apache.raft.statemachine.BaseStateMachine;
-import org.apache.raft.statemachine.TrxContext;
+import org.apache.raft.statemachine.TransactionContext;
 
 import com.google.common.collect.Lists;
-import com.google.protobuf.ByteString;
 
 public class RegionStateMachine extends BaseStateMachine {
 
@@ -96,7 +95,8 @@ public class RegionStateMachine extends BaseStateMachine {
   }
 
   @Override
-  public void initialize(RaftProperties properties, RaftStorage storage) throws IOException {
+  public void initialize(String id, RaftProperties properties, RaftStorage storage)
+      throws IOException {
     HTableDescriptor htd = HBaseUtils.createTableDescriptor();
     HRegionInfo hri = HBaseUtils.createRegionInfo(htd);
     Path rootDir = new Path(storage.getStorageDir().getRoot().toString()); // TODO
@@ -126,7 +126,7 @@ public class RegionStateMachine extends BaseStateMachine {
   }
 
   @Override
-  public TrxContext startTransaction(RaftClientRequest request) throws IOException {
+  public TransactionContext startTransaction(RaftClientRequest request) throws IOException {
     Message msg = request.getMessage();
     MultiRequest multi = MultiRequest.parseFrom(HBaseUtils.toByteString(msg.getContent()));
 
@@ -140,11 +140,12 @@ public class RegionStateMachine extends BaseStateMachine {
       startNonAtomicRegionMutation(batchContext, region, regionAction);
     }
 
-    return new TrxContext(this, request).setStateMachineContext(batchContext);
+    return new TransactionContext(this, request, (SMLogEntryProto)null)
+        .setStateMachineContext(batchContext);
   }
 
   @Override
-  public TrxContext preAppendTransaction(TrxContext trx) throws IOException {
+  public TransactionContext preAppendTransaction(TransactionContext trx) throws IOException {
     BatchContext batchContext = (BatchContext) trx.getStateMachineContext().get();
     // stamp sequence id
     region.preAppend(batchContext.getWriteContext());
@@ -157,7 +158,7 @@ public class RegionStateMachine extends BaseStateMachine {
   }
 
   @Override
-  public TrxContext applyTransactionSerial(TrxContext trx) throws IOException {
+  public TransactionContext applyTransactionSerial(TransactionContext trx) throws IOException {
     Optional<Object> stateMachineContext = trx.getStateMachineContext();
     if (stateMachineContext.isPresent()) {
       // this the leader applying already committed entries
@@ -184,7 +185,7 @@ public class RegionStateMachine extends BaseStateMachine {
   }
 
   @Override
-  public CompletableFuture<Message> applyTransaction(TrxContext trx) throws IOException {
+  public CompletableFuture<Message> applyTransaction(TransactionContext trx) throws IOException {
     Optional<Object> stateMachineContext = trx.getStateMachineContext();
     assert stateMachineContext.isPresent();
 
@@ -193,7 +194,8 @@ public class RegionStateMachine extends BaseStateMachine {
 
     region.applyCommitted(writeContext);
 
-    return CompletableFuture.completedFuture(() -> ByteString.copyFrom("success".getBytes()));
+    return CompletableFuture.<Message>completedFuture(
+      () -> ByteString.copyFrom("success".getBytes()));
   }
 
   public HRegion getRegion() {
@@ -436,16 +438,5 @@ public class RegionStateMachine extends BaseStateMachine {
   private static ResultOrException getResultOrException(
       final ResultOrException.Builder builder, final int index) {
     return builder.setIndex(index).build();
-  }
-
-  @Override
-  public void setRaftConfiguration(RaftConfiguration conf) {
-    // TODO Auto-generated method stub
-  }
-
-  @Override
-  public RaftConfiguration getRaftConfiguration() {
-    // TODO Auto-generated method stub
-    return null;
   }
 }

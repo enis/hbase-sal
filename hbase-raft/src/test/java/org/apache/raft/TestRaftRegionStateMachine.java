@@ -42,6 +42,7 @@ import org.apache.raft.server.RaftServer;
 import org.apache.raft.server.RaftServerConfigKeys;
 import org.apache.raft.server.simulation.MiniRaftClusterWithSimulatedRpc;
 import org.apache.raft.server.simulation.SimulatedRequestReply;
+import org.apache.raft.statemachine.StateMachine;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -54,7 +55,7 @@ import com.google.common.collect.Lists;
 public class TestRaftRegionStateMachine {
 
   static {
-    GenericTestUtils.setLogLevel(RaftServer.LOG, Level.DEBUG);
+    //GenericTestUtils.setLogLevel(RaftServer.LOG, Level.DEBUG);
     GenericTestUtils.setLogLevel(RaftClient.LOG, Level.DEBUG);
     GenericTestUtils.setLogLevel(HRegion.LOG, Level.TRACE);
   }
@@ -83,8 +84,8 @@ public class TestRaftRegionStateMachine {
   {
     properties.setBoolean(RaftServerConfigKeys.RAFT_SERVER_USE_MEMORY_LOG_KEY, false);
     // TODO: use guice or something?
-    properties.setStrings(MiniRaftCluster.STATEMACHINE_CLASS_KEY,
-      RegionStateMachine.class.getName());
+    properties.setClass(MiniRaftCluster.STATEMACHINE_CLASS_KEY,
+      RegionStateMachine.class, StateMachine.class);
   }
 
   public RaftProperties getProperties() {
@@ -125,7 +126,7 @@ public class TestRaftRegionStateMachine {
     Thread.sleep(cluster.getMaxTimeout() + 2000);
     LOG.info(cluster.printAllLogs());
 
-    cluster.getServers().stream().filter(RaftServer::isAlive)
+    cluster.getServers().stream()
       .forEach(s -> {
         RegionStateMachine rsm = (RegionStateMachine) s.getStateMachine();
         HRegion region = rsm.getRegion();
