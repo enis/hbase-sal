@@ -6,19 +6,15 @@ package org.apache.hadoop.hbase.protobuf.generated;
 public final class AggregateProtos {
   private AggregateProtos() {}
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistryLite registry) {
-  }
-
-  public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
-    registerAllExtensions(
-        (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface AggregateRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:hbase.pb.AggregateRequest)
-      com.google.protobuf.MessageOrBuilder {
+  public interface AggregateRequestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // required string interpreter_class_name = 1;
     /**
+     * <code>required string interpreter_class_name = 1;</code>
+     *
      * <pre>
      ** The request passed to the AggregateService consists of three parts
      *  (1) the (canonical) classname of the ColumnInterpreter implementation
@@ -26,11 +22,11 @@ public final class AggregateProtos {
      *  (3) any bytes required to construct the ColumnInterpreter object
      *      properly
      * </pre>
-     *
-     * <code>required string interpreter_class_name = 1;</code>
      */
     boolean hasInterpreterClassName();
     /**
+     * <code>required string interpreter_class_name = 1;</code>
+     *
      * <pre>
      ** The request passed to the AggregateService consists of three parts
      *  (1) the (canonical) classname of the ColumnInterpreter implementation
@@ -38,11 +34,11 @@ public final class AggregateProtos {
      *  (3) any bytes required to construct the ColumnInterpreter object
      *      properly
      * </pre>
-     *
-     * <code>required string interpreter_class_name = 1;</code>
      */
     java.lang.String getInterpreterClassName();
     /**
+     * <code>required string interpreter_class_name = 1;</code>
+     *
      * <pre>
      ** The request passed to the AggregateService consists of three parts
      *  (1) the (canonical) classname of the ColumnInterpreter implementation
@@ -50,12 +46,11 @@ public final class AggregateProtos {
      *  (3) any bytes required to construct the ColumnInterpreter object
      *      properly
      * </pre>
-     *
-     * <code>required string interpreter_class_name = 1;</code>
      */
     com.google.protobuf.ByteString
         getInterpreterClassNameBytes();
 
+    // required .hbase.pb.Scan scan = 2;
     /**
      * <code>required .hbase.pb.Scan scan = 2;</code>
      */
@@ -69,6 +64,7 @@ public final class AggregateProtos {
      */
     org.apache.hadoop.hbase.protobuf.generated.ClientProtos.ScanOrBuilder getScanOrBuilder();
 
+    // optional bytes interpreter_specific_bytes = 3;
     /**
      * <code>optional bytes interpreter_specific_bytes = 3;</code>
      */
@@ -81,29 +77,36 @@ public final class AggregateProtos {
   /**
    * Protobuf type {@code hbase.pb.AggregateRequest}
    */
-  public  static final class AggregateRequest extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:hbase.pb.AggregateRequest)
-      AggregateRequestOrBuilder {
+  public static final class AggregateRequest extends
+      com.google.protobuf.GeneratedMessage
+      implements AggregateRequestOrBuilder {
     // Use AggregateRequest.newBuilder() to construct.
-    private AggregateRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private AggregateRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private AggregateRequest() {
-      interpreterClassName_ = "";
-      interpreterSpecificBytes_ = com.google.protobuf.ByteString.EMPTY;
+    private AggregateRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final AggregateRequest defaultInstance;
+    public static AggregateRequest getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public AggregateRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private AggregateRequest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
+      initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -123,9 +126,8 @@ public final class AggregateProtos {
               break;
             }
             case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              interpreterClassName_ = bs;
+              interpreterClassName_ = input.readBytes();
               break;
             }
             case 18: {
@@ -152,7 +154,7 @@ public final class AggregateProtos {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -163,17 +165,35 @@ public final class AggregateProtos {
       return org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.internal_static_hbase_pb_AggregateRequest_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.internal_static_hbase_pb_AggregateRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequest.class, org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequest.Builder.class);
     }
 
+    public static com.google.protobuf.Parser<AggregateRequest> PARSER =
+        new com.google.protobuf.AbstractParser<AggregateRequest>() {
+      public AggregateRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AggregateRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AggregateRequest> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
+    // required string interpreter_class_name = 1;
     public static final int INTERPRETER_CLASS_NAME_FIELD_NUMBER = 1;
-    private volatile java.lang.Object interpreterClassName_;
+    private java.lang.Object interpreterClassName_;
     /**
+     * <code>required string interpreter_class_name = 1;</code>
+     *
      * <pre>
      ** The request passed to the AggregateService consists of three parts
      *  (1) the (canonical) classname of the ColumnInterpreter implementation
@@ -181,13 +201,13 @@ public final class AggregateProtos {
      *  (3) any bytes required to construct the ColumnInterpreter object
      *      properly
      * </pre>
-     *
-     * <code>required string interpreter_class_name = 1;</code>
      */
     public boolean hasInterpreterClassName() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
+     * <code>required string interpreter_class_name = 1;</code>
+     *
      * <pre>
      ** The request passed to the AggregateService consists of three parts
      *  (1) the (canonical) classname of the ColumnInterpreter implementation
@@ -195,8 +215,6 @@ public final class AggregateProtos {
      *  (3) any bytes required to construct the ColumnInterpreter object
      *      properly
      * </pre>
-     *
-     * <code>required string interpreter_class_name = 1;</code>
      */
     public java.lang.String getInterpreterClassName() {
       java.lang.Object ref = interpreterClassName_;
@@ -213,6 +231,8 @@ public final class AggregateProtos {
       }
     }
     /**
+     * <code>required string interpreter_class_name = 1;</code>
+     *
      * <pre>
      ** The request passed to the AggregateService consists of three parts
      *  (1) the (canonical) classname of the ColumnInterpreter implementation
@@ -220,8 +240,6 @@ public final class AggregateProtos {
      *  (3) any bytes required to construct the ColumnInterpreter object
      *      properly
      * </pre>
-     *
-     * <code>required string interpreter_class_name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getInterpreterClassNameBytes() {
@@ -237,6 +255,7 @@ public final class AggregateProtos {
       }
     }
 
+    // required .hbase.pb.Scan scan = 2;
     public static final int SCAN_FIELD_NUMBER = 2;
     private org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan scan_;
     /**
@@ -249,15 +268,16 @@ public final class AggregateProtos {
      * <code>required .hbase.pb.Scan scan = 2;</code>
      */
     public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan getScan() {
-      return scan_ == null ? org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan.getDefaultInstance() : scan_;
+      return scan_;
     }
     /**
      * <code>required .hbase.pb.Scan scan = 2;</code>
      */
     public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.ScanOrBuilder getScanOrBuilder() {
-      return scan_ == null ? org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan.getDefaultInstance() : scan_;
+      return scan_;
     }
 
+    // optional bytes interpreter_specific_bytes = 3;
     public static final int INTERPRETER_SPECIFIC_BYTES_FIELD_NUMBER = 3;
     private com.google.protobuf.ByteString interpreterSpecificBytes_;
     /**
@@ -273,11 +293,15 @@ public final class AggregateProtos {
       return interpreterSpecificBytes_;
     }
 
+    private void initFields() {
+      interpreterClassName_ = "";
+      scan_ = org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan.getDefaultInstance();
+      interpreterSpecificBytes_ = com.google.protobuf.ByteString.EMPTY;
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasInterpreterClassName()) {
         memoizedIsInitialized = 0;
@@ -297,40 +321,49 @@ public final class AggregateProtos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, interpreterClassName_);
+        output.writeBytes(1, getInterpreterClassNameBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(2, getScan());
+        output.writeMessage(2, scan_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(3, interpreterSpecificBytes_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, interpreterClassName_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getInterpreterClassNameBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getScan());
+          .computeMessageSize(2, scan_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, interpreterSpecificBytes_);
       }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -357,10 +390,12 @@ public final class AggregateProtos {
         result = result && getInterpreterSpecificBytes()
             .equals(other.getInterpreterSpecificBytes());
       }
-      result = result && unknownFields.equals(other.unknownFields);
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
       return result;
     }
 
+    private int memoizedHashCode = 0;
     @java.lang.Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
@@ -380,7 +415,7 @@ public final class AggregateProtos {
         hash = (37 * hash) + INTERPRETER_SPECIFIC_BYTES_FIELD_NUMBER;
         hash = (53 * hash) + getInterpreterSpecificBytes().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -408,57 +443,46 @@ public final class AggregateProtos {
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -466,15 +490,14 @@ public final class AggregateProtos {
      * Protobuf type {@code hbase.pb.AggregateRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:hbase.pb.AggregateRequest)
-        org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequestOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.internal_static_hbase_pb_AggregateRequest_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.internal_static_hbase_pb_AggregateRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -487,22 +510,25 @@ public final class AggregateProtos {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getScanFieldBuilder();
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
         interpreterClassName_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         if (scanBuilder_ == null) {
-          scan_ = null;
+          scan_ = org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan.getDefaultInstance();
         } else {
           scanBuilder_.clear();
         }
@@ -510,6 +536,10 @@ public final class AggregateProtos {
         interpreterSpecificBytes_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -554,32 +584,6 @@ public final class AggregateProtos {
         return result;
       }
 
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequest) {
           return mergeFrom((org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequest)other);
@@ -602,19 +606,21 @@ public final class AggregateProtos {
         if (other.hasInterpreterSpecificBytes()) {
           setInterpreterSpecificBytes(other.getInterpreterSpecificBytes());
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasInterpreterClassName()) {
+          
           return false;
         }
         if (!hasScan()) {
+          
           return false;
         }
         if (!getScan().isInitialized()) {
+          
           return false;
         }
         return true;
@@ -629,7 +635,7 @@ public final class AggregateProtos {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequest) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -639,8 +645,11 @@ public final class AggregateProtos {
       }
       private int bitField0_;
 
+      // required string interpreter_class_name = 1;
       private java.lang.Object interpreterClassName_ = "";
       /**
+       * <code>required string interpreter_class_name = 1;</code>
+       *
        * <pre>
        ** The request passed to the AggregateService consists of three parts
        *  (1) the (canonical) classname of the ColumnInterpreter implementation
@@ -648,13 +657,13 @@ public final class AggregateProtos {
        *  (3) any bytes required to construct the ColumnInterpreter object
        *      properly
        * </pre>
-       *
-       * <code>required string interpreter_class_name = 1;</code>
        */
       public boolean hasInterpreterClassName() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
+       * <code>required string interpreter_class_name = 1;</code>
+       *
        * <pre>
        ** The request passed to the AggregateService consists of three parts
        *  (1) the (canonical) classname of the ColumnInterpreter implementation
@@ -662,24 +671,21 @@ public final class AggregateProtos {
        *  (3) any bytes required to construct the ColumnInterpreter object
        *      properly
        * </pre>
-       *
-       * <code>required string interpreter_class_name = 1;</code>
        */
       public java.lang.String getInterpreterClassName() {
         java.lang.Object ref = interpreterClassName_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            interpreterClassName_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          interpreterClassName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
+       * <code>required string interpreter_class_name = 1;</code>
+       *
        * <pre>
        ** The request passed to the AggregateService consists of three parts
        *  (1) the (canonical) classname of the ColumnInterpreter implementation
@@ -687,8 +693,6 @@ public final class AggregateProtos {
        *  (3) any bytes required to construct the ColumnInterpreter object
        *      properly
        * </pre>
-       *
-       * <code>required string interpreter_class_name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getInterpreterClassNameBytes() {
@@ -704,6 +708,8 @@ public final class AggregateProtos {
         }
       }
       /**
+       * <code>required string interpreter_class_name = 1;</code>
+       *
        * <pre>
        ** The request passed to the AggregateService consists of three parts
        *  (1) the (canonical) classname of the ColumnInterpreter implementation
@@ -711,8 +717,6 @@ public final class AggregateProtos {
        *  (3) any bytes required to construct the ColumnInterpreter object
        *      properly
        * </pre>
-       *
-       * <code>required string interpreter_class_name = 1;</code>
        */
       public Builder setInterpreterClassName(
           java.lang.String value) {
@@ -725,6 +729,8 @@ public final class AggregateProtos {
         return this;
       }
       /**
+       * <code>required string interpreter_class_name = 1;</code>
+       *
        * <pre>
        ** The request passed to the AggregateService consists of three parts
        *  (1) the (canonical) classname of the ColumnInterpreter implementation
@@ -732,8 +738,6 @@ public final class AggregateProtos {
        *  (3) any bytes required to construct the ColumnInterpreter object
        *      properly
        * </pre>
-       *
-       * <code>required string interpreter_class_name = 1;</code>
        */
       public Builder clearInterpreterClassName() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -742,6 +746,8 @@ public final class AggregateProtos {
         return this;
       }
       /**
+       * <code>required string interpreter_class_name = 1;</code>
+       *
        * <pre>
        ** The request passed to the AggregateService consists of three parts
        *  (1) the (canonical) classname of the ColumnInterpreter implementation
@@ -749,8 +755,6 @@ public final class AggregateProtos {
        *  (3) any bytes required to construct the ColumnInterpreter object
        *      properly
        * </pre>
-       *
-       * <code>required string interpreter_class_name = 1;</code>
        */
       public Builder setInterpreterClassNameBytes(
           com.google.protobuf.ByteString value) {
@@ -763,8 +767,9 @@ public final class AggregateProtos {
         return this;
       }
 
-      private org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan scan_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
+      // required .hbase.pb.Scan scan = 2;
+      private org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan scan_ = org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
           org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan.Builder, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.ScanOrBuilder> scanBuilder_;
       /**
        * <code>required .hbase.pb.Scan scan = 2;</code>
@@ -777,7 +782,7 @@ public final class AggregateProtos {
        */
       public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan getScan() {
         if (scanBuilder_ == null) {
-          return scan_ == null ? org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan.getDefaultInstance() : scan_;
+          return scan_;
         } else {
           return scanBuilder_.getMessage();
         }
@@ -818,7 +823,6 @@ public final class AggregateProtos {
       public Builder mergeScan(org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan value) {
         if (scanBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              scan_ != null &&
               scan_ != org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan.getDefaultInstance()) {
             scan_ =
               org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan.newBuilder(scan_).mergeFrom(value).buildPartial();
@@ -837,7 +841,7 @@ public final class AggregateProtos {
        */
       public Builder clearScan() {
         if (scanBuilder_ == null) {
-          scan_ = null;
+          scan_ = org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan.getDefaultInstance();
           onChanged();
         } else {
           scanBuilder_.clear();
@@ -860,20 +864,19 @@ public final class AggregateProtos {
         if (scanBuilder_ != null) {
           return scanBuilder_.getMessageOrBuilder();
         } else {
-          return scan_ == null ?
-              org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan.getDefaultInstance() : scan_;
+          return scan_;
         }
       }
       /**
        * <code>required .hbase.pb.Scan scan = 2;</code>
        */
-      private com.google.protobuf.SingleFieldBuilderV3<
+      private com.google.protobuf.SingleFieldBuilder<
           org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan.Builder, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.ScanOrBuilder> 
           getScanFieldBuilder() {
         if (scanBuilder_ == null) {
-          scanBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          scanBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Scan.Builder, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.ScanOrBuilder>(
-                  getScan(),
+                  scan_,
                   getParentForChildren(),
                   isClean());
           scan_ = null;
@@ -881,6 +884,7 @@ public final class AggregateProtos {
         return scanBuilder_;
       }
 
+      // optional bytes interpreter_specific_bytes = 3;
       private com.google.protobuf.ByteString interpreterSpecificBytes_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>optional bytes interpreter_specific_bytes = 3;</code>
@@ -915,60 +919,25 @@ public final class AggregateProtos {
         onChanged();
         return this;
       }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:hbase.pb.AggregateRequest)
     }
 
-    // @@protoc_insertion_point(class_scope:hbase.pb.AggregateRequest)
-    private static final org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequest();
+      defaultInstance = new AggregateRequest(true);
+      defaultInstance.initFields();
     }
 
-    public static org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequest getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<AggregateRequest>
-        PARSER = new com.google.protobuf.AbstractParser<AggregateRequest>() {
-      public AggregateRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new AggregateRequest(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<AggregateRequest> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<AggregateRequest> getParserForType() {
-      return PARSER;
-    }
-
-    public org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateRequest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:hbase.pb.AggregateRequest)
   }
 
-  public interface AggregateResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:hbase.pb.AggregateResponse)
-      com.google.protobuf.MessageOrBuilder {
+  public interface AggregateResponseOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // repeated bytes first_part = 1;
     /**
+     * <code>repeated bytes first_part = 1;</code>
+     *
      * <pre>
      **
      * The AggregateService methods all have a response that either is a Pair
@@ -977,11 +946,11 @@ public final class AggregateProtos {
      * when the response is not a pair). Refer to the AggregateImplementation 
      * class for an overview of the AggregateResponse object constructions. 
      * </pre>
-     *
-     * <code>repeated bytes first_part = 1;</code>
      */
     java.util.List<com.google.protobuf.ByteString> getFirstPartList();
     /**
+     * <code>repeated bytes first_part = 1;</code>
+     *
      * <pre>
      **
      * The AggregateService methods all have a response that either is a Pair
@@ -990,11 +959,11 @@ public final class AggregateProtos {
      * when the response is not a pair). Refer to the AggregateImplementation 
      * class for an overview of the AggregateResponse object constructions. 
      * </pre>
-     *
-     * <code>repeated bytes first_part = 1;</code>
      */
     int getFirstPartCount();
     /**
+     * <code>repeated bytes first_part = 1;</code>
+     *
      * <pre>
      **
      * The AggregateService methods all have a response that either is a Pair
@@ -1003,11 +972,10 @@ public final class AggregateProtos {
      * when the response is not a pair). Refer to the AggregateImplementation 
      * class for an overview of the AggregateResponse object constructions. 
      * </pre>
-     *
-     * <code>repeated bytes first_part = 1;</code>
      */
     com.google.protobuf.ByteString getFirstPart(int index);
 
+    // optional bytes second_part = 2;
     /**
      * <code>optional bytes second_part = 2;</code>
      */
@@ -1020,29 +988,36 @@ public final class AggregateProtos {
   /**
    * Protobuf type {@code hbase.pb.AggregateResponse}
    */
-  public  static final class AggregateResponse extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:hbase.pb.AggregateResponse)
-      AggregateResponseOrBuilder {
+  public static final class AggregateResponse extends
+      com.google.protobuf.GeneratedMessage
+      implements AggregateResponseOrBuilder {
     // Use AggregateResponse.newBuilder() to construct.
-    private AggregateResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private AggregateResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private AggregateResponse() {
-      firstPart_ = java.util.Collections.emptyList();
-      secondPart_ = com.google.protobuf.ByteString.EMPTY;
+    private AggregateResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final AggregateResponse defaultInstance;
+    public static AggregateResponse getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public AggregateResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private AggregateResponse(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
+      initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -1080,7 +1055,7 @@ public final class AggregateProtos {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           firstPart_ = java.util.Collections.unmodifiableList(firstPart_);
@@ -1094,17 +1069,35 @@ public final class AggregateProtos {
       return org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.internal_static_hbase_pb_AggregateResponse_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.internal_static_hbase_pb_AggregateResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponse.class, org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponse.Builder.class);
     }
 
+    public static com.google.protobuf.Parser<AggregateResponse> PARSER =
+        new com.google.protobuf.AbstractParser<AggregateResponse>() {
+      public AggregateResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AggregateResponse(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AggregateResponse> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
+    // repeated bytes first_part = 1;
     public static final int FIRST_PART_FIELD_NUMBER = 1;
     private java.util.List<com.google.protobuf.ByteString> firstPart_;
     /**
+     * <code>repeated bytes first_part = 1;</code>
+     *
      * <pre>
      **
      * The AggregateService methods all have a response that either is a Pair
@@ -1113,14 +1106,14 @@ public final class AggregateProtos {
      * when the response is not a pair). Refer to the AggregateImplementation 
      * class for an overview of the AggregateResponse object constructions. 
      * </pre>
-     *
-     * <code>repeated bytes first_part = 1;</code>
      */
     public java.util.List<com.google.protobuf.ByteString>
         getFirstPartList() {
       return firstPart_;
     }
     /**
+     * <code>repeated bytes first_part = 1;</code>
+     *
      * <pre>
      **
      * The AggregateService methods all have a response that either is a Pair
@@ -1129,13 +1122,13 @@ public final class AggregateProtos {
      * when the response is not a pair). Refer to the AggregateImplementation 
      * class for an overview of the AggregateResponse object constructions. 
      * </pre>
-     *
-     * <code>repeated bytes first_part = 1;</code>
      */
     public int getFirstPartCount() {
       return firstPart_.size();
     }
     /**
+     * <code>repeated bytes first_part = 1;</code>
+     *
      * <pre>
      **
      * The AggregateService methods all have a response that either is a Pair
@@ -1144,13 +1137,12 @@ public final class AggregateProtos {
      * when the response is not a pair). Refer to the AggregateImplementation 
      * class for an overview of the AggregateResponse object constructions. 
      * </pre>
-     *
-     * <code>repeated bytes first_part = 1;</code>
      */
     public com.google.protobuf.ByteString getFirstPart(int index) {
       return firstPart_.get(index);
     }
 
+    // optional bytes second_part = 2;
     public static final int SECOND_PART_FIELD_NUMBER = 2;
     private com.google.protobuf.ByteString secondPart_;
     /**
@@ -1166,11 +1158,14 @@ public final class AggregateProtos {
       return secondPart_;
     }
 
+    private void initFields() {
+      firstPart_ = java.util.Collections.emptyList();
+      secondPart_ = com.google.protobuf.ByteString.EMPTY;
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1178,17 +1173,19 @@ public final class AggregateProtos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       for (int i = 0; i < firstPart_.size(); i++) {
         output.writeBytes(1, firstPart_.get(i));
       }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeBytes(2, secondPart_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
@@ -1205,12 +1202,18 @@ public final class AggregateProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, secondPart_);
       }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1229,10 +1232,12 @@ public final class AggregateProtos {
         result = result && getSecondPart()
             .equals(other.getSecondPart());
       }
-      result = result && unknownFields.equals(other.unknownFields);
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
       return result;
     }
 
+    private int memoizedHashCode = 0;
     @java.lang.Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
@@ -1248,7 +1253,7 @@ public final class AggregateProtos {
         hash = (37 * hash) + SECOND_PART_FIELD_NUMBER;
         hash = (53 * hash) + getSecondPart().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -1276,57 +1281,46 @@ public final class AggregateProtos {
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponse prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1334,15 +1328,14 @@ public final class AggregateProtos {
      * Protobuf type {@code hbase.pb.AggregateResponse}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:hbase.pb.AggregateResponse)
-        org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponseOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.internal_static_hbase_pb_AggregateResponse_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.internal_static_hbase_pb_AggregateResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -1355,15 +1348,18 @@ public final class AggregateProtos {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
         firstPart_ = java.util.Collections.emptyList();
@@ -1371,6 +1367,10 @@ public final class AggregateProtos {
         secondPart_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -1408,32 +1408,6 @@ public final class AggregateProtos {
         return result;
       }
 
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponse) {
           return mergeFrom((org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponse)other);
@@ -1458,8 +1432,7 @@ public final class AggregateProtos {
         if (other.hasSecondPart()) {
           setSecondPart(other.getSecondPart());
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
@@ -1476,7 +1449,7 @@ public final class AggregateProtos {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponse) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -1486,6 +1459,7 @@ public final class AggregateProtos {
       }
       private int bitField0_;
 
+      // repeated bytes first_part = 1;
       private java.util.List<com.google.protobuf.ByteString> firstPart_ = java.util.Collections.emptyList();
       private void ensureFirstPartIsMutable() {
         if (!((bitField0_ & 0x00000001) == 0x00000001)) {
@@ -1494,6 +1468,8 @@ public final class AggregateProtos {
          }
       }
       /**
+       * <code>repeated bytes first_part = 1;</code>
+       *
        * <pre>
        **
        * The AggregateService methods all have a response that either is a Pair
@@ -1502,14 +1478,14 @@ public final class AggregateProtos {
        * when the response is not a pair). Refer to the AggregateImplementation 
        * class for an overview of the AggregateResponse object constructions. 
        * </pre>
-       *
-       * <code>repeated bytes first_part = 1;</code>
        */
       public java.util.List<com.google.protobuf.ByteString>
           getFirstPartList() {
         return java.util.Collections.unmodifiableList(firstPart_);
       }
       /**
+       * <code>repeated bytes first_part = 1;</code>
+       *
        * <pre>
        **
        * The AggregateService methods all have a response that either is a Pair
@@ -1518,13 +1494,13 @@ public final class AggregateProtos {
        * when the response is not a pair). Refer to the AggregateImplementation 
        * class for an overview of the AggregateResponse object constructions. 
        * </pre>
-       *
-       * <code>repeated bytes first_part = 1;</code>
        */
       public int getFirstPartCount() {
         return firstPart_.size();
       }
       /**
+       * <code>repeated bytes first_part = 1;</code>
+       *
        * <pre>
        **
        * The AggregateService methods all have a response that either is a Pair
@@ -1533,13 +1509,13 @@ public final class AggregateProtos {
        * when the response is not a pair). Refer to the AggregateImplementation 
        * class for an overview of the AggregateResponse object constructions. 
        * </pre>
-       *
-       * <code>repeated bytes first_part = 1;</code>
        */
       public com.google.protobuf.ByteString getFirstPart(int index) {
         return firstPart_.get(index);
       }
       /**
+       * <code>repeated bytes first_part = 1;</code>
+       *
        * <pre>
        **
        * The AggregateService methods all have a response that either is a Pair
@@ -1548,8 +1524,6 @@ public final class AggregateProtos {
        * when the response is not a pair). Refer to the AggregateImplementation 
        * class for an overview of the AggregateResponse object constructions. 
        * </pre>
-       *
-       * <code>repeated bytes first_part = 1;</code>
        */
       public Builder setFirstPart(
           int index, com.google.protobuf.ByteString value) {
@@ -1562,6 +1536,8 @@ public final class AggregateProtos {
         return this;
       }
       /**
+       * <code>repeated bytes first_part = 1;</code>
+       *
        * <pre>
        **
        * The AggregateService methods all have a response that either is a Pair
@@ -1570,8 +1546,6 @@ public final class AggregateProtos {
        * when the response is not a pair). Refer to the AggregateImplementation 
        * class for an overview of the AggregateResponse object constructions. 
        * </pre>
-       *
-       * <code>repeated bytes first_part = 1;</code>
        */
       public Builder addFirstPart(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -1583,6 +1557,8 @@ public final class AggregateProtos {
         return this;
       }
       /**
+       * <code>repeated bytes first_part = 1;</code>
+       *
        * <pre>
        **
        * The AggregateService methods all have a response that either is a Pair
@@ -1591,18 +1567,17 @@ public final class AggregateProtos {
        * when the response is not a pair). Refer to the AggregateImplementation 
        * class for an overview of the AggregateResponse object constructions. 
        * </pre>
-       *
-       * <code>repeated bytes first_part = 1;</code>
        */
       public Builder addAllFirstPart(
           java.lang.Iterable<? extends com.google.protobuf.ByteString> values) {
         ensureFirstPartIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, firstPart_);
+        super.addAll(values, firstPart_);
         onChanged();
         return this;
       }
       /**
+       * <code>repeated bytes first_part = 1;</code>
+       *
        * <pre>
        **
        * The AggregateService methods all have a response that either is a Pair
@@ -1611,8 +1586,6 @@ public final class AggregateProtos {
        * when the response is not a pair). Refer to the AggregateImplementation 
        * class for an overview of the AggregateResponse object constructions. 
        * </pre>
-       *
-       * <code>repeated bytes first_part = 1;</code>
        */
       public Builder clearFirstPart() {
         firstPart_ = java.util.Collections.emptyList();
@@ -1621,6 +1594,7 @@ public final class AggregateProtos {
         return this;
       }
 
+      // optional bytes second_part = 2;
       private com.google.protobuf.ByteString secondPart_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>optional bytes second_part = 2;</code>
@@ -1655,62 +1629,25 @@ public final class AggregateProtos {
         onChanged();
         return this;
       }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:hbase.pb.AggregateResponse)
     }
 
-    // @@protoc_insertion_point(class_scope:hbase.pb.AggregateResponse)
-    private static final org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponse DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponse();
+      defaultInstance = new AggregateResponse(true);
+      defaultInstance.initFields();
     }
 
-    public static org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponse getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<AggregateResponse>
-        PARSER = new com.google.protobuf.AbstractParser<AggregateResponse>() {
-      public AggregateResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new AggregateResponse(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<AggregateResponse> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<AggregateResponse> getParserForType() {
-      return PARSER;
-    }
-
-    public org.apache.hadoop.hbase.protobuf.generated.AggregateProtos.AggregateResponse getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:hbase.pb.AggregateResponse)
   }
 
   /**
+   * Protobuf service {@code hbase.pb.AggregateService}
+   *
    * <pre>
    ** Refer to the AggregateImplementation class for an overview of the 
    *  AggregateService method implementations and their functionality.
    * </pre>
-   *
-   * Protobuf service {@code hbase.pb.AggregateService}
    */
   public static abstract class AggregateService
       implements com.google.protobuf.Service {
@@ -2367,22 +2304,22 @@ public final class AggregateProtos {
     // @@protoc_insertion_point(class_scope:hbase.pb.AggregateService)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_hbase_pb_AggregateRequest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_hbase_pb_AggregateRequest_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_hbase_pb_AggregateResponse_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_hbase_pb_AggregateResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
   }
-  private static  com.google.protobuf.Descriptors.FileDescriptor
+  private static com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     java.lang.String[] descriptorData = {
@@ -2408,31 +2345,30 @@ public final class AggregateProtos {
       "tedB\017AggregateProtosH\001\210\001\001\240\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_hbase_pb_AggregateRequest_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_hbase_pb_AggregateRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_hbase_pb_AggregateRequest_descriptor,
+              new java.lang.String[] { "InterpreterClassName", "Scan", "InterpreterSpecificBytes", });
+          internal_static_hbase_pb_AggregateResponse_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_hbase_pb_AggregateResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_hbase_pb_AggregateResponse_descriptor,
+              new java.lang.String[] { "FirstPart", "SecondPart", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           org.apache.hadoop.hbase.protobuf.generated.ClientProtos.getDescriptor(),
         }, assigner);
-    internal_static_hbase_pb_AggregateRequest_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_hbase_pb_AggregateRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_hbase_pb_AggregateRequest_descriptor,
-        new java.lang.String[] { "InterpreterClassName", "Scan", "InterpreterSpecificBytes", });
-    internal_static_hbase_pb_AggregateResponse_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_hbase_pb_AggregateResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_hbase_pb_AggregateResponse_descriptor,
-        new java.lang.String[] { "FirstPart", "SecondPart", });
-    org.apache.hadoop.hbase.protobuf.generated.ClientProtos.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

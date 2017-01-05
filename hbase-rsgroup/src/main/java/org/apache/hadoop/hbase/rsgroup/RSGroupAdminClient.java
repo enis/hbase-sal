@@ -19,6 +19,10 @@
  */
 package org.apache.hadoop.hbase.rsgroup;
 
+import com.google.common.collect.Sets;
+import com.google.common.net.HostAndPort;
+import com.google.protobuf.ServiceException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,10 +40,6 @@ import org.apache.hadoop.hbase.protobuf.generated.RSGroupAdminProtos;
 import org.apache.hadoop.hbase.protobuf.generated.RSGroupAdminProtos.GetRSGroupInfoOfServerResponse;
 import org.apache.hadoop.hbase.protobuf.generated.RSGroupAdminProtos.GetRSGroupInfoOfTableResponse;
 import org.apache.hadoop.hbase.protobuf.generated.RSGroupProtos;
-
-import com.google.common.collect.Sets;
-import com.google.common.net.HostAndPort;
-import com.google.protobuf.ServiceException;
 
 
 /**

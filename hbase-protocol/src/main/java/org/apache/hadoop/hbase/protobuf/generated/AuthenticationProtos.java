@@ -6,18 +6,12 @@ package org.apache.hadoop.hbase.protobuf.generated;
 public final class AuthenticationProtos {
   private AuthenticationProtos() {}
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistryLite registry) {
-  }
-
-  public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
-    registerAllExtensions(
-        (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface AuthenticationKeyOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:hbase.pb.AuthenticationKey)
-      com.google.protobuf.MessageOrBuilder {
+  public interface AuthenticationKeyOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // required int32 id = 1;
     /**
      * <code>required int32 id = 1;</code>
      */
@@ -27,6 +21,7 @@ public final class AuthenticationProtos {
      */
     int getId();
 
+    // required int64 expiration_date = 2;
     /**
      * <code>required int64 expiration_date = 2;</code>
      */
@@ -36,6 +31,7 @@ public final class AuthenticationProtos {
      */
     long getExpirationDate();
 
+    // required bytes key = 3;
     /**
      * <code>required bytes key = 3;</code>
      */
@@ -48,30 +44,36 @@ public final class AuthenticationProtos {
   /**
    * Protobuf type {@code hbase.pb.AuthenticationKey}
    */
-  public  static final class AuthenticationKey extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:hbase.pb.AuthenticationKey)
-      AuthenticationKeyOrBuilder {
+  public static final class AuthenticationKey extends
+      com.google.protobuf.GeneratedMessage
+      implements AuthenticationKeyOrBuilder {
     // Use AuthenticationKey.newBuilder() to construct.
-    private AuthenticationKey(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private AuthenticationKey(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private AuthenticationKey() {
-      id_ = 0;
-      expirationDate_ = 0L;
-      key_ = com.google.protobuf.ByteString.EMPTY;
+    private AuthenticationKey(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final AuthenticationKey defaultInstance;
+    public static AuthenticationKey getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public AuthenticationKey getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private AuthenticationKey(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
+      initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -111,7 +113,7 @@ public final class AuthenticationProtos {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -122,14 +124,30 @@ public final class AuthenticationProtos {
       return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_AuthenticationKey_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_AuthenticationKey_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKey.class, org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKey.Builder.class);
     }
 
+    public static com.google.protobuf.Parser<AuthenticationKey> PARSER =
+        new com.google.protobuf.AbstractParser<AuthenticationKey>() {
+      public AuthenticationKey parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AuthenticationKey(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AuthenticationKey> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
+    // required int32 id = 1;
     public static final int ID_FIELD_NUMBER = 1;
     private int id_;
     /**
@@ -145,6 +163,7 @@ public final class AuthenticationProtos {
       return id_;
     }
 
+    // required int64 expiration_date = 2;
     public static final int EXPIRATION_DATE_FIELD_NUMBER = 2;
     private long expirationDate_;
     /**
@@ -160,6 +179,7 @@ public final class AuthenticationProtos {
       return expirationDate_;
     }
 
+    // required bytes key = 3;
     public static final int KEY_FIELD_NUMBER = 3;
     private com.google.protobuf.ByteString key_;
     /**
@@ -175,11 +195,15 @@ public final class AuthenticationProtos {
       return key_;
     }
 
+    private void initFields() {
+      id_ = 0;
+      expirationDate_ = 0L;
+      key_ = com.google.protobuf.ByteString.EMPTY;
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasId()) {
         memoizedIsInitialized = 0;
@@ -199,6 +223,7 @@ public final class AuthenticationProtos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt32(1, id_);
       }
@@ -208,11 +233,12 @@ public final class AuthenticationProtos {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(3, key_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
@@ -228,12 +254,18 @@ public final class AuthenticationProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, key_);
       }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -260,10 +292,12 @@ public final class AuthenticationProtos {
         result = result && getKey()
             .equals(other.getKey());
       }
-      result = result && unknownFields.equals(other.unknownFields);
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
       return result;
     }
 
+    private int memoizedHashCode = 0;
     @java.lang.Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
@@ -277,14 +311,13 @@ public final class AuthenticationProtos {
       }
       if (hasExpirationDate()) {
         hash = (37 * hash) + EXPIRATION_DATE_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getExpirationDate());
+        hash = (53 * hash) + hashLong(getExpirationDate());
       }
       if (hasKey()) {
         hash = (37 * hash) + KEY_FIELD_NUMBER;
         hash = (53 * hash) + getKey().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -312,57 +345,46 @@ public final class AuthenticationProtos {
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKey parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKey parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKey parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKey parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKey parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKey parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKey prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -370,15 +392,14 @@ public final class AuthenticationProtos {
      * Protobuf type {@code hbase.pb.AuthenticationKey}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:hbase.pb.AuthenticationKey)
-        org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKeyOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKeyOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_AuthenticationKey_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_AuthenticationKey_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -391,15 +412,18 @@ public final class AuthenticationProtos {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
         id_ = 0;
@@ -409,6 +433,10 @@ public final class AuthenticationProtos {
         key_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -449,32 +477,6 @@ public final class AuthenticationProtos {
         return result;
       }
 
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKey) {
           return mergeFrom((org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKey)other);
@@ -495,19 +497,21 @@ public final class AuthenticationProtos {
         if (other.hasKey()) {
           setKey(other.getKey());
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasId()) {
+          
           return false;
         }
         if (!hasExpirationDate()) {
+          
           return false;
         }
         if (!hasKey()) {
+          
           return false;
         }
         return true;
@@ -522,7 +526,7 @@ public final class AuthenticationProtos {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKey) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -532,6 +536,7 @@ public final class AuthenticationProtos {
       }
       private int bitField0_;
 
+      // required int32 id = 1;
       private int id_ ;
       /**
        * <code>required int32 id = 1;</code>
@@ -564,6 +569,7 @@ public final class AuthenticationProtos {
         return this;
       }
 
+      // required int64 expiration_date = 2;
       private long expirationDate_ ;
       /**
        * <code>required int64 expiration_date = 2;</code>
@@ -596,6 +602,7 @@ public final class AuthenticationProtos {
         return this;
       }
 
+      // required bytes key = 3;
       private com.google.protobuf.ByteString key_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>required bytes key = 3;</code>
@@ -630,59 +637,22 @@ public final class AuthenticationProtos {
         onChanged();
         return this;
       }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:hbase.pb.AuthenticationKey)
     }
 
-    // @@protoc_insertion_point(class_scope:hbase.pb.AuthenticationKey)
-    private static final org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKey DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKey();
+      defaultInstance = new AuthenticationKey(true);
+      defaultInstance.initFields();
     }
 
-    public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKey getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<AuthenticationKey>
-        PARSER = new com.google.protobuf.AbstractParser<AuthenticationKey>() {
-      public AuthenticationKey parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new AuthenticationKey(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<AuthenticationKey> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<AuthenticationKey> getParserForType() {
-      return PARSER;
-    }
-
-    public org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.AuthenticationKey getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:hbase.pb.AuthenticationKey)
   }
 
-  public interface TokenIdentifierOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:hbase.pb.TokenIdentifier)
-      com.google.protobuf.MessageOrBuilder {
+  public interface TokenIdentifierOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // required .hbase.pb.TokenIdentifier.Kind kind = 1;
     /**
      * <code>required .hbase.pb.TokenIdentifier.Kind kind = 1;</code>
      */
@@ -692,6 +662,7 @@ public final class AuthenticationProtos {
      */
     org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier.Kind getKind();
 
+    // required bytes username = 2;
     /**
      * <code>required bytes username = 2;</code>
      */
@@ -701,6 +672,7 @@ public final class AuthenticationProtos {
      */
     com.google.protobuf.ByteString getUsername();
 
+    // required int32 key_id = 3;
     /**
      * <code>required int32 key_id = 3;</code>
      */
@@ -710,6 +682,7 @@ public final class AuthenticationProtos {
      */
     int getKeyId();
 
+    // optional int64 issue_date = 4;
     /**
      * <code>optional int64 issue_date = 4;</code>
      */
@@ -719,6 +692,7 @@ public final class AuthenticationProtos {
      */
     long getIssueDate();
 
+    // optional int64 expiration_date = 5;
     /**
      * <code>optional int64 expiration_date = 5;</code>
      */
@@ -728,6 +702,7 @@ public final class AuthenticationProtos {
      */
     long getExpirationDate();
 
+    // optional int64 sequence_number = 6;
     /**
      * <code>optional int64 sequence_number = 6;</code>
      */
@@ -740,33 +715,36 @@ public final class AuthenticationProtos {
   /**
    * Protobuf type {@code hbase.pb.TokenIdentifier}
    */
-  public  static final class TokenIdentifier extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:hbase.pb.TokenIdentifier)
-      TokenIdentifierOrBuilder {
+  public static final class TokenIdentifier extends
+      com.google.protobuf.GeneratedMessage
+      implements TokenIdentifierOrBuilder {
     // Use TokenIdentifier.newBuilder() to construct.
-    private TokenIdentifier(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private TokenIdentifier(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private TokenIdentifier() {
-      kind_ = 0;
-      username_ = com.google.protobuf.ByteString.EMPTY;
-      keyId_ = 0;
-      issueDate_ = 0L;
-      expirationDate_ = 0L;
-      sequenceNumber_ = 0L;
+    private TokenIdentifier(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TokenIdentifier defaultInstance;
+    public static TokenIdentifier getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public TokenIdentifier getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private TokenIdentifier(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
+      initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -792,7 +770,7 @@ public final class AuthenticationProtos {
                 unknownFields.mergeVarintField(1, rawValue);
               } else {
                 bitField0_ |= 0x00000001;
-                kind_ = rawValue;
+                kind_ = value;
               }
               break;
             }
@@ -827,7 +805,7 @@ public final class AuthenticationProtos {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -838,11 +816,26 @@ public final class AuthenticationProtos {
       return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_TokenIdentifier_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_TokenIdentifier_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier.class, org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TokenIdentifier> PARSER =
+        new com.google.protobuf.AbstractParser<TokenIdentifier>() {
+      public TokenIdentifier parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TokenIdentifier(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TokenIdentifier> getParserForType() {
+      return PARSER;
     }
 
     /**
@@ -853,7 +846,7 @@ public final class AuthenticationProtos {
       /**
        * <code>HBASE_AUTH_TOKEN = 0;</code>
        */
-      HBASE_AUTH_TOKEN(0),
+      HBASE_AUTH_TOKEN(0, 0),
       ;
 
       /**
@@ -862,19 +855,9 @@ public final class AuthenticationProtos {
       public static final int HBASE_AUTH_TOKEN_VALUE = 0;
 
 
-      public final int getNumber() {
-        return value;
-      }
+      public final int getNumber() { return value; }
 
-      /**
-       * @deprecated Use {@link #forNumber(int)} instead.
-       */
-      @java.lang.Deprecated
       public static Kind valueOf(int value) {
-        return forNumber(value);
-      }
-
-      public static Kind forNumber(int value) {
         switch (value) {
           case 0: return HBASE_AUTH_TOKEN;
           default: return null;
@@ -885,17 +868,17 @@ public final class AuthenticationProtos {
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static final com.google.protobuf.Internal.EnumLiteMap<
-          Kind> internalValueMap =
+      private static com.google.protobuf.Internal.EnumLiteMap<Kind>
+          internalValueMap =
             new com.google.protobuf.Internal.EnumLiteMap<Kind>() {
               public Kind findValueByNumber(int number) {
-                return Kind.forNumber(number);
+                return Kind.valueOf(number);
               }
             };
 
       public final com.google.protobuf.Descriptors.EnumValueDescriptor
           getValueDescriptor() {
-        return getDescriptor().getValues().get(ordinal());
+        return getDescriptor().getValues().get(index);
       }
       public final com.google.protobuf.Descriptors.EnumDescriptor
           getDescriptorForType() {
@@ -917,9 +900,11 @@ public final class AuthenticationProtos {
         return VALUES[desc.getIndex()];
       }
 
+      private final int index;
       private final int value;
 
-      private Kind(int value) {
+      private Kind(int index, int value) {
+        this.index = index;
         this.value = value;
       }
 
@@ -927,8 +912,9 @@ public final class AuthenticationProtos {
     }
 
     private int bitField0_;
+    // required .hbase.pb.TokenIdentifier.Kind kind = 1;
     public static final int KIND_FIELD_NUMBER = 1;
-    private int kind_;
+    private org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier.Kind kind_;
     /**
      * <code>required .hbase.pb.TokenIdentifier.Kind kind = 1;</code>
      */
@@ -939,10 +925,10 @@ public final class AuthenticationProtos {
      * <code>required .hbase.pb.TokenIdentifier.Kind kind = 1;</code>
      */
     public org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier.Kind getKind() {
-      org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier.Kind result = org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier.Kind.valueOf(kind_);
-      return result == null ? org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier.Kind.HBASE_AUTH_TOKEN : result;
+      return kind_;
     }
 
+    // required bytes username = 2;
     public static final int USERNAME_FIELD_NUMBER = 2;
     private com.google.protobuf.ByteString username_;
     /**
@@ -958,6 +944,7 @@ public final class AuthenticationProtos {
       return username_;
     }
 
+    // required int32 key_id = 3;
     public static final int KEY_ID_FIELD_NUMBER = 3;
     private int keyId_;
     /**
@@ -973,6 +960,7 @@ public final class AuthenticationProtos {
       return keyId_;
     }
 
+    // optional int64 issue_date = 4;
     public static final int ISSUE_DATE_FIELD_NUMBER = 4;
     private long issueDate_;
     /**
@@ -988,6 +976,7 @@ public final class AuthenticationProtos {
       return issueDate_;
     }
 
+    // optional int64 expiration_date = 5;
     public static final int EXPIRATION_DATE_FIELD_NUMBER = 5;
     private long expirationDate_;
     /**
@@ -1003,6 +992,7 @@ public final class AuthenticationProtos {
       return expirationDate_;
     }
 
+    // optional int64 sequence_number = 6;
     public static final int SEQUENCE_NUMBER_FIELD_NUMBER = 6;
     private long sequenceNumber_;
     /**
@@ -1018,11 +1008,18 @@ public final class AuthenticationProtos {
       return sequenceNumber_;
     }
 
+    private void initFields() {
+      kind_ = org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier.Kind.HBASE_AUTH_TOKEN;
+      username_ = com.google.protobuf.ByteString.EMPTY;
+      keyId_ = 0;
+      issueDate_ = 0L;
+      expirationDate_ = 0L;
+      sequenceNumber_ = 0L;
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasKind()) {
         memoizedIsInitialized = 0;
@@ -1042,8 +1039,9 @@ public final class AuthenticationProtos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeEnum(1, kind_);
+        output.writeEnum(1, kind_.getNumber());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, username_);
@@ -1060,17 +1058,18 @@ public final class AuthenticationProtos {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt64(6, sequenceNumber_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, kind_);
+          .computeEnumSize(1, kind_.getNumber());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1092,12 +1091,18 @@ public final class AuthenticationProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(6, sequenceNumber_);
       }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1111,7 +1116,8 @@ public final class AuthenticationProtos {
       boolean result = true;
       result = result && (hasKind() == other.hasKind());
       if (hasKind()) {
-        result = result && kind_ == other.kind_;
+        result = result &&
+            (getKind() == other.getKind());
       }
       result = result && (hasUsername() == other.hasUsername());
       if (hasUsername()) {
@@ -1138,10 +1144,12 @@ public final class AuthenticationProtos {
         result = result && (getSequenceNumber()
             == other.getSequenceNumber());
       }
-      result = result && unknownFields.equals(other.unknownFields);
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
       return result;
     }
 
+    private int memoizedHashCode = 0;
     @java.lang.Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
@@ -1151,7 +1159,7 @@ public final class AuthenticationProtos {
       hash = (19 * hash) + getDescriptorForType().hashCode();
       if (hasKind()) {
         hash = (37 * hash) + KIND_FIELD_NUMBER;
-        hash = (53 * hash) + kind_;
+        hash = (53 * hash) + hashEnum(getKind());
       }
       if (hasUsername()) {
         hash = (37 * hash) + USERNAME_FIELD_NUMBER;
@@ -1163,20 +1171,17 @@ public final class AuthenticationProtos {
       }
       if (hasIssueDate()) {
         hash = (37 * hash) + ISSUE_DATE_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getIssueDate());
+        hash = (53 * hash) + hashLong(getIssueDate());
       }
       if (hasExpirationDate()) {
         hash = (37 * hash) + EXPIRATION_DATE_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getExpirationDate());
+        hash = (53 * hash) + hashLong(getExpirationDate());
       }
       if (hasSequenceNumber()) {
         hash = (37 * hash) + SEQUENCE_NUMBER_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getSequenceNumber());
+        hash = (53 * hash) + hashLong(getSequenceNumber());
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -1204,57 +1209,46 @@ public final class AuthenticationProtos {
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1262,15 +1256,14 @@ public final class AuthenticationProtos {
      * Protobuf type {@code hbase.pb.TokenIdentifier}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:hbase.pb.TokenIdentifier)
-        org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifierOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifierOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_TokenIdentifier_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_TokenIdentifier_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -1283,18 +1276,21 @@ public final class AuthenticationProtos {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
-        kind_ = 0;
+        kind_ = org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier.Kind.HBASE_AUTH_TOKEN;
         bitField0_ = (bitField0_ & ~0x00000001);
         username_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -1307,6 +1303,10 @@ public final class AuthenticationProtos {
         sequenceNumber_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000020);
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -1359,32 +1359,6 @@ public final class AuthenticationProtos {
         return result;
       }
 
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier) {
           return mergeFrom((org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier)other);
@@ -1414,19 +1388,21 @@ public final class AuthenticationProtos {
         if (other.hasSequenceNumber()) {
           setSequenceNumber(other.getSequenceNumber());
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasKind()) {
+          
           return false;
         }
         if (!hasUsername()) {
+          
           return false;
         }
         if (!hasKeyId()) {
+          
           return false;
         }
         return true;
@@ -1441,7 +1417,7 @@ public final class AuthenticationProtos {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -1451,7 +1427,8 @@ public final class AuthenticationProtos {
       }
       private int bitField0_;
 
-      private int kind_ = 0;
+      // required .hbase.pb.TokenIdentifier.Kind kind = 1;
+      private org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier.Kind kind_ = org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier.Kind.HBASE_AUTH_TOKEN;
       /**
        * <code>required .hbase.pb.TokenIdentifier.Kind kind = 1;</code>
        */
@@ -1462,8 +1439,7 @@ public final class AuthenticationProtos {
        * <code>required .hbase.pb.TokenIdentifier.Kind kind = 1;</code>
        */
       public org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier.Kind getKind() {
-        org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier.Kind result = org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier.Kind.valueOf(kind_);
-        return result == null ? org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier.Kind.HBASE_AUTH_TOKEN : result;
+        return kind_;
       }
       /**
        * <code>required .hbase.pb.TokenIdentifier.Kind kind = 1;</code>
@@ -1473,7 +1449,7 @@ public final class AuthenticationProtos {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000001;
-        kind_ = value.getNumber();
+        kind_ = value;
         onChanged();
         return this;
       }
@@ -1482,11 +1458,12 @@ public final class AuthenticationProtos {
        */
       public Builder clearKind() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        kind_ = 0;
+        kind_ = org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier.Kind.HBASE_AUTH_TOKEN;
         onChanged();
         return this;
       }
 
+      // required bytes username = 2;
       private com.google.protobuf.ByteString username_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>required bytes username = 2;</code>
@@ -1522,6 +1499,7 @@ public final class AuthenticationProtos {
         return this;
       }
 
+      // required int32 key_id = 3;
       private int keyId_ ;
       /**
        * <code>required int32 key_id = 3;</code>
@@ -1554,6 +1532,7 @@ public final class AuthenticationProtos {
         return this;
       }
 
+      // optional int64 issue_date = 4;
       private long issueDate_ ;
       /**
        * <code>optional int64 issue_date = 4;</code>
@@ -1586,6 +1565,7 @@ public final class AuthenticationProtos {
         return this;
       }
 
+      // optional int64 expiration_date = 5;
       private long expirationDate_ ;
       /**
        * <code>optional int64 expiration_date = 5;</code>
@@ -1618,6 +1598,7 @@ public final class AuthenticationProtos {
         return this;
       }
 
+      // optional int64 sequence_number = 6;
       private long sequenceNumber_ ;
       /**
        * <code>optional int64 sequence_number = 6;</code>
@@ -1649,80 +1630,44 @@ public final class AuthenticationProtos {
         onChanged();
         return this;
       }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:hbase.pb.TokenIdentifier)
     }
 
-    // @@protoc_insertion_point(class_scope:hbase.pb.TokenIdentifier)
-    private static final org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier();
+      defaultInstance = new TokenIdentifier(true);
+      defaultInstance.initFields();
     }
 
-    public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<TokenIdentifier>
-        PARSER = new com.google.protobuf.AbstractParser<TokenIdentifier>() {
-      public TokenIdentifier parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new TokenIdentifier(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<TokenIdentifier> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<TokenIdentifier> getParserForType() {
-      return PARSER;
-    }
-
-    public org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenIdentifier getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:hbase.pb.TokenIdentifier)
   }
 
-  public interface TokenOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:hbase.pb.Token)
-      com.google.protobuf.MessageOrBuilder {
+  public interface TokenOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional bytes identifier = 1;
     /**
+     * <code>optional bytes identifier = 1;</code>
+     *
      * <pre>
      * the TokenIdentifier in serialized form
      * Note: we can't use the protobuf directly because the Hadoop Token class
      * only stores the serialized bytes
      * </pre>
-     *
-     * <code>optional bytes identifier = 1;</code>
      */
     boolean hasIdentifier();
     /**
+     * <code>optional bytes identifier = 1;</code>
+     *
      * <pre>
      * the TokenIdentifier in serialized form
      * Note: we can't use the protobuf directly because the Hadoop Token class
      * only stores the serialized bytes
      * </pre>
-     *
-     * <code>optional bytes identifier = 1;</code>
      */
     com.google.protobuf.ByteString getIdentifier();
 
+    // optional bytes password = 2;
     /**
      * <code>optional bytes password = 2;</code>
      */
@@ -1732,6 +1677,7 @@ public final class AuthenticationProtos {
      */
     com.google.protobuf.ByteString getPassword();
 
+    // optional bytes service = 3;
     /**
      * <code>optional bytes service = 3;</code>
      */
@@ -1742,37 +1688,43 @@ public final class AuthenticationProtos {
     com.google.protobuf.ByteString getService();
   }
   /**
+   * Protobuf type {@code hbase.pb.Token}
+   *
    * <pre>
    * Serialization of the org.apache.hadoop.security.token.Token class
    * Note that this is a Hadoop class, so fields may change!
    * </pre>
-   *
-   * Protobuf type {@code hbase.pb.Token}
    */
-  public  static final class Token extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:hbase.pb.Token)
-      TokenOrBuilder {
+  public static final class Token extends
+      com.google.protobuf.GeneratedMessage
+      implements TokenOrBuilder {
     // Use Token.newBuilder() to construct.
-    private Token(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private Token(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private Token() {
-      identifier_ = com.google.protobuf.ByteString.EMPTY;
-      password_ = com.google.protobuf.ByteString.EMPTY;
-      service_ = com.google.protobuf.ByteString.EMPTY;
+    private Token(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Token defaultInstance;
+    public static Token getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public Token getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private Token(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
+      initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -1812,7 +1764,7 @@ public final class AuthenticationProtos {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1823,41 +1775,58 @@ public final class AuthenticationProtos {
       return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_Token_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_Token_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token.class, org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token.Builder.class);
     }
 
+    public static com.google.protobuf.Parser<Token> PARSER =
+        new com.google.protobuf.AbstractParser<Token>() {
+      public Token parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Token(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Token> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
+    // optional bytes identifier = 1;
     public static final int IDENTIFIER_FIELD_NUMBER = 1;
     private com.google.protobuf.ByteString identifier_;
     /**
+     * <code>optional bytes identifier = 1;</code>
+     *
      * <pre>
      * the TokenIdentifier in serialized form
      * Note: we can't use the protobuf directly because the Hadoop Token class
      * only stores the serialized bytes
      * </pre>
-     *
-     * <code>optional bytes identifier = 1;</code>
      */
     public boolean hasIdentifier() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
+     * <code>optional bytes identifier = 1;</code>
+     *
      * <pre>
      * the TokenIdentifier in serialized form
      * Note: we can't use the protobuf directly because the Hadoop Token class
      * only stores the serialized bytes
      * </pre>
-     *
-     * <code>optional bytes identifier = 1;</code>
      */
     public com.google.protobuf.ByteString getIdentifier() {
       return identifier_;
     }
 
+    // optional bytes password = 2;
     public static final int PASSWORD_FIELD_NUMBER = 2;
     private com.google.protobuf.ByteString password_;
     /**
@@ -1873,6 +1842,7 @@ public final class AuthenticationProtos {
       return password_;
     }
 
+    // optional bytes service = 3;
     public static final int SERVICE_FIELD_NUMBER = 3;
     private com.google.protobuf.ByteString service_;
     /**
@@ -1888,11 +1858,15 @@ public final class AuthenticationProtos {
       return service_;
     }
 
+    private void initFields() {
+      identifier_ = com.google.protobuf.ByteString.EMPTY;
+      password_ = com.google.protobuf.ByteString.EMPTY;
+      service_ = com.google.protobuf.ByteString.EMPTY;
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -1900,6 +1874,7 @@ public final class AuthenticationProtos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeBytes(1, identifier_);
       }
@@ -1909,11 +1884,12 @@ public final class AuthenticationProtos {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(3, service_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
@@ -1929,12 +1905,18 @@ public final class AuthenticationProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, service_);
       }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1961,10 +1943,12 @@ public final class AuthenticationProtos {
         result = result && getService()
             .equals(other.getService());
       }
-      result = result && unknownFields.equals(other.unknownFields);
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
       return result;
     }
 
+    private int memoizedHashCode = 0;
     @java.lang.Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
@@ -1984,7 +1968,7 @@ public final class AuthenticationProtos {
         hash = (37 * hash) + SERVICE_FIELD_NUMBER;
         hash = (53 * hash) + getService().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -2012,78 +1996,66 @@ public final class AuthenticationProtos {
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
     /**
+     * Protobuf type {@code hbase.pb.Token}
+     *
      * <pre>
      * Serialization of the org.apache.hadoop.security.token.Token class
      * Note that this is a Hadoop class, so fields may change!
      * </pre>
-     *
-     * Protobuf type {@code hbase.pb.Token}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:hbase.pb.Token)
-        org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_Token_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_Token_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -2096,15 +2068,18 @@ public final class AuthenticationProtos {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
         identifier_ = com.google.protobuf.ByteString.EMPTY;
@@ -2114,6 +2089,10 @@ public final class AuthenticationProtos {
         service_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -2154,32 +2133,6 @@ public final class AuthenticationProtos {
         return result;
       }
 
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token) {
           return mergeFrom((org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token)other);
@@ -2200,8 +2153,7 @@ public final class AuthenticationProtos {
         if (other.hasService()) {
           setService(other.getService());
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
@@ -2218,7 +2170,7 @@ public final class AuthenticationProtos {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -2228,39 +2180,40 @@ public final class AuthenticationProtos {
       }
       private int bitField0_;
 
+      // optional bytes identifier = 1;
       private com.google.protobuf.ByteString identifier_ = com.google.protobuf.ByteString.EMPTY;
       /**
+       * <code>optional bytes identifier = 1;</code>
+       *
        * <pre>
        * the TokenIdentifier in serialized form
        * Note: we can't use the protobuf directly because the Hadoop Token class
        * only stores the serialized bytes
        * </pre>
-       *
-       * <code>optional bytes identifier = 1;</code>
        */
       public boolean hasIdentifier() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
+       * <code>optional bytes identifier = 1;</code>
+       *
        * <pre>
        * the TokenIdentifier in serialized form
        * Note: we can't use the protobuf directly because the Hadoop Token class
        * only stores the serialized bytes
        * </pre>
-       *
-       * <code>optional bytes identifier = 1;</code>
        */
       public com.google.protobuf.ByteString getIdentifier() {
         return identifier_;
       }
       /**
+       * <code>optional bytes identifier = 1;</code>
+       *
        * <pre>
        * the TokenIdentifier in serialized form
        * Note: we can't use the protobuf directly because the Hadoop Token class
        * only stores the serialized bytes
        * </pre>
-       *
-       * <code>optional bytes identifier = 1;</code>
        */
       public Builder setIdentifier(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -2272,13 +2225,13 @@ public final class AuthenticationProtos {
         return this;
       }
       /**
+       * <code>optional bytes identifier = 1;</code>
+       *
        * <pre>
        * the TokenIdentifier in serialized form
        * Note: we can't use the protobuf directly because the Hadoop Token class
        * only stores the serialized bytes
        * </pre>
-       *
-       * <code>optional bytes identifier = 1;</code>
        */
       public Builder clearIdentifier() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -2287,6 +2240,7 @@ public final class AuthenticationProtos {
         return this;
       }
 
+      // optional bytes password = 2;
       private com.google.protobuf.ByteString password_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>optional bytes password = 2;</code>
@@ -2322,6 +2276,7 @@ public final class AuthenticationProtos {
         return this;
       }
 
+      // optional bytes service = 3;
       private com.google.protobuf.ByteString service_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>optional bytes service = 3;</code>
@@ -2356,87 +2311,58 @@ public final class AuthenticationProtos {
         onChanged();
         return this;
       }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:hbase.pb.Token)
     }
 
-    // @@protoc_insertion_point(class_scope:hbase.pb.Token)
-    private static final org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token();
+      defaultInstance = new Token(true);
+      defaultInstance.initFields();
     }
 
-    public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<Token>
-        PARSER = new com.google.protobuf.AbstractParser<Token>() {
-      public Token parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Token(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<Token> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Token> getParserForType() {
-      return PARSER;
-    }
-
-    public org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:hbase.pb.Token)
   }
 
-  public interface GetAuthenticationTokenRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:hbase.pb.GetAuthenticationTokenRequest)
-      com.google.protobuf.MessageOrBuilder {
+  public interface GetAuthenticationTokenRequestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
   }
   /**
+   * Protobuf type {@code hbase.pb.GetAuthenticationTokenRequest}
+   *
    * <pre>
    * RPC request &amp; response messages
    * </pre>
-   *
-   * Protobuf type {@code hbase.pb.GetAuthenticationTokenRequest}
    */
-  public  static final class GetAuthenticationTokenRequest extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:hbase.pb.GetAuthenticationTokenRequest)
-      GetAuthenticationTokenRequestOrBuilder {
+  public static final class GetAuthenticationTokenRequest extends
+      com.google.protobuf.GeneratedMessage
+      implements GetAuthenticationTokenRequestOrBuilder {
     // Use GetAuthenticationTokenRequest.newBuilder() to construct.
-    private GetAuthenticationTokenRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private GetAuthenticationTokenRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private GetAuthenticationTokenRequest() {
+    private GetAuthenticationTokenRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final GetAuthenticationTokenRequest defaultInstance;
+    public static GetAuthenticationTokenRequest getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public GetAuthenticationTokenRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private GetAuthenticationTokenRequest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
+      initFields();
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -2460,7 +2386,7 @@ public final class AuthenticationProtos {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2471,18 +2397,34 @@ public final class AuthenticationProtos {
       return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_GetAuthenticationTokenRequest_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_GetAuthenticationTokenRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest.class, org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest.Builder.class);
     }
 
+    public static com.google.protobuf.Parser<GetAuthenticationTokenRequest> PARSER =
+        new com.google.protobuf.AbstractParser<GetAuthenticationTokenRequest>() {
+      public GetAuthenticationTokenRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new GetAuthenticationTokenRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GetAuthenticationTokenRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2490,20 +2432,28 @@ public final class AuthenticationProtos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      unknownFields.writeTo(output);
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2515,10 +2465,12 @@ public final class AuthenticationProtos {
       org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest other = (org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest) obj;
 
       boolean result = true;
-      result = result && unknownFields.equals(other.unknownFields);
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
       return result;
     }
 
+    private int memoizedHashCode = 0;
     @java.lang.Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
@@ -2526,7 +2478,7 @@ public final class AuthenticationProtos {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptorForType().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -2554,77 +2506,65 @@ public final class AuthenticationProtos {
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
     /**
+     * Protobuf type {@code hbase.pb.GetAuthenticationTokenRequest}
+     *
      * <pre>
      * RPC request &amp; response messages
      * </pre>
-     *
-     * Protobuf type {@code hbase.pb.GetAuthenticationTokenRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:hbase.pb.GetAuthenticationTokenRequest)
-        org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequestOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_GetAuthenticationTokenRequest_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_GetAuthenticationTokenRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -2637,18 +2577,25 @@ public final class AuthenticationProtos {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -2674,32 +2621,6 @@ public final class AuthenticationProtos {
         return result;
       }
 
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest) {
           return mergeFrom((org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest)other);
@@ -2711,8 +2632,7 @@ public final class AuthenticationProtos {
 
       public Builder mergeFrom(org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest other) {
         if (other == org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest.getDefaultInstance()) return this;
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
@@ -2729,7 +2649,7 @@ public final class AuthenticationProtos {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -2737,59 +2657,22 @@ public final class AuthenticationProtos {
         }
         return this;
       }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:hbase.pb.GetAuthenticationTokenRequest)
     }
 
-    // @@protoc_insertion_point(class_scope:hbase.pb.GetAuthenticationTokenRequest)
-    private static final org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest();
+      defaultInstance = new GetAuthenticationTokenRequest(true);
+      defaultInstance.initFields();
     }
 
-    public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<GetAuthenticationTokenRequest>
-        PARSER = new com.google.protobuf.AbstractParser<GetAuthenticationTokenRequest>() {
-      public GetAuthenticationTokenRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GetAuthenticationTokenRequest(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<GetAuthenticationTokenRequest> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<GetAuthenticationTokenRequest> getParserForType() {
-      return PARSER;
-    }
-
-    public org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenRequest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:hbase.pb.GetAuthenticationTokenRequest)
   }
 
-  public interface GetAuthenticationTokenResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:hbase.pb.GetAuthenticationTokenResponse)
-      com.google.protobuf.MessageOrBuilder {
+  public interface GetAuthenticationTokenResponseOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional .hbase.pb.Token token = 1;
     /**
      * <code>optional .hbase.pb.Token token = 1;</code>
      */
@@ -2806,27 +2689,36 @@ public final class AuthenticationProtos {
   /**
    * Protobuf type {@code hbase.pb.GetAuthenticationTokenResponse}
    */
-  public  static final class GetAuthenticationTokenResponse extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:hbase.pb.GetAuthenticationTokenResponse)
-      GetAuthenticationTokenResponseOrBuilder {
+  public static final class GetAuthenticationTokenResponse extends
+      com.google.protobuf.GeneratedMessage
+      implements GetAuthenticationTokenResponseOrBuilder {
     // Use GetAuthenticationTokenResponse.newBuilder() to construct.
-    private GetAuthenticationTokenResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private GetAuthenticationTokenResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private GetAuthenticationTokenResponse() {
+    private GetAuthenticationTokenResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final GetAuthenticationTokenResponse defaultInstance;
+    public static GetAuthenticationTokenResponse getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public GetAuthenticationTokenResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private GetAuthenticationTokenResponse(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
+      initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -2864,7 +2756,7 @@ public final class AuthenticationProtos {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2875,14 +2767,30 @@ public final class AuthenticationProtos {
       return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_GetAuthenticationTokenResponse_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_GetAuthenticationTokenResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponse.class, org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponse.Builder.class);
     }
 
+    public static com.google.protobuf.Parser<GetAuthenticationTokenResponse> PARSER =
+        new com.google.protobuf.AbstractParser<GetAuthenticationTokenResponse>() {
+      public GetAuthenticationTokenResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new GetAuthenticationTokenResponse(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GetAuthenticationTokenResponse> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
+    // optional .hbase.pb.Token token = 1;
     public static final int TOKEN_FIELD_NUMBER = 1;
     private org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token token_;
     /**
@@ -2895,20 +2803,22 @@ public final class AuthenticationProtos {
      * <code>optional .hbase.pb.Token token = 1;</code>
      */
     public org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token getToken() {
-      return token_ == null ? org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token.getDefaultInstance() : token_;
+      return token_;
     }
     /**
      * <code>optional .hbase.pb.Token token = 1;</code>
      */
     public org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenOrBuilder getTokenOrBuilder() {
-      return token_ == null ? org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token.getDefaultInstance() : token_;
+      return token_;
     }
 
+    private void initFields() {
+      token_ = org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token.getDefaultInstance();
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -2916,27 +2826,35 @@ public final class AuthenticationProtos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, getToken());
+        output.writeMessage(1, token_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getToken());
+          .computeMessageSize(1, token_);
       }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2953,10 +2871,12 @@ public final class AuthenticationProtos {
         result = result && getToken()
             .equals(other.getToken());
       }
-      result = result && unknownFields.equals(other.unknownFields);
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
       return result;
     }
 
+    private int memoizedHashCode = 0;
     @java.lang.Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
@@ -2968,7 +2888,7 @@ public final class AuthenticationProtos {
         hash = (37 * hash) + TOKEN_FIELD_NUMBER;
         hash = (53 * hash) + getToken().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -2996,57 +2916,46 @@ public final class AuthenticationProtos {
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponse prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3054,15 +2963,14 @@ public final class AuthenticationProtos {
      * Protobuf type {@code hbase.pb.GetAuthenticationTokenResponse}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:hbase.pb.GetAuthenticationTokenResponse)
-        org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponseOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_GetAuthenticationTokenResponse_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_GetAuthenticationTokenResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -3075,25 +2983,32 @@ public final class AuthenticationProtos {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getTokenFieldBuilder();
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
         if (tokenBuilder_ == null) {
-          token_ = null;
+          token_ = org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token.getDefaultInstance();
         } else {
           tokenBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -3130,32 +3045,6 @@ public final class AuthenticationProtos {
         return result;
       }
 
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponse) {
           return mergeFrom((org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponse)other);
@@ -3170,8 +3059,7 @@ public final class AuthenticationProtos {
         if (other.hasToken()) {
           mergeToken(other.getToken());
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
@@ -3188,7 +3076,7 @@ public final class AuthenticationProtos {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponse) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -3198,8 +3086,9 @@ public final class AuthenticationProtos {
       }
       private int bitField0_;
 
-      private org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token token_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
+      // optional .hbase.pb.Token token = 1;
+      private org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token token_ = org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
           org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token, org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token.Builder, org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenOrBuilder> tokenBuilder_;
       /**
        * <code>optional .hbase.pb.Token token = 1;</code>
@@ -3212,7 +3101,7 @@ public final class AuthenticationProtos {
        */
       public org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token getToken() {
         if (tokenBuilder_ == null) {
-          return token_ == null ? org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token.getDefaultInstance() : token_;
+          return token_;
         } else {
           return tokenBuilder_.getMessage();
         }
@@ -3253,7 +3142,6 @@ public final class AuthenticationProtos {
       public Builder mergeToken(org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token value) {
         if (tokenBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              token_ != null &&
               token_ != org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token.getDefaultInstance()) {
             token_ =
               org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token.newBuilder(token_).mergeFrom(value).buildPartial();
@@ -3272,7 +3160,7 @@ public final class AuthenticationProtos {
        */
       public Builder clearToken() {
         if (tokenBuilder_ == null) {
-          token_ = null;
+          token_ = org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token.getDefaultInstance();
           onChanged();
         } else {
           tokenBuilder_.clear();
@@ -3295,103 +3183,73 @@ public final class AuthenticationProtos {
         if (tokenBuilder_ != null) {
           return tokenBuilder_.getMessageOrBuilder();
         } else {
-          return token_ == null ?
-              org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token.getDefaultInstance() : token_;
+          return token_;
         }
       }
       /**
        * <code>optional .hbase.pb.Token token = 1;</code>
        */
-      private com.google.protobuf.SingleFieldBuilderV3<
+      private com.google.protobuf.SingleFieldBuilder<
           org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token, org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token.Builder, org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenOrBuilder> 
           getTokenFieldBuilder() {
         if (tokenBuilder_ == null) {
-          tokenBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          tokenBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token, org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.Token.Builder, org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.TokenOrBuilder>(
-                  getToken(),
+                  token_,
                   getParentForChildren(),
                   isClean());
           token_ = null;
         }
         return tokenBuilder_;
       }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:hbase.pb.GetAuthenticationTokenResponse)
     }
 
-    // @@protoc_insertion_point(class_scope:hbase.pb.GetAuthenticationTokenResponse)
-    private static final org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponse DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponse();
+      defaultInstance = new GetAuthenticationTokenResponse(true);
+      defaultInstance.initFields();
     }
 
-    public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponse getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<GetAuthenticationTokenResponse>
-        PARSER = new com.google.protobuf.AbstractParser<GetAuthenticationTokenResponse>() {
-      public GetAuthenticationTokenResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GetAuthenticationTokenResponse(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<GetAuthenticationTokenResponse> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<GetAuthenticationTokenResponse> getParserForType() {
-      return PARSER;
-    }
-
-    public org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.GetAuthenticationTokenResponse getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:hbase.pb.GetAuthenticationTokenResponse)
   }
 
-  public interface WhoAmIRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:hbase.pb.WhoAmIRequest)
-      com.google.protobuf.MessageOrBuilder {
+  public interface WhoAmIRequestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
   }
   /**
    * Protobuf type {@code hbase.pb.WhoAmIRequest}
    */
-  public  static final class WhoAmIRequest extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:hbase.pb.WhoAmIRequest)
-      WhoAmIRequestOrBuilder {
+  public static final class WhoAmIRequest extends
+      com.google.protobuf.GeneratedMessage
+      implements WhoAmIRequestOrBuilder {
     // Use WhoAmIRequest.newBuilder() to construct.
-    private WhoAmIRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private WhoAmIRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private WhoAmIRequest() {
+    private WhoAmIRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final WhoAmIRequest defaultInstance;
+    public static WhoAmIRequest getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public WhoAmIRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private WhoAmIRequest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
+      initFields();
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -3415,7 +3273,7 @@ public final class AuthenticationProtos {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -3426,18 +3284,34 @@ public final class AuthenticationProtos {
       return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_WhoAmIRequest_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_WhoAmIRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest.class, org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest.Builder.class);
     }
 
+    public static com.google.protobuf.Parser<WhoAmIRequest> PARSER =
+        new com.google.protobuf.AbstractParser<WhoAmIRequest>() {
+      public WhoAmIRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new WhoAmIRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<WhoAmIRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3445,20 +3319,28 @@ public final class AuthenticationProtos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      unknownFields.writeTo(output);
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3470,10 +3352,12 @@ public final class AuthenticationProtos {
       org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest other = (org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest) obj;
 
       boolean result = true;
-      result = result && unknownFields.equals(other.unknownFields);
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
       return result;
     }
 
+    private int memoizedHashCode = 0;
     @java.lang.Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
@@ -3481,7 +3365,7 @@ public final class AuthenticationProtos {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptorForType().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -3509,57 +3393,46 @@ public final class AuthenticationProtos {
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3567,15 +3440,14 @@ public final class AuthenticationProtos {
      * Protobuf type {@code hbase.pb.WhoAmIRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:hbase.pb.WhoAmIRequest)
-        org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequestOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_WhoAmIRequest_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_WhoAmIRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -3588,18 +3460,25 @@ public final class AuthenticationProtos {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -3625,32 +3504,6 @@ public final class AuthenticationProtos {
         return result;
       }
 
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest) {
           return mergeFrom((org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest)other);
@@ -3662,8 +3515,7 @@ public final class AuthenticationProtos {
 
       public Builder mergeFrom(org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest other) {
         if (other == org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest.getDefaultInstance()) return this;
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
@@ -3680,7 +3532,7 @@ public final class AuthenticationProtos {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -3688,59 +3540,22 @@ public final class AuthenticationProtos {
         }
         return this;
       }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:hbase.pb.WhoAmIRequest)
     }
 
-    // @@protoc_insertion_point(class_scope:hbase.pb.WhoAmIRequest)
-    private static final org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest();
+      defaultInstance = new WhoAmIRequest(true);
+      defaultInstance.initFields();
     }
 
-    public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<WhoAmIRequest>
-        PARSER = new com.google.protobuf.AbstractParser<WhoAmIRequest>() {
-      public WhoAmIRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new WhoAmIRequest(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<WhoAmIRequest> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<WhoAmIRequest> getParserForType() {
-      return PARSER;
-    }
-
-    public org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIRequest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:hbase.pb.WhoAmIRequest)
   }
 
-  public interface WhoAmIResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:hbase.pb.WhoAmIResponse)
-      com.google.protobuf.MessageOrBuilder {
+  public interface WhoAmIResponseOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional string username = 1;
     /**
      * <code>optional string username = 1;</code>
      */
@@ -3755,6 +3570,7 @@ public final class AuthenticationProtos {
     com.google.protobuf.ByteString
         getUsernameBytes();
 
+    // optional string auth_method = 2;
     /**
      * <code>optional string auth_method = 2;</code>
      */
@@ -3772,29 +3588,36 @@ public final class AuthenticationProtos {
   /**
    * Protobuf type {@code hbase.pb.WhoAmIResponse}
    */
-  public  static final class WhoAmIResponse extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:hbase.pb.WhoAmIResponse)
-      WhoAmIResponseOrBuilder {
+  public static final class WhoAmIResponse extends
+      com.google.protobuf.GeneratedMessage
+      implements WhoAmIResponseOrBuilder {
     // Use WhoAmIResponse.newBuilder() to construct.
-    private WhoAmIResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private WhoAmIResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private WhoAmIResponse() {
-      username_ = "";
-      authMethod_ = "";
+    private WhoAmIResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final WhoAmIResponse defaultInstance;
+    public static WhoAmIResponse getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public WhoAmIResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private WhoAmIResponse(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
+      initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -3814,15 +3637,13 @@ public final class AuthenticationProtos {
               break;
             }
             case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              username_ = bs;
+              username_ = input.readBytes();
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              authMethod_ = bs;
+              authMethod_ = input.readBytes();
               break;
             }
           }
@@ -3831,7 +3652,7 @@ public final class AuthenticationProtos {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -3842,16 +3663,32 @@ public final class AuthenticationProtos {
       return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_WhoAmIResponse_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_WhoAmIResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponse.class, org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponse.Builder.class);
     }
 
+    public static com.google.protobuf.Parser<WhoAmIResponse> PARSER =
+        new com.google.protobuf.AbstractParser<WhoAmIResponse>() {
+      public WhoAmIResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new WhoAmIResponse(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<WhoAmIResponse> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
+    // optional string username = 1;
     public static final int USERNAME_FIELD_NUMBER = 1;
-    private volatile java.lang.Object username_;
+    private java.lang.Object username_;
     /**
      * <code>optional string username = 1;</code>
      */
@@ -3892,8 +3729,9 @@ public final class AuthenticationProtos {
       }
     }
 
+    // optional string auth_method = 2;
     public static final int AUTH_METHOD_FIELD_NUMBER = 2;
-    private volatile java.lang.Object authMethod_;
+    private java.lang.Object authMethod_;
     /**
      * <code>optional string auth_method = 2;</code>
      */
@@ -3934,11 +3772,14 @@ public final class AuthenticationProtos {
       }
     }
 
+    private void initFields() {
+      username_ = "";
+      authMethod_ = "";
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3946,32 +3787,42 @@ public final class AuthenticationProtos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, username_);
+        output.writeBytes(1, getUsernameBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, authMethod_);
+        output.writeBytes(2, getAuthMethodBytes());
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, username_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getUsernameBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, authMethod_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getAuthMethodBytes());
       }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3993,10 +3844,12 @@ public final class AuthenticationProtos {
         result = result && getAuthMethod()
             .equals(other.getAuthMethod());
       }
-      result = result && unknownFields.equals(other.unknownFields);
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
       return result;
     }
 
+    private int memoizedHashCode = 0;
     @java.lang.Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
@@ -4012,7 +3865,7 @@ public final class AuthenticationProtos {
         hash = (37 * hash) + AUTH_METHOD_FIELD_NUMBER;
         hash = (53 * hash) + getAuthMethod().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -4040,57 +3893,46 @@ public final class AuthenticationProtos {
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponse prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -4098,15 +3940,14 @@ public final class AuthenticationProtos {
      * Protobuf type {@code hbase.pb.WhoAmIResponse}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:hbase.pb.WhoAmIResponse)
-        org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponseOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_WhoAmIResponse_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.internal_static_hbase_pb_WhoAmIResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -4119,15 +3960,18 @@ public final class AuthenticationProtos {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
         username_ = "";
@@ -4135,6 +3979,10 @@ public final class AuthenticationProtos {
         authMethod_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -4171,32 +4019,6 @@ public final class AuthenticationProtos {
         return result;
       }
 
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponse) {
           return mergeFrom((org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponse)other);
@@ -4218,8 +4040,7 @@ public final class AuthenticationProtos {
           authMethod_ = other.authMethod_;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
@@ -4236,7 +4057,7 @@ public final class AuthenticationProtos {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponse) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -4246,6 +4067,7 @@ public final class AuthenticationProtos {
       }
       private int bitField0_;
 
+      // optional string username = 1;
       private java.lang.Object username_ = "";
       /**
        * <code>optional string username = 1;</code>
@@ -4259,12 +4081,9 @@ public final class AuthenticationProtos {
       public java.lang.String getUsername() {
         java.lang.Object ref = username_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            username_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          username_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -4322,6 +4141,7 @@ public final class AuthenticationProtos {
         return this;
       }
 
+      // optional string auth_method = 2;
       private java.lang.Object authMethod_ = "";
       /**
        * <code>optional string auth_method = 2;</code>
@@ -4335,12 +4155,9 @@ public final class AuthenticationProtos {
       public java.lang.String getAuthMethod() {
         java.lang.Object ref = authMethod_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            authMethod_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          authMethod_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -4397,61 +4214,24 @@ public final class AuthenticationProtos {
         onChanged();
         return this;
       }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:hbase.pb.WhoAmIResponse)
     }
 
-    // @@protoc_insertion_point(class_scope:hbase.pb.WhoAmIResponse)
-    private static final org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponse DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponse();
+      defaultInstance = new WhoAmIResponse(true);
+      defaultInstance.initFields();
     }
 
-    public static org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponse getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<WhoAmIResponse>
-        PARSER = new com.google.protobuf.AbstractParser<WhoAmIResponse>() {
-      public WhoAmIResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new WhoAmIResponse(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<WhoAmIResponse> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<WhoAmIResponse> getParserForType() {
-      return PARSER;
-    }
-
-    public org.apache.hadoop.hbase.protobuf.generated.AuthenticationProtos.WhoAmIResponse getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:hbase.pb.WhoAmIResponse)
   }
 
   /**
+   * Protobuf service {@code hbase.pb.AuthenticationService}
+   *
    * <pre>
    * RPC service
    * </pre>
-   *
-   * Protobuf service {@code hbase.pb.AuthenticationService}
    */
   public static abstract class AuthenticationService
       implements com.google.protobuf.Service {
@@ -4753,47 +4533,47 @@ public final class AuthenticationProtos {
     // @@protoc_insertion_point(class_scope:hbase.pb.AuthenticationService)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_hbase_pb_AuthenticationKey_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_hbase_pb_AuthenticationKey_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_hbase_pb_TokenIdentifier_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_hbase_pb_TokenIdentifier_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_hbase_pb_Token_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_hbase_pb_Token_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_hbase_pb_GetAuthenticationTokenRequest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_hbase_pb_GetAuthenticationTokenRequest_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_hbase_pb_GetAuthenticationTokenResponse_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_hbase_pb_GetAuthenticationTokenResponse_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_hbase_pb_WhoAmIRequest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_hbase_pb_WhoAmIRequest_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_hbase_pb_WhoAmIResponse_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_hbase_pb_WhoAmIResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
   }
-  private static  com.google.protobuf.Descriptors.FileDescriptor
+  private static com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     java.lang.String[] descriptorData = {
@@ -4820,59 +4600,59 @@ public final class AuthenticationProtos {
       "otosH\001\210\001\001\240\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_hbase_pb_AuthenticationKey_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_hbase_pb_AuthenticationKey_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_hbase_pb_AuthenticationKey_descriptor,
+              new java.lang.String[] { "Id", "ExpirationDate", "Key", });
+          internal_static_hbase_pb_TokenIdentifier_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_hbase_pb_TokenIdentifier_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_hbase_pb_TokenIdentifier_descriptor,
+              new java.lang.String[] { "Kind", "Username", "KeyId", "IssueDate", "ExpirationDate", "SequenceNumber", });
+          internal_static_hbase_pb_Token_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_hbase_pb_Token_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_hbase_pb_Token_descriptor,
+              new java.lang.String[] { "Identifier", "Password", "Service", });
+          internal_static_hbase_pb_GetAuthenticationTokenRequest_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_hbase_pb_GetAuthenticationTokenRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_hbase_pb_GetAuthenticationTokenRequest_descriptor,
+              new java.lang.String[] { });
+          internal_static_hbase_pb_GetAuthenticationTokenResponse_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_hbase_pb_GetAuthenticationTokenResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_hbase_pb_GetAuthenticationTokenResponse_descriptor,
+              new java.lang.String[] { "Token", });
+          internal_static_hbase_pb_WhoAmIRequest_descriptor =
+            getDescriptor().getMessageTypes().get(5);
+          internal_static_hbase_pb_WhoAmIRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_hbase_pb_WhoAmIRequest_descriptor,
+              new java.lang.String[] { });
+          internal_static_hbase_pb_WhoAmIResponse_descriptor =
+            getDescriptor().getMessageTypes().get(6);
+          internal_static_hbase_pb_WhoAmIResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_hbase_pb_WhoAmIResponse_descriptor,
+              new java.lang.String[] { "Username", "AuthMethod", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_hbase_pb_AuthenticationKey_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_hbase_pb_AuthenticationKey_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_hbase_pb_AuthenticationKey_descriptor,
-        new java.lang.String[] { "Id", "ExpirationDate", "Key", });
-    internal_static_hbase_pb_TokenIdentifier_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_hbase_pb_TokenIdentifier_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_hbase_pb_TokenIdentifier_descriptor,
-        new java.lang.String[] { "Kind", "Username", "KeyId", "IssueDate", "ExpirationDate", "SequenceNumber", });
-    internal_static_hbase_pb_Token_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_hbase_pb_Token_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_hbase_pb_Token_descriptor,
-        new java.lang.String[] { "Identifier", "Password", "Service", });
-    internal_static_hbase_pb_GetAuthenticationTokenRequest_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_hbase_pb_GetAuthenticationTokenRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_hbase_pb_GetAuthenticationTokenRequest_descriptor,
-        new java.lang.String[] { });
-    internal_static_hbase_pb_GetAuthenticationTokenResponse_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_hbase_pb_GetAuthenticationTokenResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_hbase_pb_GetAuthenticationTokenResponse_descriptor,
-        new java.lang.String[] { "Token", });
-    internal_static_hbase_pb_WhoAmIRequest_descriptor =
-      getDescriptor().getMessageTypes().get(5);
-    internal_static_hbase_pb_WhoAmIRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_hbase_pb_WhoAmIRequest_descriptor,
-        new java.lang.String[] { });
-    internal_static_hbase_pb_WhoAmIResponse_descriptor =
-      getDescriptor().getMessageTypes().get(6);
-    internal_static_hbase_pb_WhoAmIResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_hbase_pb_WhoAmIResponse_descriptor,
-        new java.lang.String[] { "Username", "AuthMethod", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

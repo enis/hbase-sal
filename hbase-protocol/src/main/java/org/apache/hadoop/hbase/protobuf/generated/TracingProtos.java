@@ -6,18 +6,12 @@ package org.apache.hadoop.hbase.protobuf.generated;
 public final class TracingProtos {
   private TracingProtos() {}
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistryLite registry) {
-  }
-
-  public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
-    registerAllExtensions(
-        (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface RPCTInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:hbase.pb.RPCTInfo)
-      com.google.protobuf.MessageOrBuilder {
+  public interface RPCTInfoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int64 trace_id = 1;
     /**
      * <code>optional int64 trace_id = 1;</code>
      */
@@ -27,6 +21,7 @@ public final class TracingProtos {
      */
     long getTraceId();
 
+    // optional int64 parent_id = 2;
     /**
      * <code>optional int64 parent_id = 2;</code>
      */
@@ -37,6 +32,8 @@ public final class TracingProtos {
     long getParentId();
   }
   /**
+   * Protobuf type {@code hbase.pb.RPCTInfo}
+   *
    * <pre>
    *Used to pass through the information necessary to continue
    *a trace after an RPC is made. All we need is the traceid 
@@ -44,32 +41,37 @@ public final class TracingProtos {
    *the id of the current span when this message was sent, so we know 
    *what span caused the new span we will create when this message is received.
    * </pre>
-   *
-   * Protobuf type {@code hbase.pb.RPCTInfo}
    */
-  public  static final class RPCTInfo extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:hbase.pb.RPCTInfo)
-      RPCTInfoOrBuilder {
+  public static final class RPCTInfo extends
+      com.google.protobuf.GeneratedMessage
+      implements RPCTInfoOrBuilder {
     // Use RPCTInfo.newBuilder() to construct.
-    private RPCTInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private RPCTInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private RPCTInfo() {
-      traceId_ = 0L;
-      parentId_ = 0L;
+    private RPCTInfo(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final RPCTInfo defaultInstance;
+    public static RPCTInfo getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public RPCTInfo getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private RPCTInfo(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
+      initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -104,7 +106,7 @@ public final class TracingProtos {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -115,14 +117,30 @@ public final class TracingProtos {
       return org.apache.hadoop.hbase.protobuf.generated.TracingProtos.internal_static_hbase_pb_RPCTInfo_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.apache.hadoop.hbase.protobuf.generated.TracingProtos.internal_static_hbase_pb_RPCTInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfo.class, org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfo.Builder.class);
     }
 
+    public static com.google.protobuf.Parser<RPCTInfo> PARSER =
+        new com.google.protobuf.AbstractParser<RPCTInfo>() {
+      public RPCTInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RPCTInfo(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RPCTInfo> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
+    // optional int64 trace_id = 1;
     public static final int TRACE_ID_FIELD_NUMBER = 1;
     private long traceId_;
     /**
@@ -138,6 +156,7 @@ public final class TracingProtos {
       return traceId_;
     }
 
+    // optional int64 parent_id = 2;
     public static final int PARENT_ID_FIELD_NUMBER = 2;
     private long parentId_;
     /**
@@ -153,11 +172,14 @@ public final class TracingProtos {
       return parentId_;
     }
 
+    private void initFields() {
+      traceId_ = 0L;
+      parentId_ = 0L;
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       memoizedIsInitialized = 1;
       return true;
@@ -165,17 +187,19 @@ public final class TracingProtos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt64(1, traceId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(2, parentId_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
@@ -187,12 +211,18 @@ public final class TracingProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(2, parentId_);
       }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -214,10 +244,12 @@ public final class TracingProtos {
         result = result && (getParentId()
             == other.getParentId());
       }
-      result = result && unknownFields.equals(other.unknownFields);
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
       return result;
     }
 
+    private int memoizedHashCode = 0;
     @java.lang.Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
@@ -227,15 +259,13 @@ public final class TracingProtos {
       hash = (19 * hash) + getDescriptorForType().hashCode();
       if (hasTraceId()) {
         hash = (37 * hash) + TRACE_ID_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getTraceId());
+        hash = (53 * hash) + hashLong(getTraceId());
       }
       if (hasParentId()) {
         hash = (37 * hash) + PARENT_ID_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getParentId());
+        hash = (53 * hash) + hashLong(getParentId());
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -263,61 +293,52 @@ public final class TracingProtos {
     }
     public static org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfo prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
     /**
+     * Protobuf type {@code hbase.pb.RPCTInfo}
+     *
      * <pre>
      *Used to pass through the information necessary to continue
      *a trace after an RPC is made. All we need is the traceid 
@@ -325,19 +346,16 @@ public final class TracingProtos {
      *the id of the current span when this message was sent, so we know 
      *what span caused the new span we will create when this message is received.
      * </pre>
-     *
-     * Protobuf type {@code hbase.pb.RPCTInfo}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:hbase.pb.RPCTInfo)
-        org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.apache.hadoop.hbase.protobuf.generated.TracingProtos.internal_static_hbase_pb_RPCTInfo_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.apache.hadoop.hbase.protobuf.generated.TracingProtos.internal_static_hbase_pb_RPCTInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -350,15 +368,18 @@ public final class TracingProtos {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
         traceId_ = 0L;
@@ -366,6 +387,10 @@ public final class TracingProtos {
         parentId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -402,32 +427,6 @@ public final class TracingProtos {
         return result;
       }
 
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfo) {
           return mergeFrom((org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfo)other);
@@ -445,8 +444,7 @@ public final class TracingProtos {
         if (other.hasParentId()) {
           setParentId(other.getParentId());
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
@@ -463,7 +461,7 @@ public final class TracingProtos {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfo) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -473,6 +471,7 @@ public final class TracingProtos {
       }
       private int bitField0_;
 
+      // optional int64 trace_id = 1;
       private long traceId_ ;
       /**
        * <code>optional int64 trace_id = 1;</code>
@@ -505,6 +504,7 @@ public final class TracingProtos {
         return this;
       }
 
+      // optional int64 parent_id = 2;
       private long parentId_ ;
       /**
        * <code>optional int64 parent_id = 2;</code>
@@ -536,66 +536,29 @@ public final class TracingProtos {
         onChanged();
         return this;
       }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:hbase.pb.RPCTInfo)
     }
 
-    // @@protoc_insertion_point(class_scope:hbase.pb.RPCTInfo)
-    private static final org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfo DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfo();
+      defaultInstance = new RPCTInfo(true);
+      defaultInstance.initFields();
     }
 
-    public static org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfo getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<RPCTInfo>
-        PARSER = new com.google.protobuf.AbstractParser<RPCTInfo>() {
-      public RPCTInfo parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RPCTInfo(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<RPCTInfo> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<RPCTInfo> getParserForType() {
-      return PARSER;
-    }
-
-    public org.apache.hadoop.hbase.protobuf.generated.TracingProtos.RPCTInfo getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:hbase.pb.RPCTInfo)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_hbase_pb_RPCTInfo_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_hbase_pb_RPCTInfo_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
   }
-  private static  com.google.protobuf.Descriptors.FileDescriptor
+  private static com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     java.lang.String[] descriptorData = {
@@ -605,23 +568,23 @@ public final class TracingProtos {
       "B\rTracingProtosH\001\240\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_hbase_pb_RPCTInfo_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_hbase_pb_RPCTInfo_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_hbase_pb_RPCTInfo_descriptor,
+              new java.lang.String[] { "TraceId", "ParentId", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_hbase_pb_RPCTInfo_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_hbase_pb_RPCTInfo_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_hbase_pb_RPCTInfo_descriptor,
-        new java.lang.String[] { "TraceId", "ParentId", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

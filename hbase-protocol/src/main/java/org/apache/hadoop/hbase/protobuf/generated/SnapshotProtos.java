@@ -6,18 +6,12 @@ package org.apache.hadoop.hbase.protobuf.generated;
 public final class SnapshotProtos {
   private SnapshotProtos() {}
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistryLite registry) {
-  }
-
-  public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
-    registerAllExtensions(
-        (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface SnapshotFileInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:hbase.pb.SnapshotFileInfo)
-      com.google.protobuf.MessageOrBuilder {
+  public interface SnapshotFileInfoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // required .hbase.pb.SnapshotFileInfo.Type type = 1;
     /**
      * <code>required .hbase.pb.SnapshotFileInfo.Type type = 1;</code>
      */
@@ -27,6 +21,7 @@ public final class SnapshotProtos {
      */
     org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo.Type getType();
 
+    // optional string hfile = 3;
     /**
      * <code>optional string hfile = 3;</code>
      */
@@ -41,6 +36,7 @@ public final class SnapshotProtos {
     com.google.protobuf.ByteString
         getHfileBytes();
 
+    // optional string wal_server = 4;
     /**
      * <code>optional string wal_server = 4;</code>
      */
@@ -55,6 +51,7 @@ public final class SnapshotProtos {
     com.google.protobuf.ByteString
         getWalServerBytes();
 
+    // optional string wal_name = 5;
     /**
      * <code>optional string wal_name = 5;</code>
      */
@@ -72,31 +69,36 @@ public final class SnapshotProtos {
   /**
    * Protobuf type {@code hbase.pb.SnapshotFileInfo}
    */
-  public  static final class SnapshotFileInfo extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:hbase.pb.SnapshotFileInfo)
-      SnapshotFileInfoOrBuilder {
+  public static final class SnapshotFileInfo extends
+      com.google.protobuf.GeneratedMessage
+      implements SnapshotFileInfoOrBuilder {
     // Use SnapshotFileInfo.newBuilder() to construct.
-    private SnapshotFileInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private SnapshotFileInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private SnapshotFileInfo() {
-      type_ = 1;
-      hfile_ = "";
-      walServer_ = "";
-      walName_ = "";
+    private SnapshotFileInfo(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final SnapshotFileInfo defaultInstance;
+    public static SnapshotFileInfo getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public SnapshotFileInfo getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private SnapshotFileInfo(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
+      initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -122,26 +124,23 @@ public final class SnapshotProtos {
                 unknownFields.mergeVarintField(1, rawValue);
               } else {
                 bitField0_ |= 0x00000001;
-                type_ = rawValue;
+                type_ = value;
               }
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              hfile_ = bs;
+              hfile_ = input.readBytes();
               break;
             }
             case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              walServer_ = bs;
+              walServer_ = input.readBytes();
               break;
             }
             case 42: {
-              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
-              walName_ = bs;
+              walName_ = input.readBytes();
               break;
             }
           }
@@ -150,7 +149,7 @@ public final class SnapshotProtos {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -161,11 +160,26 @@ public final class SnapshotProtos {
       return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotFileInfo_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotFileInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo.class, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<SnapshotFileInfo> PARSER =
+        new com.google.protobuf.AbstractParser<SnapshotFileInfo>() {
+      public SnapshotFileInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new SnapshotFileInfo(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SnapshotFileInfo> getParserForType() {
+      return PARSER;
     }
 
     /**
@@ -176,11 +190,11 @@ public final class SnapshotProtos {
       /**
        * <code>HFILE = 1;</code>
        */
-      HFILE(1),
+      HFILE(0, 1),
       /**
        * <code>WAL = 2;</code>
        */
-      WAL(2),
+      WAL(1, 2),
       ;
 
       /**
@@ -193,19 +207,9 @@ public final class SnapshotProtos {
       public static final int WAL_VALUE = 2;
 
 
-      public final int getNumber() {
-        return value;
-      }
+      public final int getNumber() { return value; }
 
-      /**
-       * @deprecated Use {@link #forNumber(int)} instead.
-       */
-      @java.lang.Deprecated
       public static Type valueOf(int value) {
-        return forNumber(value);
-      }
-
-      public static Type forNumber(int value) {
         switch (value) {
           case 1: return HFILE;
           case 2: return WAL;
@@ -217,17 +221,17 @@ public final class SnapshotProtos {
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static final com.google.protobuf.Internal.EnumLiteMap<
-          Type> internalValueMap =
+      private static com.google.protobuf.Internal.EnumLiteMap<Type>
+          internalValueMap =
             new com.google.protobuf.Internal.EnumLiteMap<Type>() {
               public Type findValueByNumber(int number) {
-                return Type.forNumber(number);
+                return Type.valueOf(number);
               }
             };
 
       public final com.google.protobuf.Descriptors.EnumValueDescriptor
           getValueDescriptor() {
-        return getDescriptor().getValues().get(ordinal());
+        return getDescriptor().getValues().get(index);
       }
       public final com.google.protobuf.Descriptors.EnumDescriptor
           getDescriptorForType() {
@@ -249,9 +253,11 @@ public final class SnapshotProtos {
         return VALUES[desc.getIndex()];
       }
 
+      private final int index;
       private final int value;
 
-      private Type(int value) {
+      private Type(int index, int value) {
+        this.index = index;
         this.value = value;
       }
 
@@ -259,8 +265,9 @@ public final class SnapshotProtos {
     }
 
     private int bitField0_;
+    // required .hbase.pb.SnapshotFileInfo.Type type = 1;
     public static final int TYPE_FIELD_NUMBER = 1;
-    private int type_;
+    private org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo.Type type_;
     /**
      * <code>required .hbase.pb.SnapshotFileInfo.Type type = 1;</code>
      */
@@ -271,12 +278,12 @@ public final class SnapshotProtos {
      * <code>required .hbase.pb.SnapshotFileInfo.Type type = 1;</code>
      */
     public org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo.Type getType() {
-      org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo.Type result = org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo.Type.valueOf(type_);
-      return result == null ? org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo.Type.HFILE : result;
+      return type_;
     }
 
+    // optional string hfile = 3;
     public static final int HFILE_FIELD_NUMBER = 3;
-    private volatile java.lang.Object hfile_;
+    private java.lang.Object hfile_;
     /**
      * <code>optional string hfile = 3;</code>
      */
@@ -317,8 +324,9 @@ public final class SnapshotProtos {
       }
     }
 
+    // optional string wal_server = 4;
     public static final int WAL_SERVER_FIELD_NUMBER = 4;
-    private volatile java.lang.Object walServer_;
+    private java.lang.Object walServer_;
     /**
      * <code>optional string wal_server = 4;</code>
      */
@@ -359,8 +367,9 @@ public final class SnapshotProtos {
       }
     }
 
+    // optional string wal_name = 5;
     public static final int WAL_NAME_FIELD_NUMBER = 5;
-    private volatile java.lang.Object walName_;
+    private java.lang.Object walName_;
     /**
      * <code>optional string wal_name = 5;</code>
      */
@@ -401,11 +410,16 @@ public final class SnapshotProtos {
       }
     }
 
+    private void initFields() {
+      type_ = org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo.Type.HFILE;
+      hfile_ = "";
+      walServer_ = "";
+      walName_ = "";
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasType()) {
         memoizedIsInitialized = 0;
@@ -417,45 +431,56 @@ public final class SnapshotProtos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeEnum(1, type_);
+        output.writeEnum(1, type_.getNumber());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, hfile_);
+        output.writeBytes(3, getHfileBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, walServer_);
+        output.writeBytes(4, getWalServerBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, walName_);
+        output.writeBytes(5, getWalNameBytes());
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, type_);
+          .computeEnumSize(1, type_.getNumber());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, hfile_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getHfileBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, walServer_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getWalServerBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, walName_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getWalNameBytes());
       }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -469,7 +494,8 @@ public final class SnapshotProtos {
       boolean result = true;
       result = result && (hasType() == other.hasType());
       if (hasType()) {
-        result = result && type_ == other.type_;
+        result = result &&
+            (getType() == other.getType());
       }
       result = result && (hasHfile() == other.hasHfile());
       if (hasHfile()) {
@@ -486,10 +512,12 @@ public final class SnapshotProtos {
         result = result && getWalName()
             .equals(other.getWalName());
       }
-      result = result && unknownFields.equals(other.unknownFields);
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
       return result;
     }
 
+    private int memoizedHashCode = 0;
     @java.lang.Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
@@ -499,7 +527,7 @@ public final class SnapshotProtos {
       hash = (19 * hash) + getDescriptorForType().hashCode();
       if (hasType()) {
         hash = (37 * hash) + TYPE_FIELD_NUMBER;
-        hash = (53 * hash) + type_;
+        hash = (53 * hash) + hashEnum(getType());
       }
       if (hasHfile()) {
         hash = (37 * hash) + HFILE_FIELD_NUMBER;
@@ -513,7 +541,7 @@ public final class SnapshotProtos {
         hash = (37 * hash) + WAL_NAME_FIELD_NUMBER;
         hash = (53 * hash) + getWalName().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -541,57 +569,46 @@ public final class SnapshotProtos {
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -599,15 +616,14 @@ public final class SnapshotProtos {
      * Protobuf type {@code hbase.pb.SnapshotFileInfo}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:hbase.pb.SnapshotFileInfo)
-        org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfoOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotFileInfo_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotFileInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -620,18 +636,21 @@ public final class SnapshotProtos {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
-        type_ = 1;
+        type_ = org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo.Type.HFILE;
         bitField0_ = (bitField0_ & ~0x00000001);
         hfile_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -640,6 +659,10 @@ public final class SnapshotProtos {
         walName_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -684,32 +707,6 @@ public final class SnapshotProtos {
         return result;
       }
 
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo) {
           return mergeFrom((org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo)other);
@@ -739,13 +736,13 @@ public final class SnapshotProtos {
           walName_ = other.walName_;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasType()) {
+          
           return false;
         }
         return true;
@@ -760,7 +757,7 @@ public final class SnapshotProtos {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -770,7 +767,8 @@ public final class SnapshotProtos {
       }
       private int bitField0_;
 
-      private int type_ = 1;
+      // required .hbase.pb.SnapshotFileInfo.Type type = 1;
+      private org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo.Type type_ = org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo.Type.HFILE;
       /**
        * <code>required .hbase.pb.SnapshotFileInfo.Type type = 1;</code>
        */
@@ -781,8 +779,7 @@ public final class SnapshotProtos {
        * <code>required .hbase.pb.SnapshotFileInfo.Type type = 1;</code>
        */
       public org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo.Type getType() {
-        org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo.Type result = org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo.Type.valueOf(type_);
-        return result == null ? org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo.Type.HFILE : result;
+        return type_;
       }
       /**
        * <code>required .hbase.pb.SnapshotFileInfo.Type type = 1;</code>
@@ -792,7 +789,7 @@ public final class SnapshotProtos {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000001;
-        type_ = value.getNumber();
+        type_ = value;
         onChanged();
         return this;
       }
@@ -801,11 +798,12 @@ public final class SnapshotProtos {
        */
       public Builder clearType() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        type_ = 1;
+        type_ = org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo.Type.HFILE;
         onChanged();
         return this;
       }
 
+      // optional string hfile = 3;
       private java.lang.Object hfile_ = "";
       /**
        * <code>optional string hfile = 3;</code>
@@ -819,12 +817,9 @@ public final class SnapshotProtos {
       public java.lang.String getHfile() {
         java.lang.Object ref = hfile_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            hfile_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          hfile_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -882,6 +877,7 @@ public final class SnapshotProtos {
         return this;
       }
 
+      // optional string wal_server = 4;
       private java.lang.Object walServer_ = "";
       /**
        * <code>optional string wal_server = 4;</code>
@@ -895,12 +891,9 @@ public final class SnapshotProtos {
       public java.lang.String getWalServer() {
         java.lang.Object ref = walServer_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            walServer_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          walServer_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -958,6 +951,7 @@ public final class SnapshotProtos {
         return this;
       }
 
+      // optional string wal_name = 5;
       private java.lang.Object walName_ = "";
       /**
        * <code>optional string wal_name = 5;</code>
@@ -971,12 +965,9 @@ public final class SnapshotProtos {
       public java.lang.String getWalName() {
         java.lang.Object ref = walName_;
         if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            walName_ = s;
-          }
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          walName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1033,59 +1024,22 @@ public final class SnapshotProtos {
         onChanged();
         return this;
       }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:hbase.pb.SnapshotFileInfo)
     }
 
-    // @@protoc_insertion_point(class_scope:hbase.pb.SnapshotFileInfo)
-    private static final org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo();
+      defaultInstance = new SnapshotFileInfo(true);
+      defaultInstance.initFields();
     }
 
-    public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<SnapshotFileInfo>
-        PARSER = new com.google.protobuf.AbstractParser<SnapshotFileInfo>() {
-      public SnapshotFileInfo parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SnapshotFileInfo(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<SnapshotFileInfo> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<SnapshotFileInfo> getParserForType() {
-      return PARSER;
-    }
-
-    public org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotFileInfo getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:hbase.pb.SnapshotFileInfo)
   }
 
-  public interface SnapshotRegionManifestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:hbase.pb.SnapshotRegionManifest)
-      com.google.protobuf.MessageOrBuilder {
+  public interface SnapshotRegionManifestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // optional int32 version = 1;
     /**
      * <code>optional int32 version = 1;</code>
      */
@@ -1095,6 +1049,7 @@ public final class SnapshotProtos {
      */
     int getVersion();
 
+    // required .hbase.pb.RegionInfo region_info = 2;
     /**
      * <code>required .hbase.pb.RegionInfo region_info = 2;</code>
      */
@@ -1108,6 +1063,7 @@ public final class SnapshotProtos {
      */
     org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfoOrBuilder getRegionInfoOrBuilder();
 
+    // repeated .hbase.pb.SnapshotRegionManifest.FamilyFiles family_files = 3;
     /**
      * <code>repeated .hbase.pb.SnapshotRegionManifest.FamilyFiles family_files = 3;</code>
      */
@@ -1135,29 +1091,36 @@ public final class SnapshotProtos {
   /**
    * Protobuf type {@code hbase.pb.SnapshotRegionManifest}
    */
-  public  static final class SnapshotRegionManifest extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:hbase.pb.SnapshotRegionManifest)
-      SnapshotRegionManifestOrBuilder {
+  public static final class SnapshotRegionManifest extends
+      com.google.protobuf.GeneratedMessage
+      implements SnapshotRegionManifestOrBuilder {
     // Use SnapshotRegionManifest.newBuilder() to construct.
-    private SnapshotRegionManifest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private SnapshotRegionManifest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private SnapshotRegionManifest() {
-      version_ = 0;
-      familyFiles_ = java.util.Collections.emptyList();
+    private SnapshotRegionManifest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final SnapshotRegionManifest defaultInstance;
+    public static SnapshotRegionManifest getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public SnapshotRegionManifest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private SnapshotRegionManifest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
+      initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -1199,8 +1162,7 @@ public final class SnapshotProtos {
                 familyFiles_ = new java.util.ArrayList<org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles>();
                 mutable_bitField0_ |= 0x00000004;
               }
-              familyFiles_.add(
-                  input.readMessage(org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles.PARSER, extensionRegistry));
+              familyFiles_.add(input.readMessage(org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles.PARSER, extensionRegistry));
               break;
             }
           }
@@ -1209,7 +1171,7 @@ public final class SnapshotProtos {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           familyFiles_ = java.util.Collections.unmodifiableList(familyFiles_);
@@ -1223,17 +1185,32 @@ public final class SnapshotProtos {
       return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotRegionManifest_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotRegionManifest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.class, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.Builder.class);
     }
 
-    public interface StoreFileOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:hbase.pb.SnapshotRegionManifest.StoreFile)
-        com.google.protobuf.MessageOrBuilder {
+    public static com.google.protobuf.Parser<SnapshotRegionManifest> PARSER =
+        new com.google.protobuf.AbstractParser<SnapshotRegionManifest>() {
+      public SnapshotRegionManifest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new SnapshotRegionManifest(input, extensionRegistry);
+      }
+    };
 
+    @java.lang.Override
+    public com.google.protobuf.Parser<SnapshotRegionManifest> getParserForType() {
+      return PARSER;
+    }
+
+    public interface StoreFileOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+
+      // required string name = 1;
       /**
        * <code>required string name = 1;</code>
        */
@@ -1248,6 +1225,7 @@ public final class SnapshotProtos {
       com.google.protobuf.ByteString
           getNameBytes();
 
+      // optional .hbase.pb.Reference reference = 2;
       /**
        * <code>optional .hbase.pb.Reference reference = 2;</code>
        */
@@ -1261,49 +1239,57 @@ public final class SnapshotProtos {
        */
       org.apache.hadoop.hbase.protobuf.generated.FSProtos.ReferenceOrBuilder getReferenceOrBuilder();
 
+      // optional uint64 file_size = 3;
       /**
+       * <code>optional uint64 file_size = 3;</code>
+       *
        * <pre>
        * TODO: Add checksums or other fields to verify the file
        * </pre>
-       *
-       * <code>optional uint64 file_size = 3;</code>
        */
       boolean hasFileSize();
       /**
+       * <code>optional uint64 file_size = 3;</code>
+       *
        * <pre>
        * TODO: Add checksums or other fields to verify the file
        * </pre>
-       *
-       * <code>optional uint64 file_size = 3;</code>
        */
       long getFileSize();
     }
     /**
      * Protobuf type {@code hbase.pb.SnapshotRegionManifest.StoreFile}
      */
-    public  static final class StoreFile extends
-        com.google.protobuf.GeneratedMessageV3 implements
-        // @@protoc_insertion_point(message_implements:hbase.pb.SnapshotRegionManifest.StoreFile)
-        StoreFileOrBuilder {
+    public static final class StoreFile extends
+        com.google.protobuf.GeneratedMessage
+        implements StoreFileOrBuilder {
       // Use StoreFile.newBuilder() to construct.
-      private StoreFile(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      private StoreFile(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
         super(builder);
+        this.unknownFields = builder.getUnknownFields();
       }
-      private StoreFile() {
-        name_ = "";
-        fileSize_ = 0L;
+      private StoreFile(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final StoreFile defaultInstance;
+      public static StoreFile getDefaultInstance() {
+        return defaultInstance;
       }
 
+      public StoreFile getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
-      getUnknownFields() {
+          getUnknownFields() {
         return this.unknownFields;
       }
       private StoreFile(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        this();
+        initFields();
         int mutable_bitField0_ = 0;
         com.google.protobuf.UnknownFieldSet.Builder unknownFields =
             com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -1323,9 +1309,8 @@ public final class SnapshotProtos {
                 break;
               }
               case 10: {
-                com.google.protobuf.ByteString bs = input.readBytes();
                 bitField0_ |= 0x00000001;
-                name_ = bs;
+                name_ = input.readBytes();
                 break;
               }
               case 18: {
@@ -1352,7 +1337,7 @@ public final class SnapshotProtos {
           throw e.setUnfinishedMessage(this);
         } catch (java.io.IOException e) {
           throw new com.google.protobuf.InvalidProtocolBufferException(
-              e).setUnfinishedMessage(this);
+              e.getMessage()).setUnfinishedMessage(this);
         } finally {
           this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
@@ -1363,16 +1348,32 @@ public final class SnapshotProtos {
         return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotRegionManifest_StoreFile_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotRegionManifest_StoreFile_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile.class, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile.Builder.class);
       }
 
+      public static com.google.protobuf.Parser<StoreFile> PARSER =
+          new com.google.protobuf.AbstractParser<StoreFile>() {
+        public StoreFile parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new StoreFile(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<StoreFile> getParserForType() {
+        return PARSER;
+      }
+
       private int bitField0_;
+      // required string name = 1;
       public static final int NAME_FIELD_NUMBER = 1;
-      private volatile java.lang.Object name_;
+      private java.lang.Object name_;
       /**
        * <code>required string name = 1;</code>
        */
@@ -1413,6 +1414,7 @@ public final class SnapshotProtos {
         }
       }
 
+      // optional .hbase.pb.Reference reference = 2;
       public static final int REFERENCE_FIELD_NUMBER = 2;
       private org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference reference_;
       /**
@@ -1425,43 +1427,48 @@ public final class SnapshotProtos {
        * <code>optional .hbase.pb.Reference reference = 2;</code>
        */
       public org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference getReference() {
-        return reference_ == null ? org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference.getDefaultInstance() : reference_;
+        return reference_;
       }
       /**
        * <code>optional .hbase.pb.Reference reference = 2;</code>
        */
       public org.apache.hadoop.hbase.protobuf.generated.FSProtos.ReferenceOrBuilder getReferenceOrBuilder() {
-        return reference_ == null ? org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference.getDefaultInstance() : reference_;
+        return reference_;
       }
 
+      // optional uint64 file_size = 3;
       public static final int FILE_SIZE_FIELD_NUMBER = 3;
       private long fileSize_;
       /**
+       * <code>optional uint64 file_size = 3;</code>
+       *
        * <pre>
        * TODO: Add checksums or other fields to verify the file
        * </pre>
-       *
-       * <code>optional uint64 file_size = 3;</code>
        */
       public boolean hasFileSize() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
+       * <code>optional uint64 file_size = 3;</code>
+       *
        * <pre>
        * TODO: Add checksums or other fields to verify the file
        * </pre>
-       *
-       * <code>optional uint64 file_size = 3;</code>
        */
       public long getFileSize() {
         return fileSize_;
       }
 
+      private void initFields() {
+        name_ = "";
+        reference_ = org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference.getDefaultInstance();
+        fileSize_ = 0L;
+      }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
-        if (isInitialized == 1) return true;
-        if (isInitialized == 0) return false;
+        if (isInitialized != -1) return isInitialized == 1;
 
         if (!hasName()) {
           memoizedIsInitialized = 0;
@@ -1479,40 +1486,49 @@ public final class SnapshotProtos {
 
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
+        getSerializedSize();
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
+          output.writeBytes(1, getNameBytes());
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          output.writeMessage(2, getReference());
+          output.writeMessage(2, reference_);
         }
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
           output.writeUInt64(3, fileSize_);
         }
-        unknownFields.writeTo(output);
+        getUnknownFields().writeTo(output);
       }
 
+      private int memoizedSerializedSize = -1;
       public int getSerializedSize() {
-        int size = memoizedSize;
+        int size = memoizedSerializedSize;
         if (size != -1) return size;
 
         size = 0;
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, getNameBytes());
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(2, getReference());
+            .computeMessageSize(2, reference_);
         }
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
           size += com.google.protobuf.CodedOutputStream
             .computeUInt64Size(3, fileSize_);
         }
-        size += unknownFields.getSerializedSize();
-        memoizedSize = size;
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
         return size;
       }
 
       private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -1539,10 +1555,12 @@ public final class SnapshotProtos {
           result = result && (getFileSize()
               == other.getFileSize());
         }
-        result = result && unknownFields.equals(other.unknownFields);
+        result = result &&
+            getUnknownFields().equals(other.getUnknownFields());
         return result;
       }
 
+      private int memoizedHashCode = 0;
       @java.lang.Override
       public int hashCode() {
         if (memoizedHashCode != 0) {
@@ -1560,10 +1578,9 @@ public final class SnapshotProtos {
         }
         if (hasFileSize()) {
           hash = (37 * hash) + FILE_SIZE_FIELD_NUMBER;
-          hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-              getFileSize());
+          hash = (53 * hash) + hashLong(getFileSize());
         }
-        hash = (29 * hash) + unknownFields.hashCode();
+        hash = (29 * hash) + getUnknownFields().hashCode();
         memoizedHashCode = hash;
         return hash;
       }
@@ -1591,57 +1608,46 @@ public final class SnapshotProtos {
       }
       public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile parseFrom(java.io.InputStream input)
           throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseWithIOException(PARSER, input);
+        return PARSER.parseFrom(input);
       }
       public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile parseFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseWithIOException(PARSER, input, extensionRegistry);
+        return PARSER.parseFrom(input, extensionRegistry);
       }
       public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile parseDelimitedFrom(java.io.InputStream input)
           throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseDelimitedWithIOException(PARSER, input);
+        return PARSER.parseDelimitedFrom(input);
       }
       public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile parseDelimitedFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
       }
       public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile parseFrom(
           com.google.protobuf.CodedInputStream input)
           throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseWithIOException(PARSER, input);
+        return PARSER.parseFrom(input);
       }
       public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile parseFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseWithIOException(PARSER, input, extensionRegistry);
+        return PARSER.parseFrom(input, extensionRegistry);
       }
 
+      public static Builder newBuilder() { return Builder.create(); }
       public Builder newBuilderForType() { return newBuilder(); }
-      public static Builder newBuilder() {
-        return DEFAULT_INSTANCE.toBuilder();
-      }
       public static Builder newBuilder(org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile prototype) {
-        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+        return newBuilder().mergeFrom(prototype);
       }
-      public Builder toBuilder() {
-        return this == DEFAULT_INSTANCE
-            ? new Builder() : new Builder().mergeFrom(this);
-      }
+      public Builder toBuilder() { return newBuilder(this); }
 
       @java.lang.Override
       protected Builder newBuilderForType(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         Builder builder = new Builder(parent);
         return builder;
       }
@@ -1649,15 +1655,14 @@ public final class SnapshotProtos {
        * Protobuf type {@code hbase.pb.SnapshotRegionManifest.StoreFile}
        */
       public static final class Builder extends
-          com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-          // @@protoc_insertion_point(builder_implements:hbase.pb.SnapshotRegionManifest.StoreFile)
-          org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFileOrBuilder {
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFileOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
           return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotRegionManifest_StoreFile_descriptor;
         }
 
-        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
             internalGetFieldAccessorTable() {
           return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotRegionManifest_StoreFile_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
@@ -1670,22 +1675,25 @@ public final class SnapshotProtos {
         }
 
         private Builder(
-            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
           super(parent);
           maybeForceBuilderInitialization();
         }
         private void maybeForceBuilderInitialization() {
-          if (com.google.protobuf.GeneratedMessageV3
-                  .alwaysUseFieldBuilders) {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
             getReferenceFieldBuilder();
           }
         }
+        private static Builder create() {
+          return new Builder();
+        }
+
         public Builder clear() {
           super.clear();
           name_ = "";
           bitField0_ = (bitField0_ & ~0x00000001);
           if (referenceBuilder_ == null) {
-            reference_ = null;
+            reference_ = org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference.getDefaultInstance();
           } else {
             referenceBuilder_.clear();
           }
@@ -1693,6 +1701,10 @@ public final class SnapshotProtos {
           fileSize_ = 0L;
           bitField0_ = (bitField0_ & ~0x00000004);
           return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
         }
 
         public com.google.protobuf.Descriptors.Descriptor
@@ -1737,32 +1749,6 @@ public final class SnapshotProtos {
           return result;
         }
 
-        public Builder clone() {
-          return (Builder) super.clone();
-        }
-        public Builder setField(
-            com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
-          return (Builder) super.setField(field, value);
-        }
-        public Builder clearField(
-            com.google.protobuf.Descriptors.FieldDescriptor field) {
-          return (Builder) super.clearField(field);
-        }
-        public Builder clearOneof(
-            com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-          return (Builder) super.clearOneof(oneof);
-        }
-        public Builder setRepeatedField(
-            com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
-          return (Builder) super.setRepeatedField(field, index, value);
-        }
-        public Builder addRepeatedField(
-            com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
-          return (Builder) super.addRepeatedField(field, value);
-        }
         public Builder mergeFrom(com.google.protobuf.Message other) {
           if (other instanceof org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile) {
             return mergeFrom((org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile)other);
@@ -1785,17 +1771,18 @@ public final class SnapshotProtos {
           if (other.hasFileSize()) {
             setFileSize(other.getFileSize());
           }
-          this.mergeUnknownFields(other.unknownFields);
-          onChanged();
+          this.mergeUnknownFields(other.getUnknownFields());
           return this;
         }
 
         public final boolean isInitialized() {
           if (!hasName()) {
+            
             return false;
           }
           if (hasReference()) {
             if (!getReference().isInitialized()) {
+              
               return false;
             }
           }
@@ -1811,7 +1798,7 @@ public final class SnapshotProtos {
             parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
           } catch (com.google.protobuf.InvalidProtocolBufferException e) {
             parsedMessage = (org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile) e.getUnfinishedMessage();
-            throw e.unwrapIOException();
+            throw e;
           } finally {
             if (parsedMessage != null) {
               mergeFrom(parsedMessage);
@@ -1821,6 +1808,7 @@ public final class SnapshotProtos {
         }
         private int bitField0_;
 
+        // required string name = 1;
         private java.lang.Object name_ = "";
         /**
          * <code>required string name = 1;</code>
@@ -1834,12 +1822,9 @@ public final class SnapshotProtos {
         public java.lang.String getName() {
           java.lang.Object ref = name_;
           if (!(ref instanceof java.lang.String)) {
-            com.google.protobuf.ByteString bs =
-                (com.google.protobuf.ByteString) ref;
-            java.lang.String s = bs.toStringUtf8();
-            if (bs.isValidUtf8()) {
-              name_ = s;
-            }
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            name_ = s;
             return s;
           } else {
             return (java.lang.String) ref;
@@ -1897,8 +1882,9 @@ public final class SnapshotProtos {
           return this;
         }
 
-        private org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference reference_ = null;
-        private com.google.protobuf.SingleFieldBuilderV3<
+        // optional .hbase.pb.Reference reference = 2;
+        private org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference reference_ = org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference.getDefaultInstance();
+        private com.google.protobuf.SingleFieldBuilder<
             org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference, org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference.Builder, org.apache.hadoop.hbase.protobuf.generated.FSProtos.ReferenceOrBuilder> referenceBuilder_;
         /**
          * <code>optional .hbase.pb.Reference reference = 2;</code>
@@ -1911,7 +1897,7 @@ public final class SnapshotProtos {
          */
         public org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference getReference() {
           if (referenceBuilder_ == null) {
-            return reference_ == null ? org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference.getDefaultInstance() : reference_;
+            return reference_;
           } else {
             return referenceBuilder_.getMessage();
           }
@@ -1952,7 +1938,6 @@ public final class SnapshotProtos {
         public Builder mergeReference(org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference value) {
           if (referenceBuilder_ == null) {
             if (((bitField0_ & 0x00000002) == 0x00000002) &&
-                reference_ != null &&
                 reference_ != org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference.getDefaultInstance()) {
               reference_ =
                 org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference.newBuilder(reference_).mergeFrom(value).buildPartial();
@@ -1971,7 +1956,7 @@ public final class SnapshotProtos {
          */
         public Builder clearReference() {
           if (referenceBuilder_ == null) {
-            reference_ = null;
+            reference_ = org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference.getDefaultInstance();
             onChanged();
           } else {
             referenceBuilder_.clear();
@@ -1994,20 +1979,19 @@ public final class SnapshotProtos {
           if (referenceBuilder_ != null) {
             return referenceBuilder_.getMessageOrBuilder();
           } else {
-            return reference_ == null ?
-                org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference.getDefaultInstance() : reference_;
+            return reference_;
           }
         }
         /**
          * <code>optional .hbase.pb.Reference reference = 2;</code>
          */
-        private com.google.protobuf.SingleFieldBuilderV3<
+        private com.google.protobuf.SingleFieldBuilder<
             org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference, org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference.Builder, org.apache.hadoop.hbase.protobuf.generated.FSProtos.ReferenceOrBuilder> 
             getReferenceFieldBuilder() {
           if (referenceBuilder_ == null) {
-            referenceBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            referenceBuilder_ = new com.google.protobuf.SingleFieldBuilder<
                 org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference, org.apache.hadoop.hbase.protobuf.generated.FSProtos.Reference.Builder, org.apache.hadoop.hbase.protobuf.generated.FSProtos.ReferenceOrBuilder>(
-                    getReference(),
+                    reference_,
                     getParentForChildren(),
                     isClean());
             reference_ = null;
@@ -2015,33 +1999,34 @@ public final class SnapshotProtos {
           return referenceBuilder_;
         }
 
+        // optional uint64 file_size = 3;
         private long fileSize_ ;
         /**
+         * <code>optional uint64 file_size = 3;</code>
+         *
          * <pre>
          * TODO: Add checksums or other fields to verify the file
          * </pre>
-         *
-         * <code>optional uint64 file_size = 3;</code>
          */
         public boolean hasFileSize() {
           return ((bitField0_ & 0x00000004) == 0x00000004);
         }
         /**
+         * <code>optional uint64 file_size = 3;</code>
+         *
          * <pre>
          * TODO: Add checksums or other fields to verify the file
          * </pre>
-         *
-         * <code>optional uint64 file_size = 3;</code>
          */
         public long getFileSize() {
           return fileSize_;
         }
         /**
+         * <code>optional uint64 file_size = 3;</code>
+         *
          * <pre>
          * TODO: Add checksums or other fields to verify the file
          * </pre>
-         *
-         * <code>optional uint64 file_size = 3;</code>
          */
         public Builder setFileSize(long value) {
           bitField0_ |= 0x00000004;
@@ -2050,11 +2035,11 @@ public final class SnapshotProtos {
           return this;
         }
         /**
+         * <code>optional uint64 file_size = 3;</code>
+         *
          * <pre>
          * TODO: Add checksums or other fields to verify the file
          * </pre>
-         *
-         * <code>optional uint64 file_size = 3;</code>
          */
         public Builder clearFileSize() {
           bitField0_ = (bitField0_ & ~0x00000004);
@@ -2062,59 +2047,22 @@ public final class SnapshotProtos {
           onChanged();
           return this;
         }
-        public final Builder setUnknownFields(
-            final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return super.setUnknownFields(unknownFields);
-        }
-
-        public final Builder mergeUnknownFields(
-            final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return super.mergeUnknownFields(unknownFields);
-        }
-
 
         // @@protoc_insertion_point(builder_scope:hbase.pb.SnapshotRegionManifest.StoreFile)
       }
 
-      // @@protoc_insertion_point(class_scope:hbase.pb.SnapshotRegionManifest.StoreFile)
-      private static final org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile DEFAULT_INSTANCE;
       static {
-        DEFAULT_INSTANCE = new org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile();
+        defaultInstance = new StoreFile(true);
+        defaultInstance.initFields();
       }
 
-      public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile getDefaultInstance() {
-        return DEFAULT_INSTANCE;
-      }
-
-      @java.lang.Deprecated public static final com.google.protobuf.Parser<StoreFile>
-          PARSER = new com.google.protobuf.AbstractParser<StoreFile>() {
-        public StoreFile parsePartialFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-            return new StoreFile(input, extensionRegistry);
-        }
-      };
-
-      public static com.google.protobuf.Parser<StoreFile> parser() {
-        return PARSER;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Parser<StoreFile> getParserForType() {
-        return PARSER;
-      }
-
-      public org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile getDefaultInstanceForType() {
-        return DEFAULT_INSTANCE;
-      }
-
+      // @@protoc_insertion_point(class_scope:hbase.pb.SnapshotRegionManifest.StoreFile)
     }
 
-    public interface FamilyFilesOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:hbase.pb.SnapshotRegionManifest.FamilyFiles)
-        com.google.protobuf.MessageOrBuilder {
+    public interface FamilyFilesOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
 
+      // required bytes family_name = 1;
       /**
        * <code>required bytes family_name = 1;</code>
        */
@@ -2124,6 +2072,7 @@ public final class SnapshotProtos {
        */
       com.google.protobuf.ByteString getFamilyName();
 
+      // repeated .hbase.pb.SnapshotRegionManifest.StoreFile store_files = 2;
       /**
        * <code>repeated .hbase.pb.SnapshotRegionManifest.StoreFile store_files = 2;</code>
        */
@@ -2151,29 +2100,36 @@ public final class SnapshotProtos {
     /**
      * Protobuf type {@code hbase.pb.SnapshotRegionManifest.FamilyFiles}
      */
-    public  static final class FamilyFiles extends
-        com.google.protobuf.GeneratedMessageV3 implements
-        // @@protoc_insertion_point(message_implements:hbase.pb.SnapshotRegionManifest.FamilyFiles)
-        FamilyFilesOrBuilder {
+    public static final class FamilyFiles extends
+        com.google.protobuf.GeneratedMessage
+        implements FamilyFilesOrBuilder {
       // Use FamilyFiles.newBuilder() to construct.
-      private FamilyFiles(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      private FamilyFiles(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
         super(builder);
+        this.unknownFields = builder.getUnknownFields();
       }
-      private FamilyFiles() {
-        familyName_ = com.google.protobuf.ByteString.EMPTY;
-        storeFiles_ = java.util.Collections.emptyList();
+      private FamilyFiles(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final FamilyFiles defaultInstance;
+      public static FamilyFiles getDefaultInstance() {
+        return defaultInstance;
       }
 
+      public FamilyFiles getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
-      getUnknownFields() {
+          getUnknownFields() {
         return this.unknownFields;
       }
       private FamilyFiles(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        this();
+        initFields();
         int mutable_bitField0_ = 0;
         com.google.protobuf.UnknownFieldSet.Builder unknownFields =
             com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -2202,8 +2158,7 @@ public final class SnapshotProtos {
                   storeFiles_ = new java.util.ArrayList<org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile>();
                   mutable_bitField0_ |= 0x00000002;
                 }
-                storeFiles_.add(
-                    input.readMessage(org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile.PARSER, extensionRegistry));
+                storeFiles_.add(input.readMessage(org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile.PARSER, extensionRegistry));
                 break;
               }
             }
@@ -2212,7 +2167,7 @@ public final class SnapshotProtos {
           throw e.setUnfinishedMessage(this);
         } catch (java.io.IOException e) {
           throw new com.google.protobuf.InvalidProtocolBufferException(
-              e).setUnfinishedMessage(this);
+              e.getMessage()).setUnfinishedMessage(this);
         } finally {
           if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
             storeFiles_ = java.util.Collections.unmodifiableList(storeFiles_);
@@ -2226,14 +2181,30 @@ public final class SnapshotProtos {
         return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotRegionManifest_FamilyFiles_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotRegionManifest_FamilyFiles_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles.class, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles.Builder.class);
       }
 
+      public static com.google.protobuf.Parser<FamilyFiles> PARSER =
+          new com.google.protobuf.AbstractParser<FamilyFiles>() {
+        public FamilyFiles parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new FamilyFiles(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<FamilyFiles> getParserForType() {
+        return PARSER;
+      }
+
       private int bitField0_;
+      // required bytes family_name = 1;
       public static final int FAMILY_NAME_FIELD_NUMBER = 1;
       private com.google.protobuf.ByteString familyName_;
       /**
@@ -2249,6 +2220,7 @@ public final class SnapshotProtos {
         return familyName_;
       }
 
+      // repeated .hbase.pb.SnapshotRegionManifest.StoreFile store_files = 2;
       public static final int STORE_FILES_FIELD_NUMBER = 2;
       private java.util.List<org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile> storeFiles_;
       /**
@@ -2284,11 +2256,14 @@ public final class SnapshotProtos {
         return storeFiles_.get(index);
       }
 
+      private void initFields() {
+        familyName_ = com.google.protobuf.ByteString.EMPTY;
+        storeFiles_ = java.util.Collections.emptyList();
+      }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
-        if (isInitialized == 1) return true;
-        if (isInitialized == 0) return false;
+        if (isInitialized != -1) return isInitialized == 1;
 
         if (!hasFamilyName()) {
           memoizedIsInitialized = 0;
@@ -2306,17 +2281,19 @@ public final class SnapshotProtos {
 
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
+        getSerializedSize();
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
           output.writeBytes(1, familyName_);
         }
         for (int i = 0; i < storeFiles_.size(); i++) {
           output.writeMessage(2, storeFiles_.get(i));
         }
-        unknownFields.writeTo(output);
+        getUnknownFields().writeTo(output);
       }
 
+      private int memoizedSerializedSize = -1;
       public int getSerializedSize() {
-        int size = memoizedSize;
+        int size = memoizedSerializedSize;
         if (size != -1) return size;
 
         size = 0;
@@ -2328,12 +2305,18 @@ public final class SnapshotProtos {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(2, storeFiles_.get(i));
         }
-        size += unknownFields.getSerializedSize();
-        memoizedSize = size;
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
         return size;
       }
 
       private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -2352,10 +2335,12 @@ public final class SnapshotProtos {
         }
         result = result && getStoreFilesList()
             .equals(other.getStoreFilesList());
-        result = result && unknownFields.equals(other.unknownFields);
+        result = result &&
+            getUnknownFields().equals(other.getUnknownFields());
         return result;
       }
 
+      private int memoizedHashCode = 0;
       @java.lang.Override
       public int hashCode() {
         if (memoizedHashCode != 0) {
@@ -2371,7 +2356,7 @@ public final class SnapshotProtos {
           hash = (37 * hash) + STORE_FILES_FIELD_NUMBER;
           hash = (53 * hash) + getStoreFilesList().hashCode();
         }
-        hash = (29 * hash) + unknownFields.hashCode();
+        hash = (29 * hash) + getUnknownFields().hashCode();
         memoizedHashCode = hash;
         return hash;
       }
@@ -2399,57 +2384,46 @@ public final class SnapshotProtos {
       }
       public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles parseFrom(java.io.InputStream input)
           throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseWithIOException(PARSER, input);
+        return PARSER.parseFrom(input);
       }
       public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles parseFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseWithIOException(PARSER, input, extensionRegistry);
+        return PARSER.parseFrom(input, extensionRegistry);
       }
       public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles parseDelimitedFrom(java.io.InputStream input)
           throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseDelimitedWithIOException(PARSER, input);
+        return PARSER.parseDelimitedFrom(input);
       }
       public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles parseDelimitedFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
       }
       public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles parseFrom(
           com.google.protobuf.CodedInputStream input)
           throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseWithIOException(PARSER, input);
+        return PARSER.parseFrom(input);
       }
       public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles parseFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseWithIOException(PARSER, input, extensionRegistry);
+        return PARSER.parseFrom(input, extensionRegistry);
       }
 
+      public static Builder newBuilder() { return Builder.create(); }
       public Builder newBuilderForType() { return newBuilder(); }
-      public static Builder newBuilder() {
-        return DEFAULT_INSTANCE.toBuilder();
-      }
       public static Builder newBuilder(org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles prototype) {
-        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+        return newBuilder().mergeFrom(prototype);
       }
-      public Builder toBuilder() {
-        return this == DEFAULT_INSTANCE
-            ? new Builder() : new Builder().mergeFrom(this);
-      }
+      public Builder toBuilder() { return newBuilder(this); }
 
       @java.lang.Override
       protected Builder newBuilderForType(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         Builder builder = new Builder(parent);
         return builder;
       }
@@ -2457,15 +2431,14 @@ public final class SnapshotProtos {
        * Protobuf type {@code hbase.pb.SnapshotRegionManifest.FamilyFiles}
        */
       public static final class Builder extends
-          com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-          // @@protoc_insertion_point(builder_implements:hbase.pb.SnapshotRegionManifest.FamilyFiles)
-          org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFilesOrBuilder {
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFilesOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
           return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotRegionManifest_FamilyFiles_descriptor;
         }
 
-        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
             internalGetFieldAccessorTable() {
           return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotRegionManifest_FamilyFiles_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
@@ -2478,16 +2451,19 @@ public final class SnapshotProtos {
         }
 
         private Builder(
-            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
           super(parent);
           maybeForceBuilderInitialization();
         }
         private void maybeForceBuilderInitialization() {
-          if (com.google.protobuf.GeneratedMessageV3
-                  .alwaysUseFieldBuilders) {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
             getStoreFilesFieldBuilder();
           }
         }
+        private static Builder create() {
+          return new Builder();
+        }
+
         public Builder clear() {
           super.clear();
           familyName_ = com.google.protobuf.ByteString.EMPTY;
@@ -2499,6 +2475,10 @@ public final class SnapshotProtos {
             storeFilesBuilder_.clear();
           }
           return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
         }
 
         public com.google.protobuf.Descriptors.Descriptor
@@ -2540,32 +2520,6 @@ public final class SnapshotProtos {
           return result;
         }
 
-        public Builder clone() {
-          return (Builder) super.clone();
-        }
-        public Builder setField(
-            com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
-          return (Builder) super.setField(field, value);
-        }
-        public Builder clearField(
-            com.google.protobuf.Descriptors.FieldDescriptor field) {
-          return (Builder) super.clearField(field);
-        }
-        public Builder clearOneof(
-            com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-          return (Builder) super.clearOneof(oneof);
-        }
-        public Builder setRepeatedField(
-            com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
-          return (Builder) super.setRepeatedField(field, index, value);
-        }
-        public Builder addRepeatedField(
-            com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
-          return (Builder) super.addRepeatedField(field, value);
-        }
         public Builder mergeFrom(com.google.protobuf.Message other) {
           if (other instanceof org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles) {
             return mergeFrom((org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles)other);
@@ -2599,24 +2553,25 @@ public final class SnapshotProtos {
                 storeFiles_ = other.storeFiles_;
                 bitField0_ = (bitField0_ & ~0x00000002);
                 storeFilesBuilder_ = 
-                  com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                  com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                      getStoreFilesFieldBuilder() : null;
               } else {
                 storeFilesBuilder_.addAllMessages(other.storeFiles_);
               }
             }
           }
-          this.mergeUnknownFields(other.unknownFields);
-          onChanged();
+          this.mergeUnknownFields(other.getUnknownFields());
           return this;
         }
 
         public final boolean isInitialized() {
           if (!hasFamilyName()) {
+            
             return false;
           }
           for (int i = 0; i < getStoreFilesCount(); i++) {
             if (!getStoreFiles(i).isInitialized()) {
+              
               return false;
             }
           }
@@ -2632,7 +2587,7 @@ public final class SnapshotProtos {
             parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
           } catch (com.google.protobuf.InvalidProtocolBufferException e) {
             parsedMessage = (org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles) e.getUnfinishedMessage();
-            throw e.unwrapIOException();
+            throw e;
           } finally {
             if (parsedMessage != null) {
               mergeFrom(parsedMessage);
@@ -2642,6 +2597,7 @@ public final class SnapshotProtos {
         }
         private int bitField0_;
 
+        // required bytes family_name = 1;
         private com.google.protobuf.ByteString familyName_ = com.google.protobuf.ByteString.EMPTY;
         /**
          * <code>required bytes family_name = 1;</code>
@@ -2677,6 +2633,7 @@ public final class SnapshotProtos {
           return this;
         }
 
+        // repeated .hbase.pb.SnapshotRegionManifest.StoreFile store_files = 2;
         private java.util.List<org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile> storeFiles_ =
           java.util.Collections.emptyList();
         private void ensureStoreFilesIsMutable() {
@@ -2686,7 +2643,7 @@ public final class SnapshotProtos {
            }
         }
 
-        private com.google.protobuf.RepeatedFieldBuilderV3<
+        private com.google.protobuf.RepeatedFieldBuilder<
             org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile.Builder, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFileOrBuilder> storeFilesBuilder_;
 
         /**
@@ -2818,8 +2775,7 @@ public final class SnapshotProtos {
             java.lang.Iterable<? extends org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile> values) {
           if (storeFilesBuilder_ == null) {
             ensureStoreFilesIsMutable();
-            com.google.protobuf.AbstractMessageLite.Builder.addAll(
-                values, storeFiles_);
+            super.addAll(values, storeFiles_);
             onChanged();
           } else {
             storeFilesBuilder_.addAllMessages(values);
@@ -2902,11 +2858,11 @@ public final class SnapshotProtos {
              getStoreFilesBuilderList() {
           return getStoreFilesFieldBuilder().getBuilderList();
         }
-        private com.google.protobuf.RepeatedFieldBuilderV3<
+        private com.google.protobuf.RepeatedFieldBuilder<
             org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile.Builder, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFileOrBuilder> 
             getStoreFilesFieldBuilder() {
           if (storeFilesBuilder_ == null) {
-            storeFilesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            storeFilesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
                 org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFile.Builder, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.StoreFileOrBuilder>(
                     storeFiles_,
                     ((bitField0_ & 0x00000002) == 0x00000002),
@@ -2916,56 +2872,20 @@ public final class SnapshotProtos {
           }
           return storeFilesBuilder_;
         }
-        public final Builder setUnknownFields(
-            final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return super.setUnknownFields(unknownFields);
-        }
-
-        public final Builder mergeUnknownFields(
-            final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return super.mergeUnknownFields(unknownFields);
-        }
-
 
         // @@protoc_insertion_point(builder_scope:hbase.pb.SnapshotRegionManifest.FamilyFiles)
       }
 
-      // @@protoc_insertion_point(class_scope:hbase.pb.SnapshotRegionManifest.FamilyFiles)
-      private static final org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles DEFAULT_INSTANCE;
       static {
-        DEFAULT_INSTANCE = new org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles();
+        defaultInstance = new FamilyFiles(true);
+        defaultInstance.initFields();
       }
 
-      public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles getDefaultInstance() {
-        return DEFAULT_INSTANCE;
-      }
-
-      @java.lang.Deprecated public static final com.google.protobuf.Parser<FamilyFiles>
-          PARSER = new com.google.protobuf.AbstractParser<FamilyFiles>() {
-        public FamilyFiles parsePartialFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-            return new FamilyFiles(input, extensionRegistry);
-        }
-      };
-
-      public static com.google.protobuf.Parser<FamilyFiles> parser() {
-        return PARSER;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Parser<FamilyFiles> getParserForType() {
-        return PARSER;
-      }
-
-      public org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles getDefaultInstanceForType() {
-        return DEFAULT_INSTANCE;
-      }
-
+      // @@protoc_insertion_point(class_scope:hbase.pb.SnapshotRegionManifest.FamilyFiles)
     }
 
     private int bitField0_;
+    // optional int32 version = 1;
     public static final int VERSION_FIELD_NUMBER = 1;
     private int version_;
     /**
@@ -2981,6 +2901,7 @@ public final class SnapshotProtos {
       return version_;
     }
 
+    // required .hbase.pb.RegionInfo region_info = 2;
     public static final int REGION_INFO_FIELD_NUMBER = 2;
     private org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo regionInfo_;
     /**
@@ -2993,15 +2914,16 @@ public final class SnapshotProtos {
      * <code>required .hbase.pb.RegionInfo region_info = 2;</code>
      */
     public org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo getRegionInfo() {
-      return regionInfo_ == null ? org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo.getDefaultInstance() : regionInfo_;
+      return regionInfo_;
     }
     /**
      * <code>required .hbase.pb.RegionInfo region_info = 2;</code>
      */
     public org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfoOrBuilder getRegionInfoOrBuilder() {
-      return regionInfo_ == null ? org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo.getDefaultInstance() : regionInfo_;
+      return regionInfo_;
     }
 
+    // repeated .hbase.pb.SnapshotRegionManifest.FamilyFiles family_files = 3;
     public static final int FAMILY_FILES_FIELD_NUMBER = 3;
     private java.util.List<org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles> familyFiles_;
     /**
@@ -3037,11 +2959,15 @@ public final class SnapshotProtos {
       return familyFiles_.get(index);
     }
 
+    private void initFields() {
+      version_ = 0;
+      regionInfo_ = org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo.getDefaultInstance();
+      familyFiles_ = java.util.Collections.emptyList();
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasRegionInfo()) {
         memoizedIsInitialized = 0;
@@ -3063,20 +2989,22 @@ public final class SnapshotProtos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt32(1, version_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(2, getRegionInfo());
+        output.writeMessage(2, regionInfo_);
       }
       for (int i = 0; i < familyFiles_.size(); i++) {
         output.writeMessage(3, familyFiles_.get(i));
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
@@ -3086,18 +3014,24 @@ public final class SnapshotProtos {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getRegionInfo());
+          .computeMessageSize(2, regionInfo_);
       }
       for (int i = 0; i < familyFiles_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, familyFiles_.get(i));
       }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3121,10 +3055,12 @@ public final class SnapshotProtos {
       }
       result = result && getFamilyFilesList()
           .equals(other.getFamilyFilesList());
-      result = result && unknownFields.equals(other.unknownFields);
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
       return result;
     }
 
+    private int memoizedHashCode = 0;
     @java.lang.Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
@@ -3144,7 +3080,7 @@ public final class SnapshotProtos {
         hash = (37 * hash) + FAMILY_FILES_FIELD_NUMBER;
         hash = (53 * hash) + getFamilyFilesList().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -3172,57 +3108,46 @@ public final class SnapshotProtos {
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3230,15 +3155,14 @@ public final class SnapshotProtos {
      * Protobuf type {@code hbase.pb.SnapshotRegionManifest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:hbase.pb.SnapshotRegionManifest)
-        org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifestOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotRegionManifest_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotRegionManifest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -3251,23 +3175,26 @@ public final class SnapshotProtos {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getRegionInfoFieldBuilder();
           getFamilyFilesFieldBuilder();
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
         version_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         if (regionInfoBuilder_ == null) {
-          regionInfo_ = null;
+          regionInfo_ = org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo.getDefaultInstance();
         } else {
           regionInfoBuilder_.clear();
         }
@@ -3279,6 +3206,10 @@ public final class SnapshotProtos {
           familyFilesBuilder_.clear();
         }
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -3328,32 +3259,6 @@ public final class SnapshotProtos {
         return result;
       }
 
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest) {
           return mergeFrom((org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest)other);
@@ -3390,27 +3295,29 @@ public final class SnapshotProtos {
               familyFiles_ = other.familyFiles_;
               bitField0_ = (bitField0_ & ~0x00000004);
               familyFilesBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getFamilyFilesFieldBuilder() : null;
             } else {
               familyFilesBuilder_.addAllMessages(other.familyFiles_);
             }
           }
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasRegionInfo()) {
+          
           return false;
         }
         if (!getRegionInfo().isInitialized()) {
+          
           return false;
         }
         for (int i = 0; i < getFamilyFilesCount(); i++) {
           if (!getFamilyFiles(i).isInitialized()) {
+            
             return false;
           }
         }
@@ -3426,7 +3333,7 @@ public final class SnapshotProtos {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -3436,6 +3343,7 @@ public final class SnapshotProtos {
       }
       private int bitField0_;
 
+      // optional int32 version = 1;
       private int version_ ;
       /**
        * <code>optional int32 version = 1;</code>
@@ -3468,8 +3376,9 @@ public final class SnapshotProtos {
         return this;
       }
 
-      private org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo regionInfo_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
+      // required .hbase.pb.RegionInfo region_info = 2;
+      private org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo regionInfo_ = org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
           org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo, org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo.Builder, org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfoOrBuilder> regionInfoBuilder_;
       /**
        * <code>required .hbase.pb.RegionInfo region_info = 2;</code>
@@ -3482,7 +3391,7 @@ public final class SnapshotProtos {
        */
       public org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo getRegionInfo() {
         if (regionInfoBuilder_ == null) {
-          return regionInfo_ == null ? org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo.getDefaultInstance() : regionInfo_;
+          return regionInfo_;
         } else {
           return regionInfoBuilder_.getMessage();
         }
@@ -3523,7 +3432,6 @@ public final class SnapshotProtos {
       public Builder mergeRegionInfo(org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo value) {
         if (regionInfoBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              regionInfo_ != null &&
               regionInfo_ != org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo.getDefaultInstance()) {
             regionInfo_ =
               org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo.newBuilder(regionInfo_).mergeFrom(value).buildPartial();
@@ -3542,7 +3450,7 @@ public final class SnapshotProtos {
        */
       public Builder clearRegionInfo() {
         if (regionInfoBuilder_ == null) {
-          regionInfo_ = null;
+          regionInfo_ = org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo.getDefaultInstance();
           onChanged();
         } else {
           regionInfoBuilder_.clear();
@@ -3565,20 +3473,19 @@ public final class SnapshotProtos {
         if (regionInfoBuilder_ != null) {
           return regionInfoBuilder_.getMessageOrBuilder();
         } else {
-          return regionInfo_ == null ?
-              org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo.getDefaultInstance() : regionInfo_;
+          return regionInfo_;
         }
       }
       /**
        * <code>required .hbase.pb.RegionInfo region_info = 2;</code>
        */
-      private com.google.protobuf.SingleFieldBuilderV3<
+      private com.google.protobuf.SingleFieldBuilder<
           org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo, org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo.Builder, org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfoOrBuilder> 
           getRegionInfoFieldBuilder() {
         if (regionInfoBuilder_ == null) {
-          regionInfoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          regionInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo, org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfo.Builder, org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.RegionInfoOrBuilder>(
-                  getRegionInfo(),
+                  regionInfo_,
                   getParentForChildren(),
                   isClean());
           regionInfo_ = null;
@@ -3586,6 +3493,7 @@ public final class SnapshotProtos {
         return regionInfoBuilder_;
       }
 
+      // repeated .hbase.pb.SnapshotRegionManifest.FamilyFiles family_files = 3;
       private java.util.List<org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles> familyFiles_ =
         java.util.Collections.emptyList();
       private void ensureFamilyFilesIsMutable() {
@@ -3595,7 +3503,7 @@ public final class SnapshotProtos {
          }
       }
 
-      private com.google.protobuf.RepeatedFieldBuilderV3<
+      private com.google.protobuf.RepeatedFieldBuilder<
           org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles.Builder, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFilesOrBuilder> familyFilesBuilder_;
 
       /**
@@ -3727,8 +3635,7 @@ public final class SnapshotProtos {
           java.lang.Iterable<? extends org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles> values) {
         if (familyFilesBuilder_ == null) {
           ensureFamilyFilesIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, familyFiles_);
+          super.addAll(values, familyFiles_);
           onChanged();
         } else {
           familyFilesBuilder_.addAllMessages(values);
@@ -3811,11 +3718,11 @@ public final class SnapshotProtos {
            getFamilyFilesBuilderList() {
         return getFamilyFilesFieldBuilder().getBuilderList();
       }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
+      private com.google.protobuf.RepeatedFieldBuilder<
           org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles.Builder, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFilesOrBuilder> 
           getFamilyFilesFieldBuilder() {
         if (familyFilesBuilder_ == null) {
-          familyFilesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+          familyFilesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFiles.Builder, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.FamilyFilesOrBuilder>(
                   familyFiles_,
                   ((bitField0_ & 0x00000004) == 0x00000004),
@@ -3825,59 +3732,22 @@ public final class SnapshotProtos {
         }
         return familyFilesBuilder_;
       }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:hbase.pb.SnapshotRegionManifest)
     }
 
-    // @@protoc_insertion_point(class_scope:hbase.pb.SnapshotRegionManifest)
-    private static final org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest();
+      defaultInstance = new SnapshotRegionManifest(true);
+      defaultInstance.initFields();
     }
 
-    public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<SnapshotRegionManifest>
-        PARSER = new com.google.protobuf.AbstractParser<SnapshotRegionManifest>() {
-      public SnapshotRegionManifest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SnapshotRegionManifest(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<SnapshotRegionManifest> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<SnapshotRegionManifest> getParserForType() {
-      return PARSER;
-    }
-
-    public org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:hbase.pb.SnapshotRegionManifest)
   }
 
-  public interface SnapshotDataManifestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:hbase.pb.SnapshotDataManifest)
-      com.google.protobuf.MessageOrBuilder {
+  public interface SnapshotDataManifestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // required .hbase.pb.TableSchema table_schema = 1;
     /**
      * <code>required .hbase.pb.TableSchema table_schema = 1;</code>
      */
@@ -3891,6 +3761,7 @@ public final class SnapshotProtos {
      */
     org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchemaOrBuilder getTableSchemaOrBuilder();
 
+    // repeated .hbase.pb.SnapshotRegionManifest region_manifests = 2;
     /**
      * <code>repeated .hbase.pb.SnapshotRegionManifest region_manifests = 2;</code>
      */
@@ -3918,28 +3789,36 @@ public final class SnapshotProtos {
   /**
    * Protobuf type {@code hbase.pb.SnapshotDataManifest}
    */
-  public  static final class SnapshotDataManifest extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:hbase.pb.SnapshotDataManifest)
-      SnapshotDataManifestOrBuilder {
+  public static final class SnapshotDataManifest extends
+      com.google.protobuf.GeneratedMessage
+      implements SnapshotDataManifestOrBuilder {
     // Use SnapshotDataManifest.newBuilder() to construct.
-    private SnapshotDataManifest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private SnapshotDataManifest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private SnapshotDataManifest() {
-      regionManifests_ = java.util.Collections.emptyList();
+    private SnapshotDataManifest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final SnapshotDataManifest defaultInstance;
+    public static SnapshotDataManifest getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public SnapshotDataManifest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private SnapshotDataManifest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
+      initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -3976,8 +3855,7 @@ public final class SnapshotProtos {
                 regionManifests_ = new java.util.ArrayList<org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest>();
                 mutable_bitField0_ |= 0x00000002;
               }
-              regionManifests_.add(
-                  input.readMessage(org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.PARSER, extensionRegistry));
+              regionManifests_.add(input.readMessage(org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.PARSER, extensionRegistry));
               break;
             }
           }
@@ -3986,7 +3864,7 @@ public final class SnapshotProtos {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           regionManifests_ = java.util.Collections.unmodifiableList(regionManifests_);
@@ -4000,14 +3878,30 @@ public final class SnapshotProtos {
       return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotDataManifest_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotDataManifest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifest.class, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifest.Builder.class);
     }
 
+    public static com.google.protobuf.Parser<SnapshotDataManifest> PARSER =
+        new com.google.protobuf.AbstractParser<SnapshotDataManifest>() {
+      public SnapshotDataManifest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new SnapshotDataManifest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SnapshotDataManifest> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
+    // required .hbase.pb.TableSchema table_schema = 1;
     public static final int TABLE_SCHEMA_FIELD_NUMBER = 1;
     private org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema tableSchema_;
     /**
@@ -4020,15 +3914,16 @@ public final class SnapshotProtos {
      * <code>required .hbase.pb.TableSchema table_schema = 1;</code>
      */
     public org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema getTableSchema() {
-      return tableSchema_ == null ? org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema.getDefaultInstance() : tableSchema_;
+      return tableSchema_;
     }
     /**
      * <code>required .hbase.pb.TableSchema table_schema = 1;</code>
      */
     public org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchemaOrBuilder getTableSchemaOrBuilder() {
-      return tableSchema_ == null ? org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema.getDefaultInstance() : tableSchema_;
+      return tableSchema_;
     }
 
+    // repeated .hbase.pb.SnapshotRegionManifest region_manifests = 2;
     public static final int REGION_MANIFESTS_FIELD_NUMBER = 2;
     private java.util.List<org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest> regionManifests_;
     /**
@@ -4064,11 +3959,14 @@ public final class SnapshotProtos {
       return regionManifests_.get(index);
     }
 
+    private void initFields() {
+      tableSchema_ = org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema.getDefaultInstance();
+      regionManifests_ = java.util.Collections.emptyList();
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasTableSchema()) {
         memoizedIsInitialized = 0;
@@ -4090,34 +3988,42 @@ public final class SnapshotProtos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, getTableSchema());
+        output.writeMessage(1, tableSchema_);
       }
       for (int i = 0; i < regionManifests_.size(); i++) {
         output.writeMessage(2, regionManifests_.get(i));
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getTableSchema());
+          .computeMessageSize(1, tableSchema_);
       }
       for (int i = 0; i < regionManifests_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, regionManifests_.get(i));
       }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -4136,10 +4042,12 @@ public final class SnapshotProtos {
       }
       result = result && getRegionManifestsList()
           .equals(other.getRegionManifestsList());
-      result = result && unknownFields.equals(other.unknownFields);
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
       return result;
     }
 
+    private int memoizedHashCode = 0;
     @java.lang.Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
@@ -4155,7 +4063,7 @@ public final class SnapshotProtos {
         hash = (37 * hash) + REGION_MANIFESTS_FIELD_NUMBER;
         hash = (53 * hash) + getRegionManifestsList().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
@@ -4183,57 +4091,46 @@ public final class SnapshotProtos {
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -4241,15 +4138,14 @@ public final class SnapshotProtos {
      * Protobuf type {@code hbase.pb.SnapshotDataManifest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:hbase.pb.SnapshotDataManifest)
-        org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifestOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotDataManifest_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.internal_static_hbase_pb_SnapshotDataManifest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -4262,21 +4158,24 @@ public final class SnapshotProtos {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getTableSchemaFieldBuilder();
           getRegionManifestsFieldBuilder();
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
         if (tableSchemaBuilder_ == null) {
-          tableSchema_ = null;
+          tableSchema_ = org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema.getDefaultInstance();
         } else {
           tableSchemaBuilder_.clear();
         }
@@ -4288,6 +4187,10 @@ public final class SnapshotProtos {
           regionManifestsBuilder_.clear();
         }
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -4333,32 +4236,6 @@ public final class SnapshotProtos {
         return result;
       }
 
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifest) {
           return mergeFrom((org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifest)other);
@@ -4392,27 +4269,29 @@ public final class SnapshotProtos {
               regionManifests_ = other.regionManifests_;
               bitField0_ = (bitField0_ & ~0x00000002);
               regionManifestsBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getRegionManifestsFieldBuilder() : null;
             } else {
               regionManifestsBuilder_.addAllMessages(other.regionManifests_);
             }
           }
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasTableSchema()) {
+          
           return false;
         }
         if (!getTableSchema().isInitialized()) {
+          
           return false;
         }
         for (int i = 0; i < getRegionManifestsCount(); i++) {
           if (!getRegionManifests(i).isInitialized()) {
+            
             return false;
           }
         }
@@ -4428,7 +4307,7 @@ public final class SnapshotProtos {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifest) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -4438,8 +4317,9 @@ public final class SnapshotProtos {
       }
       private int bitField0_;
 
-      private org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema tableSchema_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
+      // required .hbase.pb.TableSchema table_schema = 1;
+      private org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema tableSchema_ = org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
           org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema, org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema.Builder, org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchemaOrBuilder> tableSchemaBuilder_;
       /**
        * <code>required .hbase.pb.TableSchema table_schema = 1;</code>
@@ -4452,7 +4332,7 @@ public final class SnapshotProtos {
        */
       public org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema getTableSchema() {
         if (tableSchemaBuilder_ == null) {
-          return tableSchema_ == null ? org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema.getDefaultInstance() : tableSchema_;
+          return tableSchema_;
         } else {
           return tableSchemaBuilder_.getMessage();
         }
@@ -4493,7 +4373,6 @@ public final class SnapshotProtos {
       public Builder mergeTableSchema(org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema value) {
         if (tableSchemaBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              tableSchema_ != null &&
               tableSchema_ != org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema.getDefaultInstance()) {
             tableSchema_ =
               org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema.newBuilder(tableSchema_).mergeFrom(value).buildPartial();
@@ -4512,7 +4391,7 @@ public final class SnapshotProtos {
        */
       public Builder clearTableSchema() {
         if (tableSchemaBuilder_ == null) {
-          tableSchema_ = null;
+          tableSchema_ = org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema.getDefaultInstance();
           onChanged();
         } else {
           tableSchemaBuilder_.clear();
@@ -4535,20 +4414,19 @@ public final class SnapshotProtos {
         if (tableSchemaBuilder_ != null) {
           return tableSchemaBuilder_.getMessageOrBuilder();
         } else {
-          return tableSchema_ == null ?
-              org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema.getDefaultInstance() : tableSchema_;
+          return tableSchema_;
         }
       }
       /**
        * <code>required .hbase.pb.TableSchema table_schema = 1;</code>
        */
-      private com.google.protobuf.SingleFieldBuilderV3<
+      private com.google.protobuf.SingleFieldBuilder<
           org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema, org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema.Builder, org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchemaOrBuilder> 
           getTableSchemaFieldBuilder() {
         if (tableSchemaBuilder_ == null) {
-          tableSchemaBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          tableSchemaBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema, org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchema.Builder, org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.TableSchemaOrBuilder>(
-                  getTableSchema(),
+                  tableSchema_,
                   getParentForChildren(),
                   isClean());
           tableSchema_ = null;
@@ -4556,6 +4434,7 @@ public final class SnapshotProtos {
         return tableSchemaBuilder_;
       }
 
+      // repeated .hbase.pb.SnapshotRegionManifest region_manifests = 2;
       private java.util.List<org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest> regionManifests_ =
         java.util.Collections.emptyList();
       private void ensureRegionManifestsIsMutable() {
@@ -4565,7 +4444,7 @@ public final class SnapshotProtos {
          }
       }
 
-      private com.google.protobuf.RepeatedFieldBuilderV3<
+      private com.google.protobuf.RepeatedFieldBuilder<
           org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.Builder, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifestOrBuilder> regionManifestsBuilder_;
 
       /**
@@ -4697,8 +4576,7 @@ public final class SnapshotProtos {
           java.lang.Iterable<? extends org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest> values) {
         if (regionManifestsBuilder_ == null) {
           ensureRegionManifestsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, regionManifests_);
+          super.addAll(values, regionManifests_);
           onChanged();
         } else {
           regionManifestsBuilder_.addAllMessages(values);
@@ -4781,11 +4659,11 @@ public final class SnapshotProtos {
            getRegionManifestsBuilderList() {
         return getRegionManifestsFieldBuilder().getBuilderList();
       }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
+      private com.google.protobuf.RepeatedFieldBuilder<
           org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.Builder, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifestOrBuilder> 
           getRegionManifestsFieldBuilder() {
         if (regionManifestsBuilder_ == null) {
-          regionManifestsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+          regionManifestsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifest.Builder, org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotRegionManifestOrBuilder>(
                   regionManifests_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
@@ -4795,86 +4673,49 @@ public final class SnapshotProtos {
         }
         return regionManifestsBuilder_;
       }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:hbase.pb.SnapshotDataManifest)
     }
 
-    // @@protoc_insertion_point(class_scope:hbase.pb.SnapshotDataManifest)
-    private static final org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifest();
+      defaultInstance = new SnapshotDataManifest(true);
+      defaultInstance.initFields();
     }
 
-    public static org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifest getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<SnapshotDataManifest>
-        PARSER = new com.google.protobuf.AbstractParser<SnapshotDataManifest>() {
-      public SnapshotDataManifest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SnapshotDataManifest(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<SnapshotDataManifest> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<SnapshotDataManifest> getParserForType() {
-      return PARSER;
-    }
-
-    public org.apache.hadoop.hbase.protobuf.generated.SnapshotProtos.SnapshotDataManifest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:hbase.pb.SnapshotDataManifest)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_hbase_pb_SnapshotFileInfo_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_hbase_pb_SnapshotFileInfo_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_hbase_pb_SnapshotRegionManifest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_hbase_pb_SnapshotRegionManifest_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_hbase_pb_SnapshotRegionManifest_StoreFile_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_hbase_pb_SnapshotRegionManifest_StoreFile_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_hbase_pb_SnapshotRegionManifest_FamilyFiles_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_hbase_pb_SnapshotRegionManifest_FamilyFiles_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_hbase_pb_SnapshotDataManifest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_hbase_pb_SnapshotDataManifest_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
   }
-  private static  com.google.protobuf.Descriptors.FileDescriptor
+  private static com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     java.lang.String[] descriptorData = {
@@ -4899,51 +4740,49 @@ public final class SnapshotProtos {
       "pshotProtosH\001\210\001\001\240\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_hbase_pb_SnapshotFileInfo_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_hbase_pb_SnapshotFileInfo_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_hbase_pb_SnapshotFileInfo_descriptor,
+              new java.lang.String[] { "Type", "Hfile", "WalServer", "WalName", });
+          internal_static_hbase_pb_SnapshotRegionManifest_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_hbase_pb_SnapshotRegionManifest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_hbase_pb_SnapshotRegionManifest_descriptor,
+              new java.lang.String[] { "Version", "RegionInfo", "FamilyFiles", });
+          internal_static_hbase_pb_SnapshotRegionManifest_StoreFile_descriptor =
+            internal_static_hbase_pb_SnapshotRegionManifest_descriptor.getNestedTypes().get(0);
+          internal_static_hbase_pb_SnapshotRegionManifest_StoreFile_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_hbase_pb_SnapshotRegionManifest_StoreFile_descriptor,
+              new java.lang.String[] { "Name", "Reference", "FileSize", });
+          internal_static_hbase_pb_SnapshotRegionManifest_FamilyFiles_descriptor =
+            internal_static_hbase_pb_SnapshotRegionManifest_descriptor.getNestedTypes().get(1);
+          internal_static_hbase_pb_SnapshotRegionManifest_FamilyFiles_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_hbase_pb_SnapshotRegionManifest_FamilyFiles_descriptor,
+              new java.lang.String[] { "FamilyName", "StoreFiles", });
+          internal_static_hbase_pb_SnapshotDataManifest_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_hbase_pb_SnapshotDataManifest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_hbase_pb_SnapshotDataManifest_descriptor,
+              new java.lang.String[] { "TableSchema", "RegionManifests", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           org.apache.hadoop.hbase.protobuf.generated.FSProtos.getDescriptor(),
           org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.getDescriptor(),
         }, assigner);
-    internal_static_hbase_pb_SnapshotFileInfo_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_hbase_pb_SnapshotFileInfo_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_hbase_pb_SnapshotFileInfo_descriptor,
-        new java.lang.String[] { "Type", "Hfile", "WalServer", "WalName", });
-    internal_static_hbase_pb_SnapshotRegionManifest_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_hbase_pb_SnapshotRegionManifest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_hbase_pb_SnapshotRegionManifest_descriptor,
-        new java.lang.String[] { "Version", "RegionInfo", "FamilyFiles", });
-    internal_static_hbase_pb_SnapshotRegionManifest_StoreFile_descriptor =
-      internal_static_hbase_pb_SnapshotRegionManifest_descriptor.getNestedTypes().get(0);
-    internal_static_hbase_pb_SnapshotRegionManifest_StoreFile_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_hbase_pb_SnapshotRegionManifest_StoreFile_descriptor,
-        new java.lang.String[] { "Name", "Reference", "FileSize", });
-    internal_static_hbase_pb_SnapshotRegionManifest_FamilyFiles_descriptor =
-      internal_static_hbase_pb_SnapshotRegionManifest_descriptor.getNestedTypes().get(1);
-    internal_static_hbase_pb_SnapshotRegionManifest_FamilyFiles_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_hbase_pb_SnapshotRegionManifest_FamilyFiles_descriptor,
-        new java.lang.String[] { "FamilyName", "StoreFiles", });
-    internal_static_hbase_pb_SnapshotDataManifest_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_hbase_pb_SnapshotDataManifest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_hbase_pb_SnapshotDataManifest_descriptor,
-        new java.lang.String[] { "TableSchema", "RegionManifests", });
-    org.apache.hadoop.hbase.protobuf.generated.FSProtos.getDescriptor();
-    org.apache.hadoop.hbase.protobuf.generated.HBaseProtos.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
