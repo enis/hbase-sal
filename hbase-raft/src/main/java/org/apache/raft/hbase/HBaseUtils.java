@@ -41,12 +41,12 @@ public class HBaseUtils {
       HConstants.EMPTY_START_ROW, HConstants.EMPTY_END_ROW, false);
   }
 
-  public static ByteString toByteString(org.apache.raft.shaded.com.google.protobuf.ByteString bytes) {
+  public static ByteString toByteString(org.apache.ratis.shaded.com.google.protobuf.ByteString bytes) {
     return ByteString.copyFrom(bytes.asReadOnlyByteBuffer());
   }
 
-  public static org.apache.raft.shaded.com.google.protobuf.ByteString toByteString(ByteString bytes) {
-    return org.apache.raft.shaded.com.google.protobuf.ByteString.copyFrom(
+  public static org.apache.ratis.shaded.com.google.protobuf.ByteString toByteString(ByteString bytes) {
+    return org.apache.ratis.shaded.com.google.protobuf.ByteString.copyFrom(
       bytes.asReadOnlyByteBuffer());
   }
 }

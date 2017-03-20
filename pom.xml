@@ -1244,7 +1244,7 @@
     <kerby.version>1.0.0-RC2</kerby.version>
     <commons-crypto.version>1.0.0</commons-crypto.version>
     <curator.version>2.11.0</curator.version>
-    <raft.version>1.0-SNAPSHOT</raft.version>
+    <ratis.version>1.0-SNAPSHOT</ratis.version>
     <!-- Plugin Dependencies -->
     <maven.assembly.version>2.4</maven.assembly.version>
     <maven.antrun.version>1.8</maven.antrun.version>
@@ -1857,38 +1857,74 @@
       </dependency>
 
      <dependency>
-      <artifactId>raft-common</artifactId>
-      <groupId>com.hortonworks.raft</groupId>
-      <version>${raft.version}</version>
+      <artifactId>ratis-common</artifactId>
+      <groupId>org.apache.ratis</groupId>
+      <version>${ratis.version}</version>
     </dependency>
     <dependency>
-      <artifactId>raft-common</artifactId>
-      <groupId>com.hortonworks.raft</groupId>
-      <version>${raft.version}</version>
+      <artifactId>ratis-common</artifactId>
+      <groupId>org.apache.ratis</groupId>
+      <version>${ratis.version}</version>
       <scope>test</scope>
       <type>test-jar</type>
     </dependency>
     <dependency>
-      <artifactId>raft-client</artifactId>
-      <groupId>com.hortonworks.raft</groupId>
-      <version>${raft.version}</version>
+      <artifactId>ratis-client</artifactId>
+      <groupId>org.apache.ratis</groupId>
+      <version>${ratis.version}</version>
     </dependency>
     <dependency>
-      <artifactId>raft-client</artifactId>
-      <groupId>com.hortonworks.raft</groupId>
-      <version>${raft.version}</version>
+      <artifactId>ratis-client</artifactId>
+      <groupId>org.apache.ratis</groupId>
+      <version>${ratis.version}</version>
       <scope>test</scope>
       <type>test-jar</type>
     </dependency>
     <dependency>
-      <artifactId>raft-server</artifactId>
-      <groupId>com.hortonworks.raft</groupId>
-      <version>${raft.version}</version>
+      <artifactId>ratis-server</artifactId>
+      <groupId>org.apache.ratis</groupId>
+      <version>${ratis.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>jsr305</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
-      <artifactId>raft-server</artifactId>
-      <groupId>com.hortonworks.raft</groupId>
-      <version>${raft.version}</version>
+      <artifactId>ratis-server</artifactId>
+      <groupId>org.apache.ratis</groupId>
+      <version>${ratis.version}</version>
+      <scope>test</scope>
+      <type>test-jar</type>
+    </dependency>
+    <dependency>
+      <artifactId>ratis-grpc</artifactId>
+      <groupId>org.apache.ratis</groupId>
+      <version>${ratis.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>jsr305</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <artifactId>ratis-grpc</artifactId>
+      <groupId>org.apache.ratis</groupId>
+      <version>${ratis.version}</version>
+      <scope>test</scope>
+      <type>test-jar</type>
+    </dependency>
+    <dependency>
+      <artifactId>ratis-netty</artifactId>
+      <groupId>org.apache.ratis</groupId>
+      <version>${ratis.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>ratis-netty</artifactId>
+      <groupId>org.apache.ratis</groupId>
+      <version>${ratis.version}</version>
       <scope>test</scope>
       <type>test-jar</type>
     </dependency>

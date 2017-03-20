@@ -68,6 +68,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.StampedLock;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
@@ -188,7 +189,6 @@ import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.io.Closeables;
 
 @SuppressWarnings("deprecation")
 @InterfaceAudience.Private
@@ -237,7 +237,7 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
    */
   protected volatile long lastReplayedOpenRegionSeqId = -1L;
   protected volatile long lastReplayedCompactionSeqId = -1L;
-  
+
   // collects Map(s) of Store to sequence Id when handleFileNotFound() is involved
   protected List<Map> storeSeqIds = new ArrayList<>();
 
@@ -1608,7 +1608,7 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
         this.metricsRegion.close();
       }
       if (this.metricsRegionWrapper != null) {
-        Closeables.closeQuietly(this.metricsRegionWrapper);
+        IOUtils.closeQuietly(this.metricsRegionWrapper);
       }
       // stop the Compacted hfile discharger
       if (this.compactedFileDischarger != null) this.compactedFileDischarger.cancel(true);
@@ -7803,7 +7803,7 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
         writeEntry = null;
       } finally {
         this.updatesLock.readLock().unlock();
-        // For increment/append, a region scanner for doing a get operation could throw 
+        // For increment/append, a region scanner for doing a get operation could throw
         // FileNotFoundException. So we call dropMemstoreContents() in finally block
         // after releasing read lock
         dropMemstoreContents();

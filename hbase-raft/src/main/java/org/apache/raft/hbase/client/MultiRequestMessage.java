@@ -20,8 +20,8 @@ package org.apache.raft.hbase.client;
 
 import org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos;
 import org.apache.raft.hbase.HBaseUtils;
-import org.apache.raft.protocol.Message;
-import org.apache.raft.shaded.com.google.protobuf.ByteString;
+import org.apache.ratis.shaded.com.google.protobuf.ByteString;
+import org.apache.ratis.protocol.Message;
 
 
 public class MultiRequestMessage implements Message {

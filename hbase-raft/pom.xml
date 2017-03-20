@@ -150,38 +150,42 @@
     </dependency>
     <!-- General dependencies -->
     <dependency>
-      <artifactId>raft-common</artifactId>
-      <groupId>com.hortonworks.raft</groupId>
+      <artifactId>ratis-common</artifactId>
+      <groupId>org.apache.ratis</groupId>
     </dependency>
     <dependency>
-      <artifactId>raft-common</artifactId>
-      <groupId>com.hortonworks.raft</groupId>
+      <artifactId>ratis-common</artifactId>
+      <groupId>org.apache.ratis</groupId>
       <scope>test</scope>
       <type>test-jar</type>
     </dependency>
     <dependency>
-      <artifactId>raft-client</artifactId>
-      <groupId>com.hortonworks.raft</groupId>
+      <artifactId>ratis-client</artifactId>
+      <groupId>org.apache.ratis</groupId>
     </dependency>
     <dependency>
-      <artifactId>raft-client</artifactId>
-      <groupId>com.hortonworks.raft</groupId>
+      <artifactId>ratis-client</artifactId>
+      <groupId>org.apache.ratis</groupId>
       <scope>test</scope>
       <type>test-jar</type>
     </dependency>
     <dependency>
-      <artifactId>raft-server</artifactId>
-      <groupId>com.hortonworks.raft</groupId>
-      <exclusions>
-        <exclusion>
-          <groupId>com.google.code.findbugs</groupId>
-          <artifactId>jsr305</artifactId>
-        </exclusion>
-      </exclusions>
+      <artifactId>ratis-server</artifactId>
+      <groupId>org.apache.ratis</groupId>
     </dependency>
     <dependency>
-      <artifactId>raft-server</artifactId>
-      <groupId>com.hortonworks.raft</groupId>
+      <artifactId>ratis-server</artifactId>
+      <groupId>org.apache.ratis</groupId>
+      <scope>test</scope>
+      <type>test-jar</type>
+    </dependency>
+    <dependency>
+      <artifactId>ratis-grpc</artifactId>
+      <groupId>org.apache.ratis</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>ratis-grpc</artifactId>
+      <groupId>org.apache.ratis</groupId>
       <scope>test</scope>
       <type>test-jar</type>
     </dependency>

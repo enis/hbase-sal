@@ -32,8 +32,8 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos.MultiReque
 import org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos.MutationProto;
 import org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos.RegionAction;
 import org.apache.hadoop.hbase.shaded.protobuf.generated.HBaseProtos;
-import org.apache.raft.client.RaftClient;
 import org.apache.raft.hbase.HBaseUtils;
+import org.apache.ratis.client.RaftClient;
 
 public class HBaseClient {
 

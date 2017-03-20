@@ -17,10 +17,10 @@ import org.apache.hadoop.hbase.regionserver.wal.WALCellCodec;
 import org.apache.hadoop.hbase.regionserver.wal.WALEdit;
 import org.apache.hadoop.hbase.shaded.protobuf.ProtobufUtil;
 import org.apache.hadoop.hbase.wal.WALKey;
-import org.apache.raft.shaded.com.google.protobuf.ByteString;
-import org.apache.raft.shaded.com.google.protobuf.ByteString.Output;
-import org.apache.raft.shaded.com.google.protobuf.CodedInputStream;
-import org.apache.raft.shaded.com.google.protobuf.InvalidProtocolBufferException;
+import org.apache.ratis.shaded.com.google.protobuf.ByteString;
+import org.apache.ratis.shaded.com.google.protobuf.ByteString.Output;
+import org.apache.ratis.shaded.com.google.protobuf.CodedInputStream;
+import org.apache.ratis.shaded.com.google.protobuf.InvalidProtocolBufferException;
 
 public class PBWALDataCodec extends Configured implements WALDataCodec {
 

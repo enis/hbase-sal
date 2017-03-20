@@ -61,17 +61,17 @@ import org.apache.hadoop.hbase.util.EnvironmentEdgeManager;
 import org.apache.hadoop.hbase.wal.WALKey;
 import org.apache.hadoop.hbase.wal.WALSplitter;
 import org.apache.hadoop.hbase.wal.WALSplitter.MutationReplay;
-import org.apache.raft.conf.RaftProperties;
 import org.apache.raft.hbase.wal.PBWALDataCodec;
 import org.apache.raft.hbase.wal.RaftWAL;
 import org.apache.raft.hbase.wal.WALDataCodec;
-import org.apache.raft.protocol.Message;
-import org.apache.raft.protocol.RaftClientRequest;
-import org.apache.raft.server.storage.RaftStorage;
-import org.apache.raft.shaded.com.google.protobuf.ByteString;
-import org.apache.raft.shaded.proto.RaftProtos.SMLogEntryProto;
-import org.apache.raft.statemachine.BaseStateMachine;
-import org.apache.raft.statemachine.TransactionContext;
+import org.apache.ratis.shaded.com.google.protobuf.ByteString;
+import org.apache.ratis.shaded.proto.RaftProtos.SMLogEntryProto;
+import org.apache.ratis.conf.RaftProperties;
+import org.apache.ratis.protocol.Message;
+import org.apache.ratis.protocol.RaftClientRequest;
+import org.apache.ratis.server.storage.RaftStorage;
+import org.apache.ratis.statemachine.BaseStateMachine;
+import org.apache.ratis.statemachine.TransactionContext;
 
 import com.google.common.collect.Lists;
 
@@ -99,7 +99,7 @@ public class RegionStateMachine extends BaseStateMachine {
       throws IOException {
     HTableDescriptor htd = HBaseUtils.createTableDescriptor();
     HRegionInfo hri = HBaseUtils.createRegionInfo(htd);
-    Path rootDir = new Path(storage.getStorageDir().getRoot().toString()); // TODO
+    Path rootDir = new Path(storage.getStorageDir().getStateMachineDir().toString());
 
     this.region = HRegion.createHRegion(hri, rootDir, hbaseConf, htd,
       new RaftWAL(rootDir, hbaseConf, Lists.newArrayList()));

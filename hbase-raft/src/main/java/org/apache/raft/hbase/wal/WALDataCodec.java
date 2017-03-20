@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import org.apache.hadoop.hbase.regionserver.wal.WALEdit;
 import org.apache.hadoop.hbase.wal.WALKey;
-import org.apache.raft.shaded.com.google.protobuf.ByteString;
+import org.apache.ratis.shaded.com.google.protobuf.ByteString;
 
 public interface WALDataCodec {
 

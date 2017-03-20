@@ -18,7 +18,7 @@
 
 package org.apache.raft;
 
-import static org.apache.raft.RaftTestUtil.waitForLeader;
+import static org.apache.ratis.RaftTestUtil.waitForLeader;
 
 import java.io.IOException;
 import java.util.List;
@@ -33,16 +33,18 @@ import org.apache.hadoop.hbase.regionserver.RegionScanner;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.test.GenericTestUtils;
 import org.apache.log4j.Level;
-import org.apache.raft.client.RaftClient;
-import org.apache.raft.conf.RaftProperties;
 import org.apache.raft.hbase.HBaseUtils;
 import org.apache.raft.hbase.RegionStateMachine;
 import org.apache.raft.hbase.client.HBaseClient;
-import org.apache.raft.server.RaftServer;
-import org.apache.raft.server.RaftServerConfigKeys;
-import org.apache.raft.server.simulation.MiniRaftClusterWithSimulatedRpc;
-import org.apache.raft.server.simulation.SimulatedRequestReply;
-import org.apache.raft.statemachine.StateMachine;
+import org.apache.ratis.MiniRaftCluster;
+import org.apache.ratis.RaftBasicTests;
+import org.apache.ratis.client.RaftClient;
+import org.apache.ratis.conf.RaftProperties;
+import org.apache.ratis.server.RaftServer;
+import org.apache.ratis.server.RaftServerConfigKeys;
+import org.apache.ratis.server.simulation.MiniRaftClusterWithSimulatedRpc;
+import org.apache.ratis.server.simulation.SimulatedRequestReply;
+import org.apache.ratis.statemachine.StateMachine;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
