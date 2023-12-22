@@ -1,9 +1,5 @@
 package org.apache.raft.hbase;
 
-import static org.apache.ratis.grpc.RaftGrpcConfigKeys.RAFT_GRPC_SERVER_PORT_KEY;
-import static org.apache.ratis.server.RaftServerConfigKeys.RAFT_SERVER_LOG_APPENDER_FACTORY_CLASS_KEY;
-import static org.apache.ratis.server.RaftServerConfigKeys.RAFT_SERVER_STORAGE_DIR_KEY;
-
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.Arrays;
@@ -11,18 +7,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.hadoop.net.NetUtils;
+import org.apache.ratis.RaftConfigKeys;
 import org.apache.ratis.conf.RaftProperties;
-import org.apache.ratis.grpc.RaftGRpcService;
-import org.apache.ratis.grpc.server.PipelinedLogAppenderFactory;
+import org.apache.ratis.grpc.GrpcConfigKeys.Server;
 import org.apache.ratis.protocol.RaftPeer;
+import org.apache.ratis.protocol.RaftPeerId;
+import org.apache.ratis.rpc.SupportedRpcType;
 import org.apache.ratis.server.RaftServer;
 import org.apache.ratis.server.RaftServerConfigKeys;
-import org.apache.ratis.server.impl.LogAppenderFactory;
-import org.apache.ratis.server.impl.RaftConfiguration;
-import org.apache.ratis.server.impl.RaftServerImpl;
-
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
 
 public class HBaseRaftServer {
 
@@ -32,34 +24,33 @@ public class HBaseRaftServer {
 
   private HBaseRaftServer(String id, String[] servers) throws IOException {
     properties = new RaftProperties();
-    properties.setBoolean(RaftServerConfigKeys.RAFT_SERVER_USE_MEMORY_LOG_KEY, false);
+    //properties.setBoolean(RaftServerConfigKeys.RAFT_SERVER_USE_MEMORY_LOG_KEY, false);
+    RaftPeerId myId = RaftPeerId.getRaftPeerId(id);
 
-
-    List<RaftPeer> peers = Arrays.stream(servers).map(addr -> new RaftPeer(addr, addr))
+    List<RaftPeer> peers = Arrays.stream(servers).map(addr -> new RaftPeer(
+        RaftPeerId.getRaftPeerId(addr), addr))
         .collect(Collectors.toList());
-    Preconditions.checkArgument(Lists.newArrayList(servers).contains(id),
-        "%s is not one of %s specified in %s", id, servers);
-    RaftConfiguration raftConfiguration = RaftConfiguration.newBuilder().setConf(peers).build();
 
     this.port = NetUtils.createSocketAddr(id).getPort();
 
     String idForPath = URLEncoder.encode(id, "UTF-8");
 
-    properties.set(RAFT_SERVER_STORAGE_DIR_KEY,
+    properties.set(RaftServerConfigKeys.STORAGE_DIR_KEY,
         "/tmp/raft-server-" + idForPath);
-    properties.setInt(RAFT_GRPC_SERVER_PORT_KEY, port);
 
-    properties.setClass(RAFT_SERVER_LOG_APPENDER_FACTORY_CLASS_KEY,
-        PipelinedLogAppenderFactory.class, LogAppenderFactory.class);
+    properties.setInt(Server.PORT_KEY, port);
 
-    raftServer = new RaftServerImpl(id, raftConfiguration, properties,
-        new RegionStateMachine());
+    RaftConfigKeys.Rpc.setType(properties, SupportedRpcType.GRPC);
+
+    raftServer = RaftServer.newBuilder()
+        .setServerId(myId)
+        .setPeers(peers)
+        .setProperties(properties)
+        .setStateMachine(new RegionStateMachine())
+        .build();
   }
 
   public void start() {
-    RaftGRpcService grpcService = new RaftGRpcService(raftServer, properties);
-    grpcService.start();
-    raftServer.setServerRpc(grpcService);
     raftServer.start();
   }
 

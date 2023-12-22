@@ -1244,7 +1244,7 @@
     <kerby.version>1.0.0-RC2</kerby.version>
     <commons-crypto.version>1.0.0</commons-crypto.version>
     <curator.version>2.11.0</curator.version>
-    <ratis.version>1.0-SNAPSHOT</ratis.version>
+    <ratis.version>0.1-SNAPSHOT</ratis.version>
     <!-- Plugin Dependencies -->
     <maven.assembly.version>2.4</maven.assembly.version>
     <maven.antrun.version>1.8</maven.antrun.version>

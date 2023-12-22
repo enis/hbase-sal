@@ -10,11 +10,12 @@ import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.hbase.util.Threads;
 import org.apache.raft.hbase.HBaseUtils;
 import org.apache.ratis.client.RaftClient;
-import org.apache.ratis.client.impl.RaftClientImpl;
+import org.apache.ratis.conf.Parameters;
 import org.apache.ratis.conf.RaftProperties;
-import org.apache.ratis.grpc.client.RaftClientSenderWithGrpc;
+import org.apache.ratis.grpc.GrpcFactory;
+import org.apache.ratis.protocol.ClientId;
 import org.apache.ratis.protocol.RaftPeer;
-import org.apache.ratis.server.impl.RaftConfiguration;
+import org.apache.ratis.protocol.RaftPeerId;
 
 import com.google.common.collect.Lists;
 
@@ -22,13 +23,16 @@ public class DemoClient {
 
   private void run(String[] servers, int numRows) throws IOException {
     RaftProperties properties = new RaftProperties();
-    List<RaftPeer> peers = Arrays.stream(servers).map(addr -> new RaftPeer(addr, addr))
+    List<RaftPeer> peers = Arrays.stream(servers).map(addr -> new RaftPeer(
+        RaftPeerId.getRaftPeerId(addr), addr))
         .collect(Collectors.toList());
-    RaftConfiguration raftConfiguration = RaftConfiguration.newBuilder().setConf(peers).build();
-    RaftClientSenderWithGrpc requestSender = new RaftClientSenderWithGrpc(peers);
 
-    RaftClient client = new RaftClientImpl("demo-client", peers,
-        requestSender, null, properties);
+    GrpcFactory grpcFactory = new GrpcFactory(new Parameters());
+    RaftClient client = RaftClient.newBuilder()
+        .setClientId(ClientId.createId())
+        .setServers(peers)
+        .setClientRpc(grpcFactory.newRaftClientRpc())
+        .setProperties(properties).build();
 
     final HBaseClient hbaseClient = new HBaseClient(client);
 
@@ -43,7 +47,7 @@ public class DemoClient {
 
   public static void main(String[] args) throws IOException {
     if (args.length < 2) {
-      System.err.println("Usage: HBaseRaftServer <quorum> <numRows>");
+      System.err.println("Usage: DemoClient <quorum> <numRows>");
       System.exit(1);
     }
 

@@ -42,6 +42,11 @@ import org.apache.hadoop.hbase.client.Mutation;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.ipc.RpcCallContext;
+import org.apache.hadoop.hbase.regionserver.HRegion;
+import org.apache.hadoop.hbase.regionserver.HRegion.WriteContext;
+import org.apache.hadoop.hbase.regionserver.OperationStatus;
+import org.apache.hadoop.hbase.regionserver.RegionScanner;
+import org.apache.hadoop.hbase.regionserver.wal.WALEdit;
 import org.apache.hadoop.hbase.shaded.protobuf.ProtobufUtil;
 import org.apache.hadoop.hbase.shaded.protobuf.ResponseConverter;
 import org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos;
@@ -52,11 +57,6 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos.MutationPr
 import org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos.RegionAction;
 import org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos.RegionActionResult;
 import org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos.ResultOrException;
-import org.apache.hadoop.hbase.regionserver.HRegion;
-import org.apache.hadoop.hbase.regionserver.HRegion.WriteContext;
-import org.apache.hadoop.hbase.regionserver.OperationStatus;
-import org.apache.hadoop.hbase.regionserver.RegionScanner;
-import org.apache.hadoop.hbase.regionserver.wal.WALEdit;
 import org.apache.hadoop.hbase.util.EnvironmentEdgeManager;
 import org.apache.hadoop.hbase.wal.WALKey;
 import org.apache.hadoop.hbase.wal.WALSplitter;
@@ -64,12 +64,13 @@ import org.apache.hadoop.hbase.wal.WALSplitter.MutationReplay;
 import org.apache.raft.hbase.wal.PBWALDataCodec;
 import org.apache.raft.hbase.wal.RaftWAL;
 import org.apache.raft.hbase.wal.WALDataCodec;
-import org.apache.ratis.shaded.com.google.protobuf.ByteString;
-import org.apache.ratis.shaded.proto.RaftProtos.SMLogEntryProto;
 import org.apache.ratis.conf.RaftProperties;
 import org.apache.ratis.protocol.Message;
 import org.apache.ratis.protocol.RaftClientRequest;
+import org.apache.ratis.protocol.RaftPeerId;
 import org.apache.ratis.server.storage.RaftStorage;
+import org.apache.ratis.shaded.com.google.protobuf.ByteString;
+import org.apache.ratis.shaded.proto.RaftProtos.SMLogEntryProto;
 import org.apache.ratis.statemachine.BaseStateMachine;
 import org.apache.ratis.statemachine.TransactionContext;
 
@@ -95,8 +96,9 @@ public class RegionStateMachine extends BaseStateMachine {
   }
 
   @Override
-  public void initialize(String id, RaftProperties properties, RaftStorage storage)
+  public void initialize(RaftPeerId id, RaftProperties properties, RaftStorage storage)
       throws IOException {
+    super.initialize(id, properties, storage);
     HTableDescriptor htd = HBaseUtils.createTableDescriptor();
     HRegionInfo hri = HBaseUtils.createRegionInfo(htd);
     Path rootDir = new Path(storage.getStorageDir().getStateMachineDir().toString());
